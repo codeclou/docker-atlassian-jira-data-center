@@ -16,25 +16,40 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
 &nbsp;
 
-### Usage with Docker Compose
+### Quickstart
 
-Start a JIRA Data Center with one loadbalancer, two JIRA nodes and a PostgreSQL Database.
+**(1)** Start a dockerized JIRA Data Center with one loadbalancer, two JIRA nodes and a PostgreSQL Database.
 
-```
+```bash
 git clone https://github.com/codeclou/docker-atlassian-jira-data-center.git
 cd docker-atlassian-jira-data-center
-docker-compose up
+bash start-cluster.sh
 ```
 
-Goto: http://localhost:9980/
+**(2)** Add cluster hostname alias
+
+```bash
+sudo su
+echo "127.0.0.1  jira-cluster-lb" >> /etc/hosts
+```
+**(3)** Enable Network Forwarding (Multicast)
+
+macOS: `sudo sysctl -w net.inet.ip.forwarding=1`
+ 
+**(4)** Browse to JIRA Software
+
+ * [http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)
+ * It might take several minutes for the cluster to fully start up.
 
 -----
 
 &nbsp;
 
-### Usage with Docker
+### Usage with Docker in Detail
 
-Direct usage with `docker run`.
+Everything explained here is automatically done by the `start-cluster.sh`.
+
+&nbsp;
 
 **(1) Cluster Hostname**
 
@@ -66,7 +81,7 @@ docker network create jira-cluster
 Start the Database
 
 ```bash
-docker kill jira-cluster-db  # if exists already
+docker kill jira-cluster-db  # kill if already running
 docker rm jira-cluster-db    # if exists already
 
 docker run \
@@ -109,48 +124,49 @@ docker run \
 
 &nbsp;
 
-**Start Loadbalancer** linked to three running named JIRA nodes
+**(5) Loadbalancer** 
+
+Start a sticky-session loadbalancer to all running JIRA nodes.
+Set `NODES` to the amount of nodes you started.
 
 ```bash
 docker rm jira-cluster-lb # if exists already
 
-docker run -i \
+docker run \
     --name jira-cluster-lb \
-    --link jira-cluster-node1 \
-    --link jira-cluster-node2 \
-    --link jira-cluster-node3 \
-    --env NODES=3 \
-    -p 9980:9999 \
-    codeclou/docker-atlassian-jira-data-center:loadbalancer
+    --net=jira-cluster \
+    --net-alias=jira-cluster-lb \
+    --env NODES=2 \
+    -p 9980:9980 \
+    -d codeclou/docker-atlassian-jira-data-center:loadbalancer
 ```
 
- docker ps --format '{{.ID}}\t{{.Names}}\t\t{{.Ports}}'
+
+
+**(6) Check Containers**
+
+Check if all containers have started. Should look like this:
+
+`docker ps --format '{{.ID}}\t{{.Names}}\t\t{{.Ports}}'`
+
+```
+fixme
+```
+
  
- * Convention is that it loadbalances to `http://jira-cluster-node1:8080, http://jira-cluster-node2:8080, ..., http://jira-cluster-nodeN:8080` with `N` being `NODES` ENV-variable.
- * Loadbalancer-URL: http://localhost:9980/
- * Note:
-   * JIRA Nodes must be started before the loadbalancer.
-   * Do not use `-t` since it will kill the foreground apache2.
-
-
-
-&nbsp;
-
-See the `start-cluster.sh` for a fully automated script to start a cluster.
+**(7) Start Configuration**
 
 Once the cluster ist fully started up, you need to start post configuration:
 
- * **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)**
- * [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
- * Tip: At best use a JIRA Software Data Center 30 Days Trial License from my.atlassian.com
-
-
-
-
+Go to **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)**
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-01-allow-cookies.png" width="80%"></p>
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-02-baseurl.png" width="80%"></p>
+
+
+You can either use a [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
+or at best get a JIRA Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-03-license.png" width="80%"></p>
 
