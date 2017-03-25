@@ -31,21 +31,20 @@ Direct usage with `docker run`.
 **Start Loadbalancer** linked to three running named JIRA nodes
 
 ```bash
-docker rm jira-data-center-loadbalancer # if exists already
+docker rm jira-cluster-lb # if exists already
 
-docker run \
-     --name jira-data-center-loadbalancer
-     --link jiranode1
-     --link jiranode2
-     --link jiranode3
-     -i \
-     -p 9980:9999 \
-     -e NODES=3 
+docker run -i \
+     --name jira-cluster-lb \
+     --link jira-cluster-node1 \
+     --link jira-cluster-node2 \
+     --link jira-cluster-node3 \
+     --env NODES=3 \
+     -p 9980:9999 \ 
      codeclou/docker-atlassian-jira-data-center:loadbalancer
 ```
 
  
- * Convention is that it loadbalances to `http://jiranode1:9999, http://jiranode2:9999, ..., http://jiranodeN:9999` with `N` being `NODES` ENV-variable.
+ * Convention is that it loadbalances to `http://jira-cluster-node1:9999, http://jira-cluster-node2:9999, ..., http://jira-cluster-nodeN:9999` with `N` being `NODES` ENV-variable.
  * Loadbalancer-URL: http://localhost:9980/
  * Note:
    * JIRA Nodes must be started before the loadbalancer.
