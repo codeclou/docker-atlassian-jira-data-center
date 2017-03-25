@@ -98,6 +98,11 @@ docker run -i \
 
 
 
+&nbsp;
+
+Once the cluster ist fully started up, you need to start post configuration
+
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/post-config-jira-data-center.gif)
 
 -----
 
