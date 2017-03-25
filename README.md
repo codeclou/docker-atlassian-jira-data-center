@@ -83,7 +83,7 @@ docker run -i \
 ```
 
  
- * Convention is that it loadbalances to `http://jira-cluster-node1:9999, http://jira-cluster-node2:9999, ..., http://jira-cluster-nodeN:9999` with `N` being `NODES` ENV-variable.
+ * Convention is that it loadbalances to `http://jira-cluster-node1:8080, http://jira-cluster-node2:8080, ..., http://jira-cluster-nodeN:8080` with `N` being `NODES` ENV-variable.
  * Loadbalancer-URL: http://localhost:9980/
  * Note:
    * JIRA Nodes must be started before the loadbalancer.

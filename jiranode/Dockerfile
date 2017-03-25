@@ -14,7 +14,10 @@ RUN chmod u+rx,g+rx,o+rx,a-w /work-private/docker-entrypoint.sh && \
     apk add --no-cache \
             bash \
             curl \
-            tar && \
+            tar \
+            python \
+            py-pip && \
+            pip install shinto-cli && \
     curl -jkSL -o /opt/jira.tar.gz \
          https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-${JIRA_VERSION}.tar.gz  && \
     tar zxf /opt/jira.tar.gz -C /jira && \
@@ -33,14 +36,15 @@ COPY cluster.properties.jinja2 /work-private/cluster.properties.jinja2
 # WORKDIR
 #
 WORKDIR /work
-EXPOSE 9999
+EXPOSE 8080
 
 #
 # RUN
 #
 USER worker
 ENV NODE_NUMBER 1
+ENV JIRA_HOME /jira-home
 VOLUME ["/work"]
 VOLUME ["/jira-shared-home"]
 ENTRYPOINT ["/work-private/docker-entrypoint.sh"]
-CMD ["bash"]
+CMD ["/jira/atlassian-jira-software-7.3.3-standalone/bin/catalina.sh", "run"]
