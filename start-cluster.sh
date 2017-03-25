@@ -33,6 +33,7 @@ docker run \
     --net=jira-cluster \
     --net-alias=jira-cluster-node1 \
     --env NODE_NUMBER=1 \
+    -P \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
     -d codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
 
@@ -44,6 +45,7 @@ docker run \
     --net=jira-cluster \
     --net-alias=jira-cluster-node2 \
     --env NODE_NUMBER=2 \
+    -P \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
     -d codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
 
@@ -55,10 +57,13 @@ docker run \
     --net=jira-cluster \
     --net-alias=jira-cluster-lb \
     --env NODES=2 \
-    -p 9980:9999 \
+    -p 9980:9980 \
     -d codeclou/docker-atlassian-jira-data-center:loadbalancer
 
 echo "================================"
 echo "Cluster ready. Wait for JIRA nodes to startup (might take some minutes) and"
-echo "Goto http://localhost:9980"
+echo " "
+echo "Goto http://jira-cluster-lb:9980"
+echo " "
+echo "do not forget to put '127.0.0.1 jira-cluster-lb' to /etc/hosts."
 echo "================================"

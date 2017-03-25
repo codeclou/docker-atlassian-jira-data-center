@@ -141,7 +141,8 @@ Once the cluster ist fully started up, you need to start post configuration:
  * Tip: At best use a JIRA Software Data Center 30 Days Trial License from my.atlassian.com
 
 
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/post-config-jira-data-center.gif?v2)
+ * [JIRA Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
+   * System > Atlassian Support Tools > Health Checks tab
 
 -----
 
