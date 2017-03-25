@@ -30,7 +30,7 @@ Direct usage with `docker run`.
 
 **Start Loadbalancer** linked to three running named JIRA nodes
 
-```
+```bash
 docker rm jira-data-center-loadbalancer # if exists already
 
 docker run \
