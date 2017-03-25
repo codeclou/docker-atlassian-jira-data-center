@@ -1,5 +1,7 @@
 # docker-atlassian-jira-data-center
 
+[![](https://codeclou.github.io/doc/badges/generated/docker-image-size-500.svg)](https://hub.docker.com/r/codeclou/docker-atlassian-jira-data-center/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-3.5.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
+
 Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/data-center) for local testing during plugin development.
 
 -----
