@@ -36,7 +36,8 @@ COPY cluster.properties.jinja2 /work-private/cluster.properties.jinja2
 # WORKDIR
 #
 WORKDIR /work
-EXPOSE 8080
+EXPOSE 8080   # JIRA HTTP Port
+EXPOSE 40001  # JIRA Cluster Sync Port
 
 #
 # RUN

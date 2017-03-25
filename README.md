@@ -36,14 +36,39 @@ Goto: http://localhost:9980/
 
 Direct usage with `docker run`.
 
-**Start PostgreSQL Database**
+**(1) Cluster Hostname**
+
+Put the cluster-hostname to your `/etc/hosts` file
 
 ```bash
-docker kill jira-cluster-db # if exists already
-docker rm jira-cluster-db # if exists already
+sudo su
+echo "127.0.0.1  jira-cluster-lb" >> /etc/hosts
+```
+
+&nbsp;
+
+**(2) Network**
+
+Create a network for your cluster.
+
+```bash
+docker network create jira-cluster
+```
+
+&nbsp;
+
+**(3) PostgreSQL Database**
+
+Start the Database
+
+```bash
+docker kill jira-cluster-db  # if exists already
+docker rm jira-cluster-db    # if exists already
 
 docker run \
     --name jira-cluster-db \
+    --net=jira-cluster \
+    --net-alias=jira-cluster-db \
     -e POSTGRES_PASSWORD=jira \
     -e POSTGRES_USER=jira \
     -d postgres:9.4
@@ -55,21 +80,28 @@ docker run \
 
 &nbsp;
 
-**Start Jira Nodes**
+**(4) Jira Nodes**
+
+Start as many JIRA nodes as you want and increase the node-number each time.
 
 ```bash
-docker kill jira-cluster-node1   # kill if already running
-docker rm jira-cluster-node1     # remove named image if exists
 rm -rf $(pwd)/jira-shared-home/* # clean shared jira-home if present
 
-docker run -i -t \
+docker kill jira-cluster-node1   # kill if already running
+docker rm jira-cluster-node1     # remove named image if exists
+
+docker run \
     --name jira-cluster-node1 \
-    --link jira-cluster-db \
-    --add-host jira-cluster-node1:127.0.0.1 \
+    --net=jira-cluster \
+    --net-alias=jira-cluster-node1 \
     --env NODE_NUMBER=1 \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
-    codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
+    -d codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
 ```
+
+ * Note:
+   * It might take up to 3 minutes for JIRA to startup. Check with `docker logs jira-cluster-node1`
+
 
 &nbsp;
 
@@ -88,6 +120,7 @@ docker run -i \
     codeclou/docker-atlassian-jira-data-center:loadbalancer
 ```
 
+ docker ps --format '{{.ID}}\t{{.Names}}\t\t{{.Ports}}'
  
  * Convention is that it loadbalances to `http://jira-cluster-node1:8080, http://jira-cluster-node2:8080, ..., http://jira-cluster-nodeN:8080` with `N` being `NODES` ENV-variable.
  * Loadbalancer-URL: http://localhost:9980/
@@ -99,10 +132,13 @@ docker run -i \
 
 &nbsp;
 
+See the `start-cluster.sh` for a fully automated script to start a cluster.
+
 Once the cluster ist fully started up, you need to start post configuration:
 
- * **[http://localhost:9980/](http://localhost:9980/)**
+ * **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)**
  * [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
+ * Tip: At best use a JIRA Software Data Center 30 Days Trial License from my.atlassian.com
 
 
 ![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/post-config-jira-data-center.gif?v2)
@@ -119,26 +155,6 @@ Once the cluster ist fully started up, you need to start post configuration:
 stateless worker nodes. JIRA Data Center on the other hand relies on a state for each node.
 
 &nbsp;
-
-**Why am I getting Healthcheck Connection refused Exceptions?**
-
-```
-2017-03-25 17:11:10,314 SupportHealthCheckThread-3 ERROR ServiceRunner     [c.a.j.p.healthcheck.support.BaseUrlHealthCheck] An error occurred when performing the Base URL healthcheck:
-org.apache.http.conn.HttpHostConnectException: Connect to localhost:9980 [localhost/127.0.0.1] failed: Connection refused (Connection refused)
-```
-
-Why is this happening?
-
- * This is due to the jira-node wanting to connect to the healthcheak via the configured **baseUrl** which is `localhost:9980`. But from inside the node this is not reachable, since 9980 belongs to the loadbalancer.
- * Generally you can ignore this, but if you want it fixed you can do the following.
-
-Solution 
-
- * Put in your hosts `/etc/hosts` the following: `127.0.0.1 jira-cluster-lb`
- * Start your nodes with `--add-host jira-cluster-lb:192.168.178.4`. Put your actual Network IP there.
- * Browse to your cluster on `http://jira-cluster-lb:9980/` and configure the baseURL in Settings this way.
-
-
 
 -----
 
