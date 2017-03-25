@@ -204,10 +204,13 @@ to check the Health of each cluster node. `System`  → `Atlassian Support Tools
 
 Check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-09-systeminfo-all-nodes-active.png" width="80%"></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-09-systeminfo-all-nodes-active.png?v2" width="80%"></p>
 
 If not all nodes you have started are active, try restarting all nodes not showing up (docker kill, docker run).
 
+&nbsp;
+
+Now your cluster should be up and running.
 
 -----
 
