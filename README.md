@@ -46,8 +46,8 @@ docker run \
  * Convention is that it loadbalances to `http://jiranode1:9999, http://jiranode2:9999, ..., http://jiranodeN:999` with `N` being `NODES` ENV-variable.
  * Loadbalancer-URL: http://localhost:9980/
  * Note:
-  * JIRA Nodes must be started before the loadbalancer.
-  * Do not use `-t` since it will kill the foreground apache2.
+   * JIRA Nodes must be started before the loadbalancer.
+   * Do not use `-t` since it will kill the foreground apache2.
 
 -----
 
