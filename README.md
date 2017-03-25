@@ -20,25 +20,24 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
 ### Quickstart
 
-**(1)** Start a dockerized JIRA® Data Center with one loadbalancer, two JIRA® nodes and a PostgreSQL Database.
-
-```bash
-curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/start-cluster.sh
-bash start-cluster.sh 2
-```
-
-**(2)** Add cluster hostname alias
+**(1)** Add cluster hostname alias
 
 ```bash
 sudo su
 echo "127.0.0.1  jira-cluster-lb" >> /etc/hosts
 ```
-**(3)** Enable Network Forwarding (Multicast). On macOS do:
+**(2)** Enable Network Forwarding (Multicast). On macOS do:
 
 ```bash
 sudo sysctl -w net.inet.ip.forwarding=1
 ```
- 
+
+**(3)** Start a dockerized JIRA® Data Center with one loadbalancer, two JIRA® nodes and a PostgreSQL Database.
+
+```bash
+curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/start-cluster.sh
+bash start-cluster.sh 2
+```
 **(4)** Browse to JIRA® Software
 
  * [http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)
