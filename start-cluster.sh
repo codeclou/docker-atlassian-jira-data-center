@@ -34,7 +34,6 @@ docker run \
     --net=jira-cluster \
     --net-alias=jira-cluster-node1 \
     --env NODE_NUMBER=1 \
-    -P \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
     -d codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
 
@@ -46,7 +45,6 @@ docker run \
     --net=jira-cluster \
     --net-alias=jira-cluster-node2 \
     --env NODE_NUMBER=2 \
-    -P \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
     -d codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
 
