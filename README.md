@@ -11,7 +11,6 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
  * Runs as non-root with fixed UID 10777 and GID 10777. See [howto prepare volume permissions](https://github.com/codeclou/doc/blob/master/docker/README.md).
  * See [howto use SystemD for named Docker-Containers and system startup](https://github.com/codeclou/doc/blob/master/docker/README.md).
- * You should get some [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing) for testing
 
 -----
 
@@ -100,7 +99,11 @@ docker run -i \
 
 &nbsp;
 
-Once the cluster ist fully started up, you need to start post configuration
+Once the cluster ist fully started up, you need to start post configuration:
+
+ * **[http://localhost:9980/](http://localhost:9980/)**
+ * [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
+
 
 ![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/post-config-jira-data-center.gif)
 
