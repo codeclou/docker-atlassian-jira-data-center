@@ -55,6 +55,10 @@ Create a network for your cluster.
 docker network create jira-cluster
 ```
 
+:bangbang: JIRA Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable Forwarding:
+
+ * macOS: `sudo sysctl -w net.inet.ip.forwarding=1`
+
 &nbsp;
 
 **(3) PostgreSQL Database**

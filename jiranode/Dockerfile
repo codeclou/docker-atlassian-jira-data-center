@@ -40,6 +40,8 @@ WORKDIR /work
 EXPOSE 8080
 # JIRA Cluster Sync Port
 EXPOSE 40001
+# JIRA Cluster EHCache Multicast Port - see: https://forums.rancher.com/t/solved-problems-multicast-ehcache/1507/7
+EXPOSE 4446
 
 #
 # RUN
