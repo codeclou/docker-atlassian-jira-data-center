@@ -2,7 +2,7 @@
 <jira-database-config>
   <name>defaultDS</name>
   <delegator-name>default</delegator-name>
-  <database-type>postgres72</database-type>
+  <database-type>postgres94</database-type>
   <schema-name>public</schema-name>
   <jdbc-datasource>
     <url>jdbc:postgresql://jira-cluster-db/jira</url>

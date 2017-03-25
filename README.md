@@ -60,7 +60,8 @@ docker rm jira-cluster-node1 # if exists already
 docker run -i \
     --name jira-cluster-node1 \
     --link jira-cluster-db \
-    --env NODE_NUMBER=1 \ 
+    --add-host jira-cluster-node1:127.0.0.1 \
+    --env NODE_NUMBER=1 \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
     codeclou/docker-atlassian-jira-data-center:jiranode
 ```
