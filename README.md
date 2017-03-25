@@ -42,10 +42,12 @@ docker run \
      codeclou/docker-atlassian-jira-data-center:loadbalancer
 ```
 
- * Do not use `-t` since it will kill the foreground apache2.
- * Convention is that he loadbalances to `http//jiranode1:9999, http://jiranode2:9999, ..., http://jiranodeN:999` with `N` being `NODES` ENV-variable.
- * URL: http://localhost:9980/
- * JIRA Nodes must be started before the loadbalancer
+ 
+ * Convention is that it loadbalances to `http://jiranode1:9999, http://jiranode2:9999, ..., http://jiranodeN:999` with `N` being `NODES` ENV-variable.
+ * Loadbalancer-URL: http://localhost:9980/
+ * Note:
+  * JIRA Nodes must be started before the loadbalancer.
+  * Do not use `-t` since it will kill the foreground apache2.
 
 -----
 
