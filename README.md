@@ -40,6 +40,7 @@ Direct usage with `docker run`.
 **Start PostgreSQL Database**
 
 ```bash
+docker kill jira-cluster-db # if exists already
 docker rm jira-cluster-db # if exists already
 
 docker run \
@@ -55,6 +56,7 @@ docker run \
 **Start Jira Nodes**
 
 ```bash
+docker kill jira-cluster-node1 # if exists already
 docker rm jira-cluster-node1 # if exists already
 
 docker run -i \
