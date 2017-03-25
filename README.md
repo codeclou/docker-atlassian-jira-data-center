@@ -20,7 +20,7 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
 ### Quickstart
 
-**(1)** Start a dockerized JIRA Data Center with one loadbalancer, two JIRA nodes and a PostgreSQL Database.
+**(1)** Start a dockerized JIRA® Data Center with one loadbalancer, two JIRA® nodes and a PostgreSQL Database.
 
 ```bash
 curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/start-cluster.sh
@@ -33,11 +33,13 @@ bash start-cluster.sh
 sudo su
 echo "127.0.0.1  jira-cluster-lb" >> /etc/hosts
 ```
-**(3)** Enable Network Forwarding (Multicast)
+**(3)** Enable Network Forwarding (Multicast). On macOS do:
 
-macOS: `sudo sysctl -w net.inet.ip.forwarding=1`
+```bash
+sudo sysctl -w net.inet.ip.forwarding=1
+```
  
-**(4)** Browse to JIRA Software
+**(4)** Browse to JIRA® Software
 
  * [http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)
  * It might take several minutes for the cluster to fully start up.
@@ -75,7 +77,7 @@ docker network create jira-cluster
 
 **(3) IP Forwarding for Multicast**
 
-JIRA Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable IP Forwarding.
+JIRA® Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable IP Forwarding.
 
 On macOS you do this with:
 
@@ -108,9 +110,9 @@ docker run \
 
 &nbsp;
 
-**(5) Jira Nodes**
+**(5) JIRA® Nodes**
 
-Start as many JIRA nodes as you want and increase the node-number each time.
+Start as many JIRA® nodes as you want and increase the node-number each time.
 
 ```bash
 rm -rf $(pwd)/jira-shared-home/* # clean shared jira-home if present
@@ -128,14 +130,14 @@ docker run \
 ```
 
  * Note:
-   * It might take up to 3 minutes for JIRA to startup. Check with `docker logs jira-cluster-node1`
+   * It might take up to 3 minutes for JIRA® to startup. Check with `docker logs jira-cluster-node1`
 
 
 &nbsp;
 
 **(6) Loadbalancer** 
 
-Start a sticky-session loadbalancer to all running JIRA nodes.
+Start a sticky-session loadbalancer to all running JIRA® nodes.
 Set `NODES` to the amount of nodes you started.
 
 ```bash
@@ -171,7 +173,7 @@ e2e9a6b1b757    jira-cluster-db        5432/tcp
 
 **(8) Start Configuration**
 
-Once the cluster is fully started up, you need to configure JIRA Software in the browser.
+Once the cluster is fully started up, you need to configure JIRA® Software in the browser.
 
 Go to **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)** and make sure you enabled cookies (sticky session).
 
@@ -182,7 +184,7 @@ Use `http://jira-cluster-lb:9980` as Base URL.
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-02-baseurl.png" width="80%"></p>
 
 You can either use a [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
-or at best get a JIRA Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
+or at best get a JIRA® Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-03-license.png" width="80%"></p>
 
@@ -198,7 +200,7 @@ Check if clustering is activated under `System`  → `System Info` and search fo
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-06-systeminfo-clustering-on.png" width="80%"></p>
 
-Use the [JIRA Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
+Use the [JIRA® Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
 to check the Health of each cluster node. `System`  → `Atlassian Support Tools` → `Health Checks tab`
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-07-health-checks.png" width="80%"></p>
@@ -222,9 +224,20 @@ Now your cluster should be up and running.
 **Why not use Docker Swarm Mode?**
 
  * Because we need a sticky session loadbalancer, and the whole idea of swarm mode is to have identical 
-stateless worker nodes. JIRA Data Center on the other hand relies on a state for each node.
+stateless worker nodes. JIRA® Data Center on the other hand relies on a state for each node.
 
 &nbsp;
+
+-----
+
+&nbsp;
+
+### 3rdparty Licenses
+
+ * **Atlassian JIRA® Sofware**
+  * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com) 
+ * **Oracle Java JDK 8**
+  * Please check yourself for corresponding Licenses and Terms of Use at [www.oracle.com](https://www.oracle.com/)
 
 -----
 
