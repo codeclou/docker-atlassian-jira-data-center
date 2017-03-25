@@ -47,8 +47,11 @@ docker run \
     --name jira-cluster-db \
     -e POSTGRES_PASSWORD=jira \
     -e POSTGRES_USER=jira \
-    -d postgres:9.6
+    -d postgres:9.4
 ```
+
+ * Note: 
+   * [JIRA Software 7.x supports max PostgreSQL 9.4](https://confluence.atlassian.com/adminjiraserver072/supported-platforms-828787550.html)
 
 
 &nbsp;
@@ -56,16 +59,17 @@ docker run \
 **Start Jira Nodes**
 
 ```bash
-docker kill jira-cluster-node1 # if exists already
-docker rm jira-cluster-node1 # if exists already
+docker kill jira-cluster-node1   # kill if already running
+docker rm jira-cluster-node1     # remove named image if exists
+rm -rf $(pwd)/jira-shared-home/* # clean shared jira-home if present
 
-docker run -i \
+docker run -i -t \
     --name jira-cluster-node1 \
     --link jira-cluster-db \
     --add-host jira-cluster-node1:127.0.0.1 \
     --env NODE_NUMBER=1 \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
-    codeclou/docker-atlassian-jira-data-center:jiranode
+    codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
 ```
 
 &nbsp;
@@ -105,6 +109,27 @@ docker run -i \
 
  * Because we need a sticky session loadbalancer, and the whole idea of swarm mode is to have identical 
 stateless worker nodes. JIRA Data Center on the other hand relies on a state for each node.
+
+&nbsp;
+
+**Why am I getting Healthcheck Connection refused Exceptions?**
+
+```
+2017-03-25 17:11:10,314 SupportHealthCheckThread-3 ERROR ServiceRunner     [c.a.j.p.healthcheck.support.BaseUrlHealthCheck] An error occurred when performing the Base URL healthcheck:
+org.apache.http.conn.HttpHostConnectException: Connect to localhost:9980 [localhost/127.0.0.1] failed: Connection refused (Connection refused)
+```
+
+Why is this happening?
+
+ * This is due to the jira-node wanting to connect to the healthcheak via the configured **baseUrl** which is `localhost:9980`. But from inside the node this is not reachable, since 9980 belongs to the loadbalancer.
+ * Generally you can ignore this, but if you want it fixed you can do the following.
+
+Solution 
+
+ * Put in your hosts `/etc/hosts` the following: `127.0.0.1 jira-cluster-lb`
+ * Start your nodes with `--add-host jira-cluster-lb:192.168.178.4`. Put your actual Network IP there.
+ * Browse to your cluster on `http://jira-cluster-lb:9980/` and configure the baseURL in Settings this way.
+
 
 
 -----
