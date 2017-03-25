@@ -6,7 +6,18 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
 &nbsp;
 
-## Usage with Docker Compose
+### Prerequisites
+
+
+ * Runs as non-root with fixed UID 10777 and GID 10777. See [howto prepare volume permissions](https://github.com/codeclou/doc/blob/master/docker/README.md).
+ * See [howto use SystemD for named Docker-Containers and system startup](https://github.com/codeclou/doc/blob/master/docker/README.md).
+ * You should get some [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing) for testing
+
+-----
+
+&nbsp;
+
+### Usage with Docker Compose
 
 Start a JIRA Data Center with one loadbalancer, two JIRA nodes and a PostgreSQL Database.
 
@@ -22,9 +33,37 @@ Goto: http://localhost:9980/
 
 &nbsp;
 
-## Usage with Docker
+### Usage with Docker
 
 Direct usage with `docker run`.
+
+**Start PostgreSQL Database**
+
+```bash
+docker rm jira-cluster-db # if exists already
+
+docker run \
+    --name jira-cluster-db \
+    -e POSTGRES_PASSWORD=jira \
+    -e POSTGRES_USER=jira \
+    -d postgres:9.6
+```
+
+
+&nbsp;
+
+**Start Jira Nodes**
+
+```bash
+docker rm jira-cluster-node1 # if exists already
+
+docker run -i \
+    --name jira-cluster-node1 \
+    --link jira-cluster-db \
+    --env NODE_NUMBER=1 \ 
+    -v $(pwd)/jira-shared-home:/jira-shared-home \
+    codeclou/docker-atlassian-jira-data-center:jiranode
+```
 
 &nbsp;
 
@@ -34,13 +73,13 @@ Direct usage with `docker run`.
 docker rm jira-cluster-lb # if exists already
 
 docker run -i \
-     --name jira-cluster-lb \
-     --link jira-cluster-node1 \
-     --link jira-cluster-node2 \
-     --link jira-cluster-node3 \
-     --env NODES=3 \
-     -p 9980:9999 \ 
-     codeclou/docker-atlassian-jira-data-center:loadbalancer
+    --name jira-cluster-lb \
+    --link jira-cluster-node1 \
+    --link jira-cluster-node2 \
+    --link jira-cluster-node3 \
+    --env NODES=3 \
+    -p 9980:9999 \ 
+    codeclou/docker-atlassian-jira-data-center:loadbalancer
 ```
 
  
@@ -50,18 +89,19 @@ docker run -i \
    * JIRA Nodes must be started before the loadbalancer.
    * Do not use `-t` since it will kill the foreground apache2.
 
+
+
+
 -----
 
 &nbsp;
 
-## FAQ
+### FAQ
 
-### Why not use Docker Swarm Mode?
+**Why not use Docker Swarm Mode?**
 
-Because we need a sticky session loadbalancer,
-and the whole idea of swarm mode is to have identical 
-sateless worker nodes. JIRA Data Center on the other hand
-relies on a state for each node.
+ * Because we need a sticky session loadbalancer, and the whole idea of swarm mode is to have identical 
+stateless worker nodes. JIRA Data Center on the other hand relies on a state for each node.
 
 
 -----
