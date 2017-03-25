@@ -141,7 +141,7 @@ docker run \
     -d codeclou/docker-atlassian-jira-data-center:loadbalancer
 ```
 
-
+&nbsp;
 
 **(6) Check Containers**
 
@@ -153,34 +153,42 @@ Check if all containers have started. Should look like this:
 fixme
 ```
 
- 
+&nbsp;
+
 **(7) Start Configuration**
 
-Once the cluster ist fully started up, you need to start post configuration:
+Once the cluster is fully started up, you need to configure JIRA Software in the browser.
 
-Go to **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)**
+Go to **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)** and make sure you enabled cookies (sticky session).
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-01-allow-cookies.png" width="80%"></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-02-baseurl.png" width="80%"></p>
+Use `http://jira-cluster-lb:9980` as Base URL.
 
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-02-baseurl.png" width="80%"></p>
 
 You can either use a [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
 or at best get a JIRA Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-03-license.png" width="80%"></p>
 
+Configure your user.
+
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-04-username.png" width="80%"></p>
+
+Skip E-Mail Setup and click yourself through to the end of the installation.
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-05-email-later.png" width="80%"></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-06-systeminfo-clustering-on.png" width="80%"></p>
+Check if clustering is activated under `System`  → `System Info` and search for `Clustering`
 
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-06-systeminfo-clustering-on.png" width="80%"></p>
 
 Use the [JIRA Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
 to check the Health of each cluster node. `System`  → `Atlassian Support Tools` → `Health Checks tab`
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-07-health-checks.png" width="80%"></p>
+
 
 -----
 
