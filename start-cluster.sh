@@ -46,6 +46,7 @@ docker run \
     --net-alias=jira-cluster-node2 \
     --env NODE_NUMBER=2 \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
+    -d jiranode-local
     -d codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
 
 

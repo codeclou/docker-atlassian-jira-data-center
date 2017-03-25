@@ -145,12 +145,17 @@ docker run \
 
 **(6) Check Containers**
 
-Check if all containers have started. Should look like this:
+Check if all containers have started with:
 
 `docker ps --format '{{.ID}}\t{{.Names}}\t\t{{.Ports}}'`
 
+Should show something like:
+
 ```
-fixme
+101c71ae0c12	jira-cluster-node1		4446/tcp, 8080/tcp, 40001/tcp
+72f92316309f	jira-cluster-lb		    0.0.0.0:9980->9980/tcp
+62fba1910763	jira-cluster-node2		4446/tcp, 8080/tcp, 40001/tcp
+e2e9a6b1b757	jira-cluster-db		    5432/tcp
 ```
 
 &nbsp;
@@ -188,6 +193,12 @@ Use the [JIRA Data Center Health Check Tools](https://confluence.atlassian.com/e
 to check the Health of each cluster node. `System`  → `Atlassian Support Tools` → `Health Checks tab`
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-07-health-checks.png" width="80%"></p>
+
+Check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
+
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-09-systeminfo-all-nodes-active.png" width="80%"></p>
+
+If not all nodes you have started are active, try restarting all nodes not showing up (docker kill, docker run).
 
 
 -----
