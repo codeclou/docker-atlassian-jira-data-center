@@ -160,10 +160,10 @@ Check if all containers have started with:
 Should show something like:
 
 ```
-101c71ae0c12	jira-cluster-node1		4446/tcp, 8080/tcp, 40001/tcp
-72f92316309f	jira-cluster-lb		    0.0.0.0:9980->9980/tcp
-62fba1910763	jira-cluster-node2		4446/tcp, 8080/tcp, 40001/tcp
-e2e9a6b1b757	jira-cluster-db		    5432/tcp
+101c71ae0c12    jira-cluster-node1     4446/tcp, 8080/tcp, 40001/tcp
+72f92316309f    jira-cluster-lb        0.0.0.0:9980->9980/tcp
+62fba1910763    jira-cluster-node2     4446/tcp, 8080/tcp, 40001/tcp
+e2e9a6b1b757    jira-cluster-db        5432/tcp
 ```
 
 &nbsp;
