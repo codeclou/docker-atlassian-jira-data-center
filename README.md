@@ -23,8 +23,7 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 **(1)** Start a dockerized JIRA Data Center with one loadbalancer, two JIRA nodes and a PostgreSQL Database.
 
 ```bash
-git clone https://github.com/codeclou/docker-atlassian-jira-data-center.git
-cd docker-atlassian-jira-data-center
+curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/start-cluster.sh
 bash start-cluster.sh
 ```
 
