@@ -31,8 +31,10 @@ Direct usage with `docker run`.
 **Start Loadbalancer** linked to three running named JIRA nodes
 
 ```
+docker rm jira-data-center-loadbalancer # if exists already
+
 docker run \
-     --name loadbalancer
+     --name jira-data-center-loadbalancer
      --link jiranode1
      --link jiranode2
      --link jiranode3
@@ -43,7 +45,7 @@ docker run \
 ```
 
  
- * Convention is that it loadbalances to `http://jiranode1:9999, http://jiranode2:9999, ..., http://jiranodeN:999` with `N` being `NODES` ENV-variable.
+ * Convention is that it loadbalances to `http://jiranode1:9999, http://jiranode2:9999, ..., http://jiranodeN:9999` with `N` being `NODES` ENV-variable.
  * Loadbalancer-URL: http://localhost:9980/
  * Note:
    * JIRA Nodes must be started before the loadbalancer.
