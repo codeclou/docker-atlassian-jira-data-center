@@ -15,5 +15,9 @@
     <pool-max-idle>20</pool-max-idle>
     <pool-remove-abandoned>true</pool-remove-abandoned>
     <pool-remove-abandoned-timeout>300</pool-remove-abandoned-timeout>
+    <pool-test-while-idle>true</pool-test-while-idle>
+    <pool-test-on-borrow>false</pool-test-on-borrow>
+    <validation-query>select 1</validation-query>
+    <validation-query-timeout>3</validation-query-timeout>
   </jdbc-datasource>
 </jira-database-config>
