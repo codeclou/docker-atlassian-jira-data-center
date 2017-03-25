@@ -70,13 +70,21 @@ Create a network for your cluster.
 docker network create jira-cluster
 ```
 
-:bangbang: JIRA Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable Forwarding:
+&nbsp;
 
- * macOS: `sudo sysctl -w net.inet.ip.forwarding=1`
+**(3) IP Forwarding for Multicast**
+
+JIRA Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable IP Forwarding.
+
+On macOS you do this with:
+
+```bash
+sudo sysctl -w net.inet.ip.forwarding=1
+```
 
 &nbsp;
 
-**(3) PostgreSQL Database**
+**(4) PostgreSQL Database**
 
 Start the Database
 
@@ -99,7 +107,7 @@ docker run \
 
 &nbsp;
 
-**(4) Jira Nodes**
+**(5) Jira Nodes**
 
 Start as many JIRA nodes as you want and increase the node-number each time.
 
@@ -124,7 +132,7 @@ docker run \
 
 &nbsp;
 
-**(5) Loadbalancer** 
+**(6) Loadbalancer** 
 
 Start a sticky-session loadbalancer to all running JIRA nodes.
 Set `NODES` to the amount of nodes you started.
@@ -143,7 +151,7 @@ docker run \
 
 &nbsp;
 
-**(6) Check Containers**
+**(7) Check Containers**
 
 Check if all containers have started with:
 
@@ -160,7 +168,7 @@ e2e9a6b1b757	jira-cluster-db		    5432/tcp
 
 &nbsp;
 
-**(7) Start Configuration**
+**(8) Start Configuration**
 
 Once the cluster is fully started up, you need to configure JIRA Software in the browser.
 
