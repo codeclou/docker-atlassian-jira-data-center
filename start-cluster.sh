@@ -8,7 +8,8 @@
 docker network rm jira-cluster
 docker network create jira-cluster
 
-
+docker pull codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
+docker pull codeclou/docker-atlassian-jira-data-center:loadbalancer
 
 
 docker kill jira-cluster-db # if exists already
