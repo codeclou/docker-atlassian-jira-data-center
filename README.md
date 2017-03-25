@@ -232,12 +232,14 @@ stateless worker nodes. JIRA® Data Center on the other hand relies on a state f
 
 &nbsp;
 
-### 3rdparty Licenses
+### Trademarks and Third Party Licenses
 
  * **Atlassian JIRA® Sofware**
-  * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com) 
+   * Atlassian®, JIRA®, JIRA® Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark). 
+   * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com).
  * **Oracle Java JDK 8**
-  * Please check yourself for corresponding Licenses and Terms of Use at [www.oracle.com](https://www.oracle.com/)
+   * Oracle and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
+   * Please check yourself for corresponding Licenses and Terms of Use at [www.oracle.com](https://www.oracle.com/).
 
 -----
 
