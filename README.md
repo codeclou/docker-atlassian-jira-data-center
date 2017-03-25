@@ -141,8 +141,7 @@ Once the cluster ist fully started up, you need to start post configuration:
  * Tip: At best use a JIRA Software Data Center 30 Days Trial License from my.atlassian.com
 
 
- * [JIRA Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
-   * System > Atlassian Support Tools > Health Checks tab
+
 
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-01-allow-cookies.png" width="80%"></p>
@@ -156,6 +155,10 @@ Once the cluster ist fully started up, you need to start post configuration:
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-05-email-later.png" width="80%"></p>
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-06-systeminfo-clustering-on.png" width="80%"></p>
+
+
+Use the [JIRA Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
+to check the Health of each cluster node. `System`  → `Atlassian Support Tools` → `Health Checks tab`
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-07-health-checks.png" width="80%"></p>
 
