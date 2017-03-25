@@ -24,7 +24,7 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
 ```bash
 curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/start-cluster.sh
-bash start-cluster.sh
+bash start-cluster.sh 2
 ```
 
 **(2)** Add cluster hostname alias
