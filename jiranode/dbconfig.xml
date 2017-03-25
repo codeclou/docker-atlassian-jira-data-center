@@ -7,8 +7,8 @@
   <jdbc-datasource>
     <url>jdbc:postgresql://jira-cluster-db/jira</url>
     <driver-class>org.postgresql.Driver</driver-class>
-    <username>jiradbuser</username>
-    <password>password</password>
+    <username>jira</username>
+    <password>jira</password>
     <pool-min-size>20</pool-min-size>
     <pool-max-size>20</pool-max-size>
     <pool-max-wait>30000</pool-max-wait>
