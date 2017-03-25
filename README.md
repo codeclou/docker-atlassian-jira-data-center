@@ -105,7 +105,7 @@ Once the cluster ist fully started up, you need to start post configuration:
  * [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
 
 
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/post-config-jira-data-center.gif)
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/post-config-jira-data-center.gif?v2)
 
 -----
 

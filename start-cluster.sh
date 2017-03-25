@@ -35,7 +35,7 @@ docker rm jira-cluster-node2     # remove named image if exists
 docker run \
     --name jira-cluster-node2 \
     --link jira-cluster-db \
-    --add-host jira-cluster-node1:127.0.0.1 \
+    --add-host jira-cluster-node2:127.0.0.1 \
     --env NODE_NUMBER=2 \
     -v $(pwd)/jira-shared-home:/jira-shared-home \
     -d codeclou/docker-atlassian-jira-data-center:jiranode-software-7.3.3
