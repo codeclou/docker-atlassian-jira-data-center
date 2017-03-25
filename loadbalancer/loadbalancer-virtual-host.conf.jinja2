@@ -10,4 +10,5 @@
         ProxyPass / balancer://jira-cluster/  stickysession=ROUTEID
         ProxyPreserveHost on
         ProxyRequests off
+        ProxyTimeout 9600
 </VirtualHost>

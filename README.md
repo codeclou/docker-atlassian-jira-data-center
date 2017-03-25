@@ -79,7 +79,7 @@ docker run -i \
     --link jira-cluster-node2 \
     --link jira-cluster-node3 \
     --env NODES=3 \
-    -p 9980:9999 \ 
+    -p 9980:9999 \
     codeclou/docker-atlassian-jira-data-center:loadbalancer
 ```
 
