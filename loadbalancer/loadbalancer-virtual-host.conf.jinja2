@@ -1,0 +1,13 @@
+{% set amountNodes = NODES | int %}
+<VirtualHost *:9999>
+        ServerName jiracluster
+        Header add Set-Cookie  "ROUTEID=.%{BALANCER_WORKER_ROUTE}e; path=/"  env=BALANCER_ROUTE_CHANGED
+        <Proxy balancer://jiracluster>
+            {% for n in range(1, (amountNodes+1)) %}
+                BalancerMember http://jiranode{{ n }}:9999 route={{ n }}
+            {% endfor %}
+        </Proxy>
+        ProxyPass / balancer://jiracluster/  stickysession=ROUTEID
+        ProxyPreserveHost on
+        ProxyRequests off
+</VirtualHost>

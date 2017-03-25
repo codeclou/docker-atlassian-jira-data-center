@@ -1,0 +1,15 @@
+version: '3'
+services:
+  loadbalancer:
+    image: "codeclou/docker-atlassian-jira-data-center:loadbalancer"
+    ports:
+     - "9980:9999"
+    environment:
+     - NODES=2
+    links:
+     - jiranode1
+     - jiranode2
+  jiranode1:
+    image: "codeclou/docker-atlassian-jira-data-center:jiranode"
+  jiranode2:
+    image: "codeclou/docker-atlassian-jira-data-center:jiranode"
