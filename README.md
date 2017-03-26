@@ -14,6 +14,10 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
  * Runs as non-root with fixed UID 10777 and GID 10777. See [howto prepare volume permissions](https://github.com/codeclou/doc/blob/master/docker/README.md).
  * See [howto use SystemD for named Docker-Containers and system startup](https://github.com/codeclou/doc/blob/master/docker/README.md).
 
+Linux / MacOS
+
+ * Have `wc`, `awk`, `curl` and `bash` installed.
+
 -----
 
 &nbsp;
@@ -64,17 +68,7 @@ echo "127.0.0.1  jira-cluster-lb" >> /etc/hosts
 
 &nbsp;
 
-**(2) Network**
-
-Create a network for your cluster.
-
-```bash
-docker network create jira-cluster
-```
-
-&nbsp;
-
-**(3) IP Forwarding for Multicast**
+**(2) IP Forwarding for Multicast**
 
 JIRA® Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable IP Forwarding.
 
@@ -86,21 +80,14 @@ sudo sysctl -w net.inet.ip.forwarding=1
 
 &nbsp;
 
-**(4) PostgreSQL Database**
+**(3) Start Cluster**
 
-Start the Database
+Start a cluster initially with **once JIRA® node**. This is the safest way.
+Once we did the post configuration we will scale the cluster for more JIRA® nodes.
 
 ```bash
-docker kill jira-cluster-db  # kill if already running
-docker rm jira-cluster-db    # if exists already
-
-docker run \
-    --name jira-cluster-db \
-    --net=jira-cluster \
-    --net-alias=jira-cluster-db \
-    -e POSTGRES_PASSWORD=jira \
-    -e POSTGRES_USER=jira \
-    -d postgres:9.4
+curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/manage-cluster.sh
+bash manage-cluster.sh --action create --scale 1
 ```
 
  * Note: 
