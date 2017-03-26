@@ -210,6 +210,14 @@ Check if all nodes are active and alive under `System`  → `System Info` and se
 
 If not all nodes you have started are active, try restarting all nodes not showing up (docker kill, docker run).
 
+For example if Instance 1 does not show up, you can restart it like so:
+
+```bash
+curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/restart-instance.sh
+# restart jira-cluster-node1 and restart loadbalancer for 2 nodes
+bash restart-instance.sh 1 2
+```
+
 &nbsp;
 
 Now your cluster should be up and running.
