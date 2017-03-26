@@ -142,7 +142,7 @@ function start_instance_jiranode {
         --net-alias=jira-cluster-node${1} \
         --env NODE_NUMBER=${1} \
         --env MULTICAST=${MULTICAST} \
-        -v $(pwd)/jira-shared-home:/jira-shared-home \
+        -v /tmp/jira-shared-home:/jira-shared-home \
         -d codeclou/docker-atlassian-jira-data-center:jiranode-software-${JIRA_SOFTWARE_VERSION}
 }
 
@@ -157,8 +157,8 @@ function kill_instance_jiranode {
 #
 #
 function clean_jiranode_shared_home {
-    echo -e $C_CYN">> clean shared home ..:${C_RST}${C_GRN} Deleting${C_RST}  - Deleting contents of jira-shared-home: $(pwd)/jira-shared-home/."
-    rm -rf $(pwd)/jira-shared-home/* # clean shared jira-home if present
+    echo -e $C_CYN">> clean shared home ..:${C_RST}${C_GRN} Deleting${C_RST}  - Deleting contents of jira-shared-home: /tmp/jira-shared-home/."
+    rm -rf /tmp/jira-shared-home/* # clean shared jira-home if present
 }
 
 # Pulls the latest docker images from docker hub
@@ -168,6 +168,7 @@ function pull_latest_images {
     echo -e $C_CYN">> docker pull ........:${C_RST}${C_GRN} Pulling${C_RST}   - Pulling latest images from Docker Hub."
     docker pull codeclou/docker-atlassian-jira-data-center:jiranode-software-${JIRA_SOFTWARE_VERSION}
     docker pull codeclou/docker-atlassian-jira-data-center:loadbalancer-${JIRA_SOFTWARE_VERSION}
+    docker pull postgres:9.4
 }
 
 # Creates a network for cluster
@@ -297,7 +298,7 @@ then
     echo -e $C_RED">> param error ........: Please specify action as parameter -a or --action"$C_RST
     EXIT=1
 else
-    if [[ "$ACTION" == "create" && ! $SCALE ]]
+    if [[ ("$ACTION" == "create" || "$ACTION" == "update") && ! $SCALE ]]
     then
         echo -e $C_RED">> param error ........: Please specify scale as parameter -s or --scale. E.g. --scale 3"$C_RST
         EXIT=1
@@ -329,7 +330,7 @@ fi
 
 if [ "$ACTION" == "create" ]
 then
-    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} CREATE${C_RST} - Creating new cluster and destroying existing if exists"$C_RST
+    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} CREATE${C_RST}    - Creating new cluster and destroying existing if exists"$C_RST
     echo ""
 
     pull_latest_images
@@ -364,9 +365,9 @@ then
     echo ""
 fi
 
-if [ "$ACTION" == "shutdown" ]
+if [ "$ACTION" == "destroy" ]
 then
-    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} SHUTDOWN${C_RST} - Shutting down cluster."$C_RST
+    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} DESTROY${C_RST}   - Shutting down cluster and destroying instances."$C_RST
     echo ""
 
     kill_all_running_jiranodes
@@ -377,4 +378,19 @@ then
 
     kill_instance_loadbalancer
     echo ""
+fi
+
+if [ "$ACTION" == "update" ]
+then
+    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} UPDATE${C_RST}    - Update running cluster."$C_RST
+    echo ""
+
+    running_jiranode_count=0
+    get_running_jiranode_count running_jiranode_count
+    if (( running_jiranode_count > 0 )) # arithmetic brackets ... woohoo
+    then
+        echo "Running ${running_jiranode_count}"
+    else
+       echo "Cluster seems compleztely down. Try creating first"
+    fi
 fi
