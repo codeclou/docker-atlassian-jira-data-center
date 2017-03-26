@@ -54,8 +54,25 @@ sudo sysctl -w net.inet.ip.forwarding=1
 **(3) Install Cluster Management Script**
 
 ```bash
-cd /usr/local/bin
-curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/manage-jira-cluster.sh
+#
+# Download v1.0.0
+#
+curl -so /usr/local/bin/manage-jira-cluster.sh \
+"https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/\
+manage-jira-cluster-1.0.0/manage-jira-cluster.sh"
+
+#
+# CHECK SHA512 SUM - Should output OK
+#
+echo "d630264aa95bf08ca4a9cbe700261a8bfec20a2\
+7336a5f842977bef2f2eaaf22e6488c1db7f2a3138737\
+727f2d41596b135aa7deb08bda2c29c0f9bd377f64f4  \
+/usr/local/bin/manage-jira-cluster.sh" > /usr/local/bin/manage-jira-cluster.sh.sha512sum
+gsha512sum -c /usr/local/bin/manage-jira-cluster.sh.sha512sum
+
+#
+# MAKE EXECUTABLE
+#
 chmod +x /usr/local/bin manage-jira-cluster.sh
 ```
 
