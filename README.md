@@ -51,7 +51,11 @@ On macOS® you do this with:
 sudo sysctl -w net.inet.ip.forwarding=1
 ```
 
+&nbsp;
+
 **(3) Install Cluster Management Script**
+
+On macOS® you do this with:
 
 ```bash
 #
@@ -89,7 +93,8 @@ manage-jira-cluster.sh --action create --scale 1
 ```
 
 Important: 
- * We start with one loadbalancer, one JIRA® node and one PostgreSQL Database. After we post configured the first JIRA® node we will add more nodes.
+ * We start with one loadbalancer, one JIRA® node and one PostgreSQL Database. 
+ * After we post configured the first JIRA® node we will add more nodes.
  * Directory `/tmp/jira-shared-home` is used instead of NFS as replacement for the shared-filesystem across all JIRA® nodes. 
 
 &nbsp;
@@ -116,6 +121,13 @@ Should show something like:
 e2e9a6b1b757    jira-cluster-db        5432/tcp
 72f92316309f    jira-cluster-lb        0.0.0.0:9980->9980/tcp
 ```
+
+You can check the logs of each container by calling e.g.:
+
+```bash
+docker logs jira-cluster-node1
+```
+
 
 &nbsp;
 
