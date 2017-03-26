@@ -4,6 +4,11 @@
 
 Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/data-center) for local testing during plugin development.
 
+&nbsp;
+
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-cluster-demo.gif" width="80%"></p>
+
+
 -----
 
 &nbsp;
@@ -22,7 +27,7 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
 &nbsp;
 
-### Prerequisites
+### Initial Configuration
 
 **(1) Add cluster hostname alias**
 
@@ -60,7 +65,7 @@ chmod +x /usr/local/bin manage-cluster.sh
 
 ### Usage
 
-**(1) Start a JIRA® Data Center Cluster**
+**(1) Start a JIRA® Data Center 7.3.3 Cluster**
  
 ```bash
 manage-cluster.sh --action create --scale 1
