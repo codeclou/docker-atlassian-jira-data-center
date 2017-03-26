@@ -73,7 +73,7 @@ gsha512sum -c /usr/local/bin/manage-jira-cluster.sh.sha512sum
 #
 # MAKE EXECUTABLE
 #
-chmod +x /usr/local/bin manage-jira-cluster.sh
+chmod +x /usr/local/bin/manage-jira-cluster.sh
 ```
 
 -----
