@@ -272,6 +272,10 @@ case $key in
     ACTION="$2"
     shift
     ;;
+    -i|--id)
+    NODE_ID="$2"
+    shift
+    ;;
     *)
        # unknown option
     ;;
@@ -288,7 +292,7 @@ echo -e $C_MGN'  /_/  /_/\__,_/_/ /_/\__,_/\__, /\___/   \____/_/\__,_/____/\__/
 echo -e $C_MGN'                           /____/                                            '$C_RST
 echo ""
 echo -e $C_MGN'  Manage local JIRA® Data Center cluster during Plugin development with Docker'$C_RST
-echo -e $C_MGN'  v0.0.1 - https://github.com/codeclou/docker-atlassian-jira-data-center'$C_RST
+echo -e $C_MGN'  v1.0.0 - https://github.com/codeclou/docker-atlassian-jira-data-center'$C_RST
 echo -e $C_MGN'  ------'$C_RST
 echo ""
 
@@ -301,6 +305,16 @@ else
     if [[ ("$ACTION" == "create" || "$ACTION" == "update") && ! $SCALE ]]
     then
         echo -e $C_RED">> param error ........: Please specify scale as parameter -s or --scale. E.g. --scale 3"$C_RST
+        EXIT=1
+    fi
+    if [[ "$ACTION" == "restart-node" && ! $NODE_ID ]]
+    then
+        echo -e $C_RED">> param error ........: Please specify id as parameter -i or --id. E.g. --id3"$C_RST
+        EXIT=1
+    fi
+    if [[ "$ACTION" != "info" && "$ACTION" != "restart-node" && "$ACTION" != "create" && "$ACTION" != "destroy" && "$ACTION" != "update" ]]
+    then
+        echo -e $C_RED">> param error ........: Please specify action as one of [ destroy, create, update, restart-node, info ]"$C_RST
         EXIT=1
     fi
 fi
@@ -389,8 +403,44 @@ then
     get_running_jiranode_count running_jiranode_count
     if (( running_jiranode_count > 0 )) # arithmetic brackets ... woohoo
     then
-        echo "Running ${running_jiranode_count}"
+        echo -e $C_CYN">> update .............:${C_RST}${C_GRN} OK${C_RST}        - currently ${running_jiranode_count} JIRA nodes are running. Cluster should be scaled to ${SCALE} JIRA nodes."$C_RST
+        start_node_id=$(($running_jiranode_count + 1))
+        for (( node_id=$start_node_id; node_id<=$SCALE; node_id++ ))
+        do
+            kill_instance_jiranode $node_id
+            start_instance_jiranode $node_id
+            echo ""
+        done
+        echo ""
+
+        kill_instance_loadbalancer
+        start_instance_loadbalancer $SCALE
+        echo ""
     else
-       echo "Cluster seems compleztely down. Try creating first"
+        echo -e $C_CYN">> update .............:${C_RST}${C_RED} FAIL${C_RST}      - currently 0 JIRA nodes are running. Try to create the cluster first."$C_RST
     fi
+    echo ""
+fi
+
+if [ "$ACTION" == "restart-node" ]
+then
+    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} RESTART-N${C_RST} - Restarting JIRA node ${NODE_ID}."$C_RST
+    echo ""
+
+    kill_instance_jiranode $NODE_ID
+    start_instance_jiranode $NODE_ID
+    echo ""
+fi
+
+if [ "$ACTION" == "info" ]
+then
+    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} INFO${C_RST}      - Cluster information."$C_RST
+    echo ""
+
+    running_jiranode_count=0
+    get_running_jiranode_count running_jiranode_count
+    echo -e $C_CYN">> info ...............:${C_RST}${C_GRN} OK${C_RST}        - currently ${running_jiranode_count} JIRA node(s) are running. Showing 'docker ps' for cluster:"$C_RST
+    echo ""
+    docker ps --format '{{.ID}}\t {{.Names}}\t {{.Ports}}' --filter "name=jira-cluster*"
+    echo ""
 fi

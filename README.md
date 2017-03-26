@@ -55,8 +55,8 @@ sudo sysctl -w net.inet.ip.forwarding=1
 
 ```bash
 cd /usr/local/bin
-curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/manage-cluster.sh
-chmod +x /usr/local/bin manage-cluster.sh
+curl -O https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/manage-jira-cluster.sh
+chmod +x /usr/local/bin manage-jira-cluster.sh
 ```
 
 -----
@@ -68,7 +68,7 @@ chmod +x /usr/local/bin manage-cluster.sh
 **(1) Start a JIRA® Data Center 7.3.3 Cluster**
  
 ```bash
-manage-cluster.sh --action create --scale 1
+manage-jira-cluster.sh --action create --scale 1
 ```
 
 Important: 
@@ -89,7 +89,7 @@ Important:
 Check if all containers have started with:
 
 ```bash
-docker ps --format '{{.ID}}\t{{.Names}}\t\t{{.Ports}}' --filter='name=jira-cluster'
+manage-jira-cluster.sh --action info
 ```
 
 Should show something like:
@@ -148,7 +148,7 @@ to check the Health of each cluster node. `System`  → `Atlassian Support Tools
 Now that our first JIRA® Node is fully working we add additional nodes to our existing cluster.
 
 ```bash
-manage-cluster.sh --action update --scale 3
+manage-jira-cluster.sh --action update --scale 3
 ```
 
 This will **add two additional JIRA® Nodes** and reconfigure the loadbalancer automatically.
@@ -162,7 +162,7 @@ If not all nodes you have started are active, try restarting all nodes not showi
 For example if Instance 3 does not show up, you can restart it like so:
 
 ```bash
-manage-cluster.sh --action restart-node --id 3
+manage-jira-cluster.sh --action restart-node --id 3
 ```
 
 &nbsp;
@@ -176,7 +176,7 @@ Now your cluster should be up and running.
 **(6) Shutting down the cluster**
 
 ```bash
-manage-cluster.sh --action destroy
+manage-jira-cluster.sh --action destroy
 ```
 
 This will kill and remove all instances.
