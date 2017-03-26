@@ -13,7 +13,7 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
  * Runs as non-root with fixed UID 10777 and GID 10777. See [howto prepare volume permissions](https://github.com/codeclou/doc/blob/master/docker/README.md).
  * See [howto use SystemD for named Docker-Containers and system startup](https://github.com/codeclou/doc/blob/master/docker/README.md).
- * You need Linux or macOS.
+ * You need Linux or macOS®.
  * Basic unix-tools like `wc`, `awk`, `curl` and `bash` must be installed.
  * Bash 3 or 4 must be installed.
  * Latest Docker version must be installed.
@@ -24,7 +24,7 @@ Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/da
 
 ### Prerequisites
 
-**(1)** Add cluster hostname alias
+**(1) Add cluster hostname alias**
 
 Add the alias on your Docker-Host machine.
 
@@ -36,17 +36,17 @@ If you like to work with your cluster from your local network, use the servers p
 
 &nbsp;
 
-**(2)** Enable Network Forwarding (Multicast). On macOS do:
+**(2) Enable Network Forwarding (Multicast)**
 
 JIRA® Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable IP Forwarding.
 
-On macOS you do this with:
+On macOS® you do this with:
 
 ```bash
 sudo sysctl -w net.inet.ip.forwarding=1
 ```
 
-**(3)** Install Cluster Management Script
+**(3) Install Cluster Management Script**
 
 ```bash
 cd /usr/local/bin
@@ -60,7 +60,7 @@ chmod +x /usr/local/bin manage-cluster.sh
 
 ### Usage
 
-**(1)** Start a JIRA® Data Center Cluster
+**(1) Start a JIRA® Data Center Cluster**
  
 ```bash
 manage-cluster.sh --action create --scale 1
@@ -70,8 +70,9 @@ Important:
  * We start with one loadbalancer, one JIRA® node and one PostgreSQL Database. After we post configured the first JIRA® node we will add more nodes.
  * Directory `/tmp/jira-shared-home` is used instead of NFS as replacement for the shared-filesystem across all JIRA® nodes. 
 
+&nbsp;
 
-**(2)** Browse to JIRA® Software
+**(2) Browse to JIRA® Software**
 
  * Open a browser to [http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)
  * It might take several minutes for the cluster to fully start up.
@@ -90,7 +91,6 @@ Should show something like:
 
 ```
 101c71ae0c12    jira-cluster-node1     4446/tcp, 8080/tcp, 40001/tcp
-62fba1910763    jira-cluster-node2     4446/tcp, 8080/tcp, 40001/tcp
 e2e9a6b1b757    jira-cluster-db        5432/tcp
 72f92316309f    jira-cluster-lb        0.0.0.0:9980->9980/tcp
 ```
@@ -225,7 +225,11 @@ Tested under the following Operating Systems:
  * **Docker**
    * Docker and the Docker logo are trademarks or registered [trademarks of Docker](https://www.docker.com/trademark-guidelines), Inc. in the United States and/or other countries. Docker, Inc. and other parties may also have trademark rights in other terms used herein.
    * Please check yourself for corresponding Licenses and Terms of Use at [www.docker.com](https://www.docker.com/).
-
+ * **Ubuntu**
+   * Ubuntu and Canonical are registered [trademarks of Canonical Ltd.](https://www.ubuntu.com/legal/short-terms)
+ * **Apple**
+   * macOS®, Mac and OS X are [trademarks of Apple Inc.](http://www.apple.com/legal/intellectual-property/trademark/appletmlist.html), registered in the U.S. and other countries.
+   
 -----
 
 &nbsp;
