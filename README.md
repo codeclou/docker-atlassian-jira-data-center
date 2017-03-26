@@ -2,11 +2,11 @@
 
 [![](https://codeclou.github.io/doc/badges/generated/docker-image-size-500.svg?v2)](https://hub.docker.com/r/codeclou/docker-atlassian-jira-data-center/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-3.5.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
 
-Dockerized [Atlassian JIRA® Data Center](https://de.atlassian.com/enterprise/data-center) for local testing during plugin development.
+Start an [Atlassian JIRA® Software Data Center](https://de.atlassian.com/enterprise/data-center) version 7.3.3 with Docker by [`manage-jira-cluster.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/manage-jira-cluster.sh) for local testing during plugin development.
 
 &nbsp;
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-cluster-demo.gif" width="80%"></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-cluster-demo.gif?v2" width="80%"></p>
 
 
 -----
