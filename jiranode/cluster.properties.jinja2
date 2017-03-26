@@ -14,6 +14,8 @@ jira.shared.home = /jira-shared-home
 ehcache.listener.hostName = jira-cluster-node{{ NODE_NUMBER }}
 ehcache.listener.port = 40001
 
+
+{% if MULTICAST is string("true") %}
 #
 # MULTICAST
 #
@@ -21,3 +23,4 @@ ehcache.peer.discovery = automatic
 ehcache.multicast.address = 230.0.0.1
 ehcache.multicast.port = 4446
 ehcache.multicast.timeToLive = 32
+{% endif %}

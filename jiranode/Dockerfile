@@ -47,7 +47,10 @@ EXPOSE 4446
 # RUN
 #
 USER worker
+# CONFIG VARS (jinja2)
 ENV NODE_NUMBER 1
+ENV MULTICAST "true"
+# INTERNAL CONFIG
 ENV JIRA_HOME /jira-home
 VOLUME ["/work"]
 VOLUME ["/jira-shared-home"]
