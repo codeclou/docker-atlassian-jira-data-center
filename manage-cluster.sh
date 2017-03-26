@@ -100,7 +100,7 @@ function start_instance_loadbalancer {
         --net-alias=jira-cluster-lb \
         --env NODES=${1} \
         -p 9980:9980 \
-        -d codeclou/docker-atlassian-jira-data-center:loadbalancer
+        -d codeclou/docker-atlassian-jira-data-center:loadbalancer-${JIRA_SOFTWARE_VERSION}
 }
 
 # Kill the loadbalancer instance
@@ -167,7 +167,7 @@ function clean_jiranode_shared_home {
 function pull_latest_images {
     echo -e $C_CYN">> docker pull ........:${C_RST}${C_GRN} Pulling${C_RST}   - Pulling latest images from Docker Hub."
     docker pull codeclou/docker-atlassian-jira-data-center:jiranode-software-${JIRA_SOFTWARE_VERSION}
-    docker pull codeclou/docker-atlassian-jira-data-center:loadbalancer
+    docker pull codeclou/docker-atlassian-jira-data-center:loadbalancer-${JIRA_SOFTWARE_VERSION}
 }
 
 # Creates a network for cluster
@@ -292,15 +292,16 @@ echo -e $C_MGN'  ------'$C_RST
 echo ""
 
 EXIT=0
-if [ ! $SCALE ]
-then
-    echo -e $C_RED">> param error ........: Please specify scale as parameter -s or --scale. E.g. --scale 3"$C_RST
-    EXIT=1
-fi
 if [ ! $ACTION ]
 then
     echo -e $C_RED">> param error ........: Please specify action as parameter -a or --action"$C_RST
     EXIT=1
+else
+    if [[ "$ACTION" == "create" && ! $SCALE ]]
+    then
+        echo -e $C_RED">> param error ........: Please specify scale as parameter -s or --scale. E.g. --scale 3"$C_RST
+        EXIT=1
+    fi
 fi
 if [ ! $MULTICAST_PARAM ]
 then
@@ -326,12 +327,12 @@ fi
 #
 ####################################################################################
 
-pull_latest_images
-echo ""
-
 if [ "$ACTION" == "create" ]
 then
-    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} Creating${C_RST} - Creating new cluster and destroying existing if exists"$C_RST
+    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} CREATE${C_RST} - Creating new cluster and destroying existing if exists"$C_RST
+    echo ""
+
+    pull_latest_images
     echo ""
 
     create_network
@@ -363,4 +364,17 @@ then
     echo ""
 fi
 
+if [ "$ACTION" == "shutdown" ]
+then
+    echo -e $C_CYN">> action .............:${C_RST}${C_GRN} SHUTDOWN${C_RST} - Shutting down cluster."$C_RST
+    echo ""
 
+    kill_all_running_jiranodes
+    echo ""
+
+    kill_instance_database
+    echo ""
+
+    kill_instance_loadbalancer
+    echo ""
+fi
