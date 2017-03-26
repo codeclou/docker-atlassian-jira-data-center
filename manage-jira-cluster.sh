@@ -292,7 +292,7 @@ echo -e $C_MGN'  /_/  /_/\__,_/_/ /_/\__,_/\__, /\___/   \____/_/\__,_/____/\__/
 echo -e $C_MGN'                           /____/                                            '$C_RST
 echo ""
 echo -e $C_MGN'  Manage local JIRA® Data Center cluster during Plugin development with Docker'$C_RST
-echo -e $C_MGN'  v1.0.0 - https://github.com/codeclou/docker-atlassian-jira-data-center'$C_RST
+echo -e $C_MGN'  v1.0.1 - https://github.com/codeclou/docker-atlassian-jira-data-center'$C_RST
 echo -e $C_MGN'  ------'$C_RST
 echo ""
 
