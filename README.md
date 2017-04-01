@@ -260,6 +260,9 @@ Tested under the following Operating Systems:
  * **Docker**
    * Docker and the Docker logo are trademarks or registered [trademarks of Docker](https://www.docker.com/trademark-guidelines), Inc. in the United States and/or other countries. Docker, Inc. and other parties may also have trademark rights in other terms used herein.
    * Please check yourself for corresponding Licenses and Terms of Use at [www.docker.com](https://www.docker.com/).
+ * **PostgreSQL**
+   * PostgreSQL is a [registered trademark of the PostgreSQL Community Association of Canada](https://wiki.postgresql.org/wiki/Trademark_Policy).
+   * Please check yourself for corresponding Licenses and Terms of Use at [www.postgresql.org](https://www.postgresql.org/).
  * **Ubuntu**
    * Ubuntu and Canonical are registered [trademarks of Canonical Ltd.](https://www.ubuntu.com/legal/short-terms)
  * **Apple**
