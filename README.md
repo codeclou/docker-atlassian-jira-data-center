@@ -7,7 +7,7 @@ It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apach
 
 &nbsp;
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-cluster-demo.gif?v2" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-cluster-demo.gif?v2)
 
 
 -----
@@ -138,33 +138,33 @@ Once the cluster is fully started up, you need to configure JIRA® Software in t
 
 Go to **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)** and make sure you enabled cookies (sticky session).
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-01-allow-cookies.png" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-01-allow-cookies.png)
 
 Use `http://jira-cluster-lb:9980` as Base URL.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-02-baseurl.png" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-02-baseurl.png)
 
 You can either use a [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
 or at best get a JIRA® Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-03-license.png" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-03-license.png)
 
 Configure your user.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-04-username.png" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-04-username.png)
 
 Skip E-Mail Setup and click yourself through to the end of the installation.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-05-email-later.png" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-05-email-later.png)
 
 Check if clustering is activated under `System`  → `System Info` and search for `Clustering`
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-06-systeminfo-clustering-on.png" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-06-systeminfo-clustering-on.png)
 
 Use the [JIRA® Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
 to check the Health of each cluster node. `System`  → `Atlassian Support Tools` → `Health Checks tab`
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-07-health-checks.png" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-07-health-checks.png)
 
 
 
@@ -185,7 +185,7 @@ This will **add two additional JIRA® Nodes** and reconfigure the loadbalancer a
 
 Wait again several minutes and now check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-09-systeminfo-all-nodes-active.png?v2" width="80%"></p>
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-09-systeminfo-all-nodes-active.png?v2)
 
 If not all nodes you have started are active, try restarting all nodes not showing up.
 
