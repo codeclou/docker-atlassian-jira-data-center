@@ -84,7 +84,7 @@ chmod +x /usr/local/bin/manage-jira-cluster.sh
 
 &nbsp;
 
-**(4) OPTIONAL: Prepare Jira Shared Home
+**(4) OPTIONAL: Prepare Jira Shared Home**
 
 On some systems where permissions are handled very strict and docker runs under a certain user,
 give the `/tmp/jira-shared-home` correct permissions for docker.
@@ -97,7 +97,7 @@ chmod 777 /tmp/jira-shared-home
 
 &nbsp;
 
-**(5) OPTIONAL: ufw and iptables on Ubuntu
+**(5) OPTIONAL: ufw and iptables on Ubuntu**
 
 If you run docker on ubuntu behind UFW and started docker with `--iptables=false` then you
 need to enable Postrouting in `/etc/ufw/before.rules` for the network.
