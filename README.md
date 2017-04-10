@@ -81,6 +81,16 @@ gsha512sum -c /usr/local/bin/manage-jira-cluster.sh.sha512sum
 chmod +x /usr/local/bin/manage-jira-cluster.sh
 ```
 
+**(4) OPTIONAL: Prepare Jira Shared Home
+
+On some systems where permissions are handled very strict and docker runs under a certain user,
+give the `/tmp/jira-shared-home` correct permissions for docker.
+
+```bash
+mkdir /tmp/jira-shared-home
+chmod 777 /tmp/jira-shared-home
+```
+
 -----
 
 &nbsp;
