@@ -81,6 +81,9 @@ gsha512sum -c /usr/local/bin/manage-jira-cluster.sh.sha512sum
 chmod +x /usr/local/bin/manage-jira-cluster.sh
 ```
 
+
+&nbsp;
+
 **(4) OPTIONAL: Prepare Jira Shared Home
 
 On some systems where permissions are handled very strict and docker runs under a certain user,
@@ -89,6 +92,26 @@ give the `/tmp/jira-shared-home` correct permissions for docker.
 ```bash
 mkdir /tmp/jira-shared-home
 chmod 777 /tmp/jira-shared-home
+```
+
+
+&nbsp;
+
+**(5) OPTIONAL: ufw and iptables on Ubuntu
+
+If you run docker on ubuntu behind UFW and started docker with `--iptables=false` then you
+need to enable Postrouting in `/etc/ufw/before.rules` for the network.
+
+Use `docker network list` to get Network-ID which is then `br-NETWORK-ID` under ifconfig, where you get the network range in my case 172.18.0.0.
+
+```
+*nat
+:POSTROUTING ACCEPT [0:0]
+#...
+# DOCKER jira-cluster network
+-A POSTROUTING ! -o br-8a831390552b -s 172.18.0.0/16 -j MASQUERADE
+#...
+COMMIT
 ```
 
 -----
