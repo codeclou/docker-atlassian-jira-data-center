@@ -30,7 +30,7 @@ RUN chmod u+rx,g+rx,o+rx,a-w /work-private/docker-entrypoint.sh && \
     touch /var/www/logs/access.log && chown -R worker:worker /var/www/logs/access.log && \
     chown -R worker:worker /var/log/apache2 && \
     mkdir /run/apache2 && chown -R worker:worker /run/apache2 && \
-    sed -i -e 's/Listen 80/Listen 9980\nServerName localhost/g' /etc/apache2/httpd.conf && \
+    sed -i -e 's/Listen 80/Listen 60733\nServerName localhost/g' /etc/apache2/httpd.conf && \
     sed -i -e 's/AllowOverride\s*None/AllowOverride All/ig' /etc/apache2/httpd.conf && \
     echo "LoadModule proxy_module modules/mod_proxy.so" >> /etc/apache2/httpd.conf && \
     echo "LoadModule proxy_http_module modules/mod_proxy_http.so" >> /etc/apache2/httpd.conf && \
