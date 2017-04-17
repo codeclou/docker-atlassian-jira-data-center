@@ -151,53 +151,33 @@ Once the cluster is fully started up, you need to configure JIRA® Software in t
 
 Go to **[http://jira-cluster-733-lb:60733/](http://jira-cluster-733-lb:60733/)** and make sure you enabled cookies (sticky session).
 
-
+Use `http://jira-cluster-733-lb:60733` as Base URL.
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/01.png?v5" width="80%"/></p>
 
+You can either use a [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
+or at best get a JIRA® Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
+
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/02.png?v5" width="80%"/></p>
 
+Configure your user.
+
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/03.png?v5" width="80%"/></p>
+
+Skip E-Mail Setup and click yourself through to the end of the installation.
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/04.png?v5" width="80%"/></p>
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/05.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/10.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/11.png?v5" width="80%"/></p>
-
-
-
-
-
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-01-allow-cookies.png)
-
-Use `http://jira-cluster-733-lb:60733` as Base URL.
-
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-02-baseurl.png)
-
-You can either use a [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
-or at best get a JIRA® Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
-
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-03-license.png)
-
-Configure your user.
-
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-04-username.png)
-
-Skip E-Mail Setup and click yourself through to the end of the installation.
-
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-05-email-later.png)
-
-Check if clustering is activated under `System`  → `System Info` and search for `Clustering`
-
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-06-systeminfo-clustering-on.png)
 
 Use the [JIRA® Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
 to check the Health of each cluster node. `System`  → `Atlassian Support Tools` → `Health Checks tab`
 
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-07-health-checks.png)
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/10.png?v5" width="80%"/></p>
+
+
 
 
 
@@ -218,7 +198,7 @@ This will **add two additional JIRA® Nodes** and reconfigure the loadbalancer a
 
 Wait again several minutes and now check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
 
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-09-systeminfo-all-nodes-active.png?v2)
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/11.png?v5" width="80%"/></p>
 
 If not all nodes you have started are active, try restarting all nodes not showing up.
 
