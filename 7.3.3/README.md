@@ -97,7 +97,7 @@ data-center/master/7.3.3/manage-jira-cluster-7.3.3.sh"
 #
 # CHECK SHA SUM - Should output OK
 #
-echo "26a9817492dfffe46d587cb95043d0bfbf011d3b4781494a5dc6825d76c8e0e1  \
+echo "4458bfac178c81ddd653a461614d3c6e47dad26ce231abc7fb067004453cd6b0  \
 /usr/local/bin/manage-jira-cluster-7.3.3.sh" \
 > /usr/local/bin/manage-jira-cluster-7.3.3.sh.sha256sum
 gsha256sum -c /usr/local/bin/manage-jira-cluster-7.3.3.sh.sha256sum

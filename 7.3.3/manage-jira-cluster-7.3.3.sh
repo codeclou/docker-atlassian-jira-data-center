@@ -126,13 +126,14 @@ function kill_instance_database {
 # @param $1 {int} node ID
 function start_instance_jiranode {
     echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-${JIRA_VERSION_DOT_FREE}-node${1}."
+    local volume_name=jira-shared-home-${JIRA_VERSION_DOT_FREE}
     docker run \
         --rm \
         --name jira-cluster-${JIRA_VERSION_DOT_FREE}-node${1} \
         --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
         --net-alias=jira-cluster-${JIRA_VERSION_DOT_FREE}-node${1} \
         --env NODE_NUMBER=${1} \
-        -v jira-shared-home:/jira-shared-home \
+        -v ${volume_name}:/jira-shared-home \
         -d codeclou/docker-atlassian-jira-data-center:jiranode-${JIRA_VERSION}
 }
 
