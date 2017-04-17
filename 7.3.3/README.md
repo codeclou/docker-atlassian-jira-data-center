@@ -2,13 +2,28 @@
 
 [![](https://codeclou.github.io/doc/badges/generated/docker-image-size-500.svg?v2)](https://hub.docker.com/r/codeclou/docker-atlassian-jira-data-center/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-3.5.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
 
-Start an [Atlassian JIRA® Software Data Center](https://de.atlassian.com/enterprise/data-center) version 7.3.3 with Docker by [`manage-jira-cluster.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/manage-jira-cluster.sh) for local testing during plugin development.
+[![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-confluence-cluster-logo.svg)](https://github.com/codeclou/docker-atlassian-jira-data-center)
+
+## Version 7.3.3
+
+Start an [Atlassian JIRA® Software Data Center](https://de.atlassian.com/enterprise/data-center) version 7.3.3 with Docker by [`manage-jira-cluster-7.3.3.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/manage-jira-cluster-7.3.3.sh) for local testing during plugin development.
 It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume. 
 
 &nbsp;
 
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-cluster-demo.gif?v2)
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-cluster-demo.gif?v2" width="80%"/></p>
 
+
+-----
+
+&nbsp;
+
+### Manage Cluster Script
+
+To start, scale, stop and destroy the cluster, the [`manage-jira-cluster-7.3.3.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/7.3.3/manage-jira-cluster-7.3.3.sh) script is provided.
+It basically works in the following way:
+
+  * todo
 
 -----
 
@@ -16,9 +31,7 @@ It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apach
 
 ### Prerequisites
 
-
- * Runs as non-root with fixed UID 10777 and GID 10777. See [howto prepare volume permissions](https://github.com/codeclou/doc/blob/master/docker/README.md).
- * See [howto use SystemD for named Docker-Containers and system startup](https://github.com/codeclou/doc/blob/master/docker/README.md).
+ * All Docker containers run internally as non-root with fixed UID 10777 and GID 10777.
  * You need Linux or macOS®.
  * Basic unix-tools like `wc`, `awk`, `curl` and `bash` must be installed.
  * Bash 3 or 4 must be installed.
@@ -36,7 +49,7 @@ Add the alias on your Docker-Host machine.
 
 ```bash
 sudo su
-echo "127.0.0.1  jira-cluster-lb" >> /etc/hosts
+echo "127.0.0.1  jira-cluster-733-lb" >> /etc/hosts
 ```
 If you like to work with your cluster from your local network, use the servers public IP instead.
 
@@ -60,59 +73,27 @@ On macOS® you do this with:
 
 ```bash
 #
-# Download v1.0.0
+# DOWNLOAD MANAGEMENT SCRIPT
 #
-curl -so /usr/local/bin/manage-jira-cluster.sh \
-"https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/\
-manage-jira-cluster-1.0.0/manage-jira-cluster.sh"
+curl -so /usr/local/bin/manage-jira-cluster-7.3.3.sh \
+"https://raw.githubusercontent.com/codeclou/\
+docker-atlassian-jira-data-center/6.1.1/manage-jira-cluster-7.3.3.sh"
 
 #
-# CHECK SHA512 SUM - Should output OK
+# CHECK SHA SUM - Should output OK
 #
-echo "d630264aa95bf08ca4a9cbe700261a8bfec20a2\
-7336a5f842977bef2f2eaaf22e6488c1db7f2a3138737\
-727f2d41596b135aa7deb08bda2c29c0f9bd377f64f4  \
-/usr/local/bin/manage-jira-cluster.sh" > /usr/local/bin/manage-jira-cluster.sh.sha512sum
-gsha512sum -c /usr/local/bin/manage-jira-cluster.sh.sha512sum
+echo "26a9817492dfffe46d587cb95043d0bfbf011d3b4781494a5dc6825d76c8e0e1  \
+/usr/local/bin/manage-jira-cluster-7.3.3.sh" \
+> /usr/local/bin/manage-jira-cluster-7.3.3.sh.sha256sum
+gsha256sum -c /usr/local/bin/manage-jira-cluster-7.3.3.sh.sha256sum
 
 #
 # MAKE EXECUTABLE
 #
-chmod +x /usr/local/bin/manage-jira-cluster.sh
+chmod +x /usr/local/bin/manage-jira-cluster-7.3.3.sh
 ```
 
 
-&nbsp;
-
-**(4) OPTIONAL: Prepare Jira Shared Home**
-
-On some systems where permissions are handled very strict and docker runs under a certain user,
-give the `/tmp/jira-shared-home` correct permissions for docker.
-
-```bash
-mkdir /tmp/jira-shared-home
-chmod 777 /tmp/jira-shared-home
-```
-
-
-&nbsp;
-
-**(5) OPTIONAL: ufw and iptables on Ubuntu**
-
-If you run docker on ubuntu behind UFW and started docker with `--iptables=false` then you
-need to enable Postrouting in `/etc/ufw/before.rules` for the network.
-
-Use `docker network list` to get Network-ID which is then `br-NETWORK-ID` under ifconfig, where you get the network range in my case 172.18.0.0.
-
-```
-*nat
-:POSTROUTING ACCEPT [0:0]
-#...
-# DOCKER jira-cluster network
--A POSTROUTING ! -o br-8a831390552b -s 172.18.0.0/16 -j MASQUERADE
-#...
-COMMIT
-```
 
 -----
 
@@ -123,19 +104,18 @@ COMMIT
 **(1) Start a JIRA® Data Center 7.3.3 Cluster**
  
 ```bash
-manage-jira-cluster.sh --action create --scale 1
+manage-jira-cluster-7.3.3.sh --action create --scale 1
 ```
 
 Important: 
  * We start with one loadbalancer, one JIRA® node and one PostgreSQL Database. 
  * After we post configured the first JIRA® node we will add more nodes.
- * Directory `/tmp/jira-shared-home` is used instead of NFS as replacement for the shared-filesystem across all JIRA® nodes. 
 
 &nbsp;
 
 **(2) Browse to JIRA® Software**
 
- * Open a browser to [http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)
+ * Open a browser to [http://jira-cluster-733-lb:60733/](http://jira-cluster-733-lb:60733/)
  * It might take several minutes for the cluster to fully start up.
 
 &nbsp;
@@ -145,21 +125,21 @@ Important:
 Check if all containers have started with:
 
 ```bash
-manage-jira-cluster.sh --action info
+manage-jira-cluster-7.3.3.sh --action info
 ```
 
 Should show something like:
 
 ```
-101c71ae0c12    jira-cluster-node1     4446/tcp, 8080/tcp, 40001/tcp
-e2e9a6b1b757    jira-cluster-db        5432/tcp
-72f92316309f    jira-cluster-lb        0.0.0.0:9980->9980/tcp
+101c71ae0c12    jira-cluster-733-node1     4446/tcp, 8080/tcp, 40001/tcp
+e2e9a6b1b757    jira-cluster-733-db        5432/tcp
+72f92316309f    jira-cluster-733-lb        0.0.0.0:60733->60733/tcp
 ```
 
 You can check the logs of each container by calling e.g.:
 
 ```bash
-docker logs jira-cluster-node1
+docker logs jira-cluster-733-node1
 ```
 
 
@@ -169,7 +149,7 @@ docker logs jira-cluster-node1
 
 Once the cluster is fully started up, you need to configure JIRA® Software in the browser.
 
-Go to **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)** and make sure you enabled cookies (sticky session).
+Go to **[http://jira-cluster-733-lb:60733/](http://jira-cluster-733-lb:60733/)** and make sure you enabled cookies (sticky session).
 
 
 
@@ -193,7 +173,7 @@ Go to **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)** and make 
 
 ![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-01-allow-cookies.png)
 
-Use `http://jira-cluster-lb:9980` as Base URL.
+Use `http://jira-cluster-733-lb:60733` as Base URL.
 
 ![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/cluster-02-baseurl.png)
 
@@ -231,7 +211,7 @@ to check the Health of each cluster node. `System`  → `Atlassian Support Tools
 Now that our first JIRA® Node is fully working we add additional nodes to our existing cluster.
 
 ```bash
-manage-jira-cluster.sh --action update --scale 3
+manage-jira-cluster-7.3.3.sh --action update --scale 3
 ```
 
 This will **add two additional JIRA® Nodes** and reconfigure the loadbalancer automatically.
@@ -245,7 +225,7 @@ If not all nodes you have started are active, try restarting all nodes not showi
 For example if Instance 3 does not show up, you can restart it like so:
 
 ```bash
-manage-jira-cluster.sh --action restart-node --id 3
+manage-jira-cluster-7.3.3.sh --action restart-node --id 3
 ```
 
 &nbsp;
@@ -259,7 +239,7 @@ Now your cluster should be up and running.
 **(6) Shutting down the cluster**
 
 ```bash
-manage-jira-cluster.sh --action destroy
+manage-jira-cluster-7.3.3.sh --action destroy
 ```
 
 This will kill and remove all instances.
@@ -280,6 +260,30 @@ stateless worker nodes. JIRA® Data Center on the other hand relies on a state f
 **Why PostgreSQL 9.4?**
 
  * [JIRA Software 7.x supports max PostgreSQL 9.4](https://confluence.atlassian.com/adminjiraserver072/supported-platforms-828787550.html)
+
+
+
+&nbsp;
+
+**Running with ufw and iptables on Ubuntu**
+
+If you run docker on ubuntu behind UFW and started docker with `--iptables=false` then you
+need to enable Postrouting in `/etc/ufw/before.rules` for the network.
+
+Use `docker network list` to get Network-ID which is then `br-NETWORK-ID` under ifconfig, where you get the network range in my case 172.18.0.0.
+
+```
+*nat
+:POSTROUTING ACCEPT [0:0]
+#...
+# DOCKER jira-cluster-733 network
+-A POSTROUTING ! -o br-8a831390552b -s 172.18.0.0/16 -j MASQUERADE
+#...
+COMMIT
+```
+
+&nbsp;
+
 
 -----
 
