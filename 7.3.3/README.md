@@ -20,7 +20,7 @@ It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apach
 
 ### Manage Cluster Script
 
-To start, scale, stop and destroy the cluster, the [`manage-jira-cluster-7.3.3.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/7.3.3/manage-jira-cluster-7.3.3.sh) script is provided.
+To start, scale, stop and destroy the cluster, the [`manage-jira-cluster-7.3.3.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.3.3/manage-jira-cluster-7.3.3.sh) script is provided.
 It basically works in the following way:
 
   * todo
