@@ -15,7 +15,7 @@ set -e
 #
 ####################################################################################
 # keep in sync with 'manage-jira-cluster-7.3.3-version.txt'
-MANAGEMENT_SCRIPT_VERSION=1
+MANAGEMENT_SCRIPT_VERSION=2
 
 ####################################################################################
 #
@@ -254,9 +254,9 @@ function update_check {
     local latest_version=$(curl -s https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/7.3.3/manage-jira-cluster-7.3.3-version.txt)
     if (( latest_version > MANAGEMENT_SCRIPT_VERSION )) # arithmetic brackets ... woohoo
     then
-        echo -e $C_CYN">> management script ..:${C_RST}${C_RED} OutOfDate${C_RST} - please update the management script. Visit GitHub for instructions."
+        echo -e $C_CYN">> management script ..:${C_RST}${C_RED} OUTOFDATE${C_RST} - please update the management script. Visit GitHub for instructions."
     else
-        echo -e $C_CYN">> management script ..:${C_RST}${C_GRN} UpToDate${C_RST}  - your script is up to date."
+        echo -e $C_CYN">> management script ..:${C_RST}${C_GRN} UPTODATE${C_RST}  - your script is up to date."
     fi
 }
 
