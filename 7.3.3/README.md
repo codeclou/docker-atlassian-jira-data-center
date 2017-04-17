@@ -11,7 +11,7 @@ It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apach
 
 &nbsp;
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-cluster-demo.gif?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/demo.gif?v2" width="80%"/></p>
 
 
 -----
