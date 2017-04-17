@@ -6,7 +6,9 @@
 
 ## Version 7.3.3
 
-Start an [Atlassian JIRA® Software Data Center](https://de.atlassian.com/enterprise/data-center) version 7.3.3 with Docker by [`manage-jira-cluster-7.3.3.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/manage-jira-cluster-7.3.3.sh) for local testing during plugin development.
+Start an [Atlassian JIRA® Software Data Center](https://de.atlassian.com/enterprise/data-center) version 7.3.3 with 
+Docker by [`manage-jira-cluster-7.3.3.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.3.3/manage-jira-cluster-7.3.3.sh) 
+for local testing during plugin development.
 It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume. 
 
 &nbsp;
