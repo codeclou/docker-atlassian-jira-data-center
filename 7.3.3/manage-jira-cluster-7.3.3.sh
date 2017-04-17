@@ -264,10 +264,6 @@ case $key in
     SCALE="$2"
     shift
     ;;
-    -m|--multicast)
-    MULTICAST_PARAM="$2"
-    shift
-    ;;
     -a|--action)
     ACTION="$2"
     shift
@@ -319,16 +315,6 @@ else
         echo -e $C_RED">> param error ........: Please specify action as one of [ destroy, create, update, restart-node, info ]"$C_RST
         EXIT=1
     fi
-fi
-if [ ! $MULTICAST_PARAM ]
-then
-    MULTICAST="true"
-    echo -e $C_CYN">> config .............:${C_RST}${C_GRN} Multicast${C_RST} - using multicast='true' by default."$C_RST
-    echo ""
-else
-    MULTICAST="false"
-    echo -e $C_CYN">> config .............:${C_RST}${C_GRN} Multicast${C_RST} - using multicast='false' by user choice."$C_RST
-    echo ""
 fi
 
 if [ $EXIT -eq 1 ]
