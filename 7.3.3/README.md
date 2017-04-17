@@ -23,7 +23,22 @@ It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apach
 To start, scale, stop and destroy the cluster, the [`manage-jira-cluster-7.3.3.sh`](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.3.3/manage-jira-cluster-7.3.3.sh) script is provided.
 It basically works in the following way:
 
-  * todo
+
+  * It creates a docker bridge network called `jira-cluster-733`.
+  * It creates a shared volume called `jira-shared-home-733`.
+  * It creates a docker container called `jira-cluster-733-lb` as the loadbalancer.
+    * Binds Port 50611/tcp to the host.
+  * It creates a docker container called `jira-cluster-733-db` as the database.
+    * Port 5432/tcp are only exposed inside the `jira-cluster-733` network.
+  * It creates multiple docker containers called `jira-cluster-733-node{n}` as JIRA Software instances.
+    * With `n ∈ {1,2,3,...,100}`.
+    * An instance runs [JIRA Software](https://confluence.atlassian.com/jirasoftwareserver073/installing-jira-software-861254170.html) on Port 8080/tcp.
+    * Port 8080/tcp and the multicast Ports 40001,4446/tcp are only exposed inside the `jira-cluster-733` network.
+
+The script is meant to follow the convention over configuration paradigma, therefore there is not much to be configured, except two things:
+
+  * It relies on the hostname `jira-cluster-733-lb` pointing to the interface which binds 60733/tcp.
+
 
 -----
 
@@ -155,7 +170,7 @@ Use `http://jira-cluster-733-lb:60733` as Base URL.
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/01.png?v5" width="80%"/></p>
 
-You can either use a [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
+You can either use an [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
 or at best get a JIRA® Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/02.png?v5" width="80%"/></p>
@@ -280,7 +295,9 @@ Tested under the following Operating Systems:
    * Docker version 17.03.0-ce, build 60ccb22
    * GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin15)
 
-:bangbang: Might not run under Windows.
+Not tested and not compatible under the following Operating Systems:
+
+  * Microsoft Windows
 
 -----
 
