@@ -48,7 +48,7 @@ The script is meant to follow the convention over configuration paradigma, there
 
  * All Docker containers run internally as non-root with fixed UID 10777 and GID 10777.
  * You need Linux or macOS®.
- * Basic unix-tools like `wc`, `awk`, `curl` and `bash` must be installed.
+ * Basic unix-tools like `wc`, `awk`, `curl`, `tr`, `head` and `bash` must be installed.
  * Bash 3 or 4 must be installed.
  * Latest Docker version must be installed.
 

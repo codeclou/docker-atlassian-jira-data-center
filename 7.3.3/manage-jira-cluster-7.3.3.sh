@@ -15,7 +15,7 @@ set -e
 #
 ####################################################################################
 # keep in sync with 'manage-jira-cluster-7.3.3-version.txt'
-MANAGEMENT_SCRIPT_VERSION=2
+MANAGEMENT_SCRIPT_VERSION=3
 
 ####################################################################################
 #
@@ -251,7 +251,8 @@ function kill_all_running_jiranodes {
 #
 #
 function update_check {
-    local latest_version=$(curl -s https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/7.3.3/manage-jira-cluster-7.3.3-version.txt)
+    local unique_hash=$(cat /dev/random | LC_CTYPE=C tr -dc "[:alpha:]" | head -c 16)
+    local latest_version=$(curl -s https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/7.3.3/manage-jira-cluster-7.3.3-version.txt?r=${unique_hash})
     if (( latest_version > MANAGEMENT_SCRIPT_VERSION )) # arithmetic brackets ... woohoo
     then
         echo -e $C_CYN">> management script ..:${C_RST}${C_RED} OUTOFDATE${C_RST} - please update the management script. Visit GitHub for instructions."
