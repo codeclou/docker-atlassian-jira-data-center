@@ -81,14 +81,14 @@ function _kill_and_remove_named_instance_if_exists {
 #
 # @param $1 {integer} amount of jiranodes
 function start_instance_loadbalancer {
-    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-733-lb."
+    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-${JIRA_VERSION_DOT_FREE}-lb."
     docker run \
         --rm \
-        --name jira-cluster-733-lb \
-        --net=jira-cluster-733 \
-        --net-alias=jira-cluster-733-lb \
+        --name jira-cluster-${JIRA_VERSION_DOT_FREE}-lb \
+        --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
+        --net-alias=jira-cluster-${JIRA_VERSION_DOT_FREE}-lb \
         --env NODES=${1} \
-        -p 60733:60733 \
+        -p ${JIRA_LB_PUBLIC_PORT}:${JIRA_LB_PUBLIC_PORT} \
         -d codeclou/docker-atlassian-jira-data-center:loadbalancer-${JIRA_VERSION}
 }
 
@@ -96,41 +96,41 @@ function start_instance_loadbalancer {
 #
 #
 function kill_instance_loadbalancer {
-    _kill_and_remove_named_instance_if_exists jira-cluster-733-lb
+    _kill_and_remove_named_instance_if_exists jira-cluster-${JIRA_VERSION_DOT_FREE}-lb
 }
 
 # Start the database instance
 #
 #
 function start_instance_database {
-    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-733-db."
+    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-${JIRA_VERSION_DOT_FREE}-db."
     docker run \
         --rm \
-        --name jira-cluster-733-db \
-        --net=jira-cluster-733 \
-        --net-alias=jira-cluster-733-db \
+        --name jira-cluster-${JIRA_VERSION_DOT_FREE}-db \
+        --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
+        --net-alias=jira-cluster-${JIRA_VERSION_DOT_FREE}-db \
         -e POSTGRES_PASSWORD=jira \
         -e POSTGRES_USER=jira \
-        -d postgres:9.4
+        -d postgres:${POSTGRESQL_VERSION}
 }
 
 # Kill the database instance
 #
 #
 function kill_instance_database {
-    _kill_and_remove_named_instance_if_exists jira-cluster-733-db
+    _kill_and_remove_named_instance_if_exists jira-cluster-${JIRA_VERSION_DOT_FREE}-db
 }
 
 # Start a jiranode instance
 #
 # @param $1 {int} node ID
 function start_instance_jiranode {
-    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-733-node${1}."
+    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-${JIRA_VERSION_DOT_FREE}-node${1}."
     docker run \
         --rm \
-        --name jira-cluster-733-node${1} \
-        --net=jira-cluster-733 \
-        --net-alias=jira-cluster-733-node${1} \
+        --name jira-cluster-${JIRA_VERSION_DOT_FREE}-node${1} \
+        --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
+        --net-alias=jira-cluster-${JIRA_VERSION_DOT_FREE}-node${1} \
         --env NODE_NUMBER=${1} \
         -v jira-shared-home:/jira-shared-home \
         -d codeclou/docker-atlassian-jira-data-center:jiranode-${JIRA_VERSION}
@@ -140,15 +140,22 @@ function start_instance_jiranode {
 #
 # @param $1 {int} node ID
 function kill_instance_jiranode {
-    _kill_and_remove_named_instance_if_exists jira-cluster-733-node${1}
+    _kill_and_remove_named_instance_if_exists jira-cluster-${JIRA_VERSION_DOT_FREE}-node${1}
 }
 
 # Cleans the jira shared-home
 #
 #
 function clean_jiranode_shared_home {
-    echo -e $C_CYN">> clean shared home ..:${C_RST}${C_GRN} Deleting${C_RST}  - Deleting contents of jira-shared-home: /tmp/jira-shared-home/."
-    rm -rf /tmp/jira-shared-home/* # clean shared jira-home if present
+    local volume_name=jira-shared-home-${JIRA_VERSION_DOT_FREE}
+    shared_home_exists=$(docker volume ls --filter "name=${volume_name}" --format '{{.Name}}' | wc -l | awk '{print $1}')
+    if (( shared_home_exists == 1 )) # arithmetic brackets ... woohoo
+    then
+        echo -e $C_CYN">> clean shared home ..:${C_RST}${C_GRN} Deleting${C_RST}  - Deleting existing volume ${volume_name}"
+        docker volume rm --force ${volume_name}
+    fi
+    echo -e $C_CYN">> clean shared home ..:${C_RST}${C_GRN} Creating${C_RST}  - Creating volume ${volume_name}"
+    docker volume create ${volume_name}
 }
 
 # Pulls the latest docker images from docker hub
@@ -165,13 +172,14 @@ function pull_latest_images {
 #
 #
 function create_network {
-    network_exists=$(docker network ls --filter 'name=jira-cluster-733' --format '{{.Name}}' | wc -l | awk '{print $1}')
+    local network_name="jira-cluster-${JIRA_VERSION_DOT_FREE}"
+    network_exists=$(docker network ls --filter "name=${network_name}" --format '{{.Name}}' | wc -l | awk '{print $1}')
     if (( network_exists == 1 )) # arithmetic brackets ... woohoo
     then
-        echo -e $C_CYN">> docker network .....:${C_RST}${C_MGN} Skipping${C_RST}  - Network jira-cluster-733 exists already."
+        echo -e $C_CYN">> docker network .....:${C_RST}${C_MGN} Skipping${C_RST}  - Network ${network_name} exists already."
     else
-        echo -e $C_CYN">> docker network .....:${C_RST}${C_GRN} Creating${C_RST}  - Creating network jira-cluster-733."
-        docker network create jira-cluster-733
+        echo -e $C_CYN">> docker network .....:${C_RST}${C_GRN} Creating${C_RST}  - Creating network ${network_name}."
+        docker network create ${network_name}
     fi
 }
 
@@ -184,7 +192,8 @@ function create_network {
 # @param $1 {int} return value passByReference
 function get_running_jiranode_count {
     local ret_value=-1
-    _is_named_container_running "jira-cluster-733-node" ret_value
+    local jiracount_match_str="jira-cluster-${JIRA_VERSION_DOT_FREE}-node"
+    _is_named_container_running $jiracount_match_str ret_value
 
     local "$1" && return_by_reference $1 $ret_value
 }
@@ -197,7 +206,8 @@ function get_running_jiranode_count {
 #
 # @param $1 {string} return value passByReference in form of "node1 node2 node"
 function get_running_jiranode_name_array {
-    local instance_names_string_newlines=$(docker ps --format '{{.Names}}' --filter "name=jira-cluster-733-node")
+    local jiranode_match_str="jira-cluster-${JIRA_VERSION_DOT_FREE}-node"
+    local instance_names_string_newlines=$(docker ps --format '{{.Names}}' --filter "name=${jiranode_match_str}")
     local instance_names_string_oneline=$(echo $instance_names_string_newlines | tr "\n" " ")
     local ret_value=$instance_names_string_oneline
 
@@ -214,7 +224,7 @@ function kill_all_running_jiranodes {
     get_running_jiranode_count running_jiranode_count
     if (( running_jiranode_count > 0 )) # arithmetic brackets ... woohoo
     then
-        echo -e $C_CYN">> docker kill nodes ..:${C_RST}${C_GRN} Killing${C_RST}   - Killing all running jira-cluster-733-node* instances."
+        echo -e $C_CYN">> docker kill nodes ..:${C_RST}${C_GRN} Killing${C_RST}   - Killing all running jira-cluster-${JIRA_VERSION_DOT_FREE}-node* instances."
         local running_instance_names=""
         get_running_jiranode_name_array running_instance_names
         local running_instance_names_array=($running_instance_names)
@@ -223,7 +233,7 @@ function kill_all_running_jiranodes {
            _kill_and_remove_named_instance_if_exists ${running_instance_name}
         done
     else
-        echo -e $C_CYN">> docker kill nodes ..:${C_RST}${C_MGN} Skipping${C_RST}  - No running jira-cluster-733-node* instances present."
+        echo -e $C_CYN">> docker kill nodes ..:${C_RST}${C_MGN} Skipping${C_RST}  - No running jira-cluster-${JIRA_VERSION_DOT_FREE}-node* instances present."
     fi
 }
 
@@ -233,9 +243,9 @@ function kill_all_running_jiranodes {
 function print_cluster_ready_info {
     echo -e $C_CYN">> ----------------------------------------------------------------------------------------------------"$C_RST
     echo -e $C_CYN">> info ...............:${C_RST}${C_GRN} Ready${C_RST}     - Wait for JIRA nodes to startup, might take some minutes."
-    echo -e $C_CYN">> info ...............:${C_RST}${C_GRN} http://jira-cluster-733-lb:60733${C_RST} "
+    echo -e $C_CYN">> info ...............:${C_RST}${C_GRN} http://jira-cluster-${JIRA_VERSION_DOT_FREE}-lb:${JIRA_LB_PUBLIC_PORT}${C_RST} "
     echo -e $C_CYN">> info ...............:${C_RST} Do not forget to:"
-    echo -e $C_CYN">> info ...............:${C_RST}   [1] put '127.0.0.1 jira-cluster-733-lb' to /etc/hosts."
+    echo -e $C_CYN">> info ...............:${C_RST}   [1] put '127.0.0.1 jira-cluster-${JIRA_VERSION_DOT_FREE}-lb' to /etc/hosts."
     echo -e $C_CYN">> info ...............:${C_RST}   [2] enable IP Forwarding to support multicast."
     echo -e $C_CYN">> ----------------------------------------------------------------------------------------------------"$C_RST
 }
@@ -345,10 +355,10 @@ then
     create_network
     echo ""
 
-    clean_jiranode_shared_home
+    kill_all_running_jiranodes
     echo ""
 
-    kill_all_running_jiranodes
+    clean_jiranode_shared_home
     echo ""
 
     kill_instance_database
@@ -433,6 +443,6 @@ then
     get_running_jiranode_count running_jiranode_count
     echo -e $C_CYN">> info ...............:${C_RST}${C_GRN} OK${C_RST}        - currently ${running_jiranode_count} JIRA node(s) are running. Showing 'docker ps' for cluster:"$C_RST
     echo ""
-    docker ps --format '{{.ID}}\t {{.Names}}\t {{.Ports}}' --filter "name=jira-cluster-733*"
+    docker ps --format '{{.ID}}\t {{.Names}}\t {{.Ports}}' --filter "name=jira-cluster-${JIRA_VERSION_DOT_FREE}*"
     echo ""
 fi
