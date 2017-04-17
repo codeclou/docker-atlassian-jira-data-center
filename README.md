@@ -12,6 +12,9 @@ Please choose the JIRA Software version you want to run:
 |-------------------|--------------------|-----------------|-----------------------|
 | **⇨ [7.3.3](https://github.com/codeclou/docker-atlassian-jira-data-center/tree/master/7.3.3)** | http://jira-cluster-733-lb:60733/ | [9.4](https://hub.docker.com/_/postgres/) | [8u121](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.3.3/Dockerfile) |
 
+**Please Note:**
+ * I do not provide support. If you have questions on how to run JIRA Software and/or JIRA Data Center, please ask in the 
+[Atlassian Community](https://community.atlassian.com/).
 
 -----
 
