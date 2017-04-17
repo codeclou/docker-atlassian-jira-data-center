@@ -8,6 +8,15 @@
 
 set -e
 
+
+####################################################################################
+#
+# VERSION
+#
+####################################################################################
+# keep in sync with 'manage-jira-cluster-7.3.3-version.txt'
+MANAGEMENT_SCRIPT_VERSION=1
+
 ####################################################################################
 #
 # CONFIG
@@ -238,6 +247,19 @@ function kill_all_running_jiranodes {
     fi
 }
 
+# Update check
+#
+#
+function update_check {
+    local latest_version=$(curl -s https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/7.3.3/manage-jira-cluster-7.3.3-version.txt)
+    if (( latest_version > MANAGEMENT_SCRIPT_VERSION )) # arithmetic brackets ... woohoo
+    then
+        echo -e $C_CYN">> management script ..:${C_RST}${C_RED} OutOfDate${C_RST} - please update the management script. Visit GitHub for instructions."
+    else
+        echo -e $C_CYN">> management script ..:${C_RST}${C_GRN} UpToDate${C_RST}  - your script is up to date."
+    fi
+}
+
 # Prints info
 #
 #
@@ -336,6 +358,9 @@ then
     echo -e $C_CYN">> action .............:${C_RST}${C_GRN} CREATE${C_RST}    - Creating new cluster and destroying existing if exists"$C_RST
     echo ""
 
+    update_check
+    echo ""
+
     pull_latest_images
     echo ""
 
@@ -388,6 +413,9 @@ then
     echo -e $C_CYN">> action .............:${C_RST}${C_GRN} UPDATE${C_RST}    - Update running cluster."$C_RST
     echo ""
 
+    update_check
+    echo ""
+
     running_jiranode_count=0
     get_running_jiranode_count running_jiranode_count
     if (( running_jiranode_count > 0 )) # arithmetic brackets ... woohoo
@@ -424,6 +452,9 @@ fi
 if [ "$ACTION" == "info" ]
 then
     echo -e $C_CYN">> action .............:${C_RST}${C_GRN} INFO${C_RST}      - Cluster information."$C_RST
+    echo ""
+
+    update_check
     echo ""
 
     running_jiranode_count=0
