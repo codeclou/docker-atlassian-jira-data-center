@@ -76,8 +76,8 @@ On macOS® you do this with:
 # DOWNLOAD MANAGEMENT SCRIPT
 #
 curl -so /usr/local/bin/manage-jira-cluster-7.3.3.sh \
-"https://raw.githubusercontent.com/codeclou/\
-docker-atlassian-jira-data-center/6.1.1/manage-jira-cluster-7.3.3.sh"
+"https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-\
+data-center/master/7.3.3/manage-jira-cluster-7.3.3.sh"
 
 #
 # CHECK SHA SUM - Should output OK
