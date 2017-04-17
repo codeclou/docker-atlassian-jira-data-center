@@ -2,7 +2,7 @@
 
 [![](https://codeclou.github.io/doc/badges/generated/docker-image-size-500.svg?v2)](https://hub.docker.com/r/codeclou/docker-atlassian-jira-data-center/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-3.5.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
 
-[![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-confluence-cluster-logo.svg)](https://github.com/codeclou/docker-atlassian-jira-data-center)
+[![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-jira-cluster-logo.svg)](https://github.com/codeclou/docker-atlassian-jira-data-center)
 
 ## Version 7.3.3
 
