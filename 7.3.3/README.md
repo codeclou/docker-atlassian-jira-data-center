@@ -173,19 +173,19 @@ Go to **[http://jira-cluster-lb:9980/](http://jira-cluster-lb:9980/)** and make 
 
 
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/01.png?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/01.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/02.png?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/02.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/03.png?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/03.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/04.png?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/04.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/05.png?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/05.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/10.png?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/10.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/11.png?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/11.png?v5" width="80%"/></p>
 
 
 
