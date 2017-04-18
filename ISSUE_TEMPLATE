@@ -1,0 +1,28 @@
+-------
+
+I DO NOT GIVE SUPPORT FOR ATLASSIAN JIRA DATA CENTER!
+PLEASE ASK USAGE QUESTIONS ON THE ATLASSIAN COMMUNITY:
+
+https://community.atlassian.com/
+
+OR IF YOU OWN A LICENSE ASK THE ATLASSIAN SUPPORT:
+
+https://support.atlassian.com/
+
+-------
+
+I WILL ONLY RESPOND TO ISSUES ABOUT THE MANAGEMENT SCRIPT.
+BUT ONLY FOR SUPPORTED PLATFORMS:
+
+  * latest Ubuntu with latest Docker
+  * latest macOS Sierra with latest Docker (without boot2docker or other shenanigans)
+
+ISSUES ON EVERYTHING ELSE WILL BE CLOSED IMMEDIATELY
+
+-------
+
+When you have an issue with the management script please supply:
+
+  * STDOUT/STDERR output from script
+  * Docker version `docker --version`
+  * Ubuntu / macOS Version
