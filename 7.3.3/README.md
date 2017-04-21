@@ -35,7 +35,7 @@ It basically works in the following way:
     * An instance runs [JIRA Software](https://confluence.atlassian.com/jirasoftwareserver073/installing-jira-software-861254170.html) on Port 8080/tcp.
     * Port 8080/tcp and the multicast Ports 40001,4446/tcp are only exposed inside the `jira-cluster-733` network.
 
-The script is meant to follow the convention over configuration paradigma, therefore there is not much to be configured, except two things:
+The script is meant to follow the convention over configuration paradigma, therefore there is not much to be configured, except one thing:
 
   * It relies on the hostname `jira-cluster-733-lb` pointing to the interface which binds 60733/tcp.
 
