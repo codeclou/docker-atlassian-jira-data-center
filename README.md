@@ -1,7 +1,7 @@
 # docker-atlassian-jira-data-center
 
 Start an [Atlassian JIRA® Software Data Center](https://de.atlassian.com/enterprise/data-center) with Docker for local testing during plugin development.
-It starts a PostgreSQL Database, several JIRA® cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume. This is not meant to be used in production!
+It starts a PostgreSQL Database, several JIRA® cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume. This is not meant to be used in production! The cluster is designed to not be persistent, meaning, once you shut it down, all data is lost. See it as the Data-Center version of [`atlas-run-standalone`](https://developer.atlassian.com/docs/developer-tools/working-with-the-sdk/command-reference/atlas-run-standalone).
 
 [![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/manage-jira-cluster-logo.svg)](https://github.com/codeclou/docker-atlassian-jira-data-center)
 
