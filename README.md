@@ -13,7 +13,7 @@ Please choose the JIRA Software version you want to run:
 | **⇨ [7.3.3](https://github.com/codeclou/docker-atlassian-jira-data-center/tree/master/7.3.3)** | http://jira-cluster-733-lb:60733/ | [9.4](https://hub.docker.com/_/postgres/) | [8u131](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.3.3/Dockerfile) |
 
 **Please Note:**
- * I do not provide support. If you have questions on how to run JIRA Software and/or JIRA Data Center, please ask in the 
+ * I do not provide support. If you have questions on how to run JIRA Software and/or JIRA Data Center, please ask in the
 [Atlassian Community](https://community.atlassian.com/).
 
 -----
@@ -23,7 +23,7 @@ Please choose the JIRA Software version you want to run:
 ### Trademarks and Third Party Licenses
 
  * **Atlassian JIRA® Sofware**
-   * Atlassian®, JIRA®, JIRA® Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark). 
+   * Atlassian®, JIRA®, JIRA® Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
    * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com).
  * **Oracle Java JDK 8**
    * Oracle and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
@@ -38,7 +38,7 @@ Please choose the JIRA Software version you want to run:
    * Ubuntu and Canonical are registered [trademarks of Canonical Ltd.](https://www.ubuntu.com/legal/short-terms)
  * **Apple**
    * macOS®, Mac and OS X are [trademarks of Apple Inc.](http://www.apple.com/legal/intellectual-property/trademark/appletmlist.html), registered in the U.S. and other countries.
-   
+
 -----
 
 &nbsp;
