@@ -11,7 +11,7 @@ It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apach
 
 &nbsp;
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.4.0/img/demo.gif?v2" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/demo.gif?v2" width="80%"/></p>
 
 
 -----
@@ -97,7 +97,7 @@ data-center/master/7.4.0/manage-jira-cluster-7.4.0.sh"
 #
 # CHECK SHA SUM - Should output OK
 #
-echo "9dfb47ed593227ec4f0a8c254d959016e2443ac98b4e67edf1976971ba500cf4  \
+echo "4bfb686f406d1dc7d8d47bd08270e9002ca893252ba72e93d866dee665d3e451  \
 /usr/local/bin/manage-jira-cluster-7.4.0.sh" \
 > /usr/local/bin/manage-jira-cluster-7.4.0.sh.sha256sum
 gsha256sum -c /usr/local/bin/manage-jira-cluster-7.4.0.sh.sha256sum
@@ -168,29 +168,29 @@ Go to **[http://jira-cluster-740-lb:60740/](http://jira-cluster-740-lb:60740/)**
 
 Use `http://jira-cluster-740-lb:60740` as Base URL.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.4.0/img/post-config/01.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/01.png?v5" width="80%"/></p>
 
 You can either use an [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
 or at best get a JIRA® Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.4.0/img/post-config/02.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/02.png?v5" width="80%"/></p>
 
 Configure your user.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.4.0/img/post-config/03.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/03.png?v5" width="80%"/></p>
 
 Skip E-Mail Setup and click yourself through to the end of the installation.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.4.0/img/post-config/04.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/04.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.4.0/img/post-config/05.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/05.png?v5" width="80%"/></p>
 
 
 
 Use the [JIRA® Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
 to check the Health of each cluster node. `System`  → `Atlassian Support Tools` → `Health Checks tab`
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.4.0/img/post-config/10.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/10.png?v5" width="80%"/></p>
 
 
 
@@ -213,7 +213,7 @@ This will **add two additional JIRA® Nodes** and reconfigure the loadbalancer a
 
 Wait again several minutes and now check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.4.0/img/post-config/11.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/11.png?v5" width="80%"/></p>
 
 If not all nodes you have started are active, try restarting all nodes not showing up.
 
