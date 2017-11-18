@@ -95,14 +95,6 @@ curl -so /usr/local/bin/manage-jira-cluster-7.6.0.sh \
 data-center/master/7.6.0/manage-jira-cluster-7.6.0.sh"
 
 #
-# CHECK SHA SUM - Should output OK
-#
-echo "4bfb686f406d1dc7d8d47bd08270e9002ca893252ba72e93d866dee665d3e451  \
-/usr/local/bin/manage-jira-cluster-7.6.0.sh" \
-> /usr/local/bin/manage-jira-cluster-7.6.0.sh.sha256sum
-gsha256sum -c /usr/local/bin/manage-jira-cluster-7.6.0.sh.sha256sum
-
-#
 # MAKE EXECUTABLE
 #
 chmod +x /usr/local/bin/manage-jira-cluster-7.6.0.sh
