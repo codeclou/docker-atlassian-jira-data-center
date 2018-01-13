@@ -14,7 +14,7 @@ set -e
 # VERSION
 #
 ####################################################################################
-# keep in sync with 'manage-jira-cluster-7.6.0-version.txt'
+# keep in sync with 'manage-jira-cluster-7.7.0-version.txt'
 MANAGEMENT_SCRIPT_VERSION=4
 
 ####################################################################################
@@ -23,9 +23,9 @@ MANAGEMENT_SCRIPT_VERSION=4
 #
 ####################################################################################
 
-JIRA_VERSION="7.6.0"
-JIRA_VERSION_DOT_FREE="760"
-JIRA_LB_PUBLIC_PORT=60760
+JIRA_VERSION="7.7.0"
+JIRA_VERSION_DOT_FREE="770"
+JIRA_LB_PUBLIC_PORT=60770
 POSTGRESQL_VERSION="9.4"
 
 
@@ -224,7 +224,7 @@ function get_running_jiranode_name_array {
     local "$1" && return_by_reference $1 "$ret_value"
 }
 
-# Kills and removes all jira-cluster-760-node* instances if present
+# Kills and removes all jira-cluster-770-node* instances if present
 #
 #
 function kill_all_running_jiranodes {
@@ -252,7 +252,7 @@ function kill_all_running_jiranodes {
 #
 function update_check {
     local unique_hash=$(cat /dev/urandom | LC_CTYPE=C tr -dc "[:alpha:]" | head -c 16)
-    local latest_version=$(curl -s https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/7.6.0/manage-jira-cluster-7.6.0-version.txt?r=${unique_hash})
+    local latest_version=$(curl -s https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/master/7.7.0/manage-jira-cluster-7.7.0-version.txt?r=${unique_hash})
     if (( latest_version > MANAGEMENT_SCRIPT_VERSION )) # arithmetic brackets ... woohoo
     then
         echo -e $C_CYN">> management script ..:${C_RST}${C_RED} OUTOFDATE${C_RST} - please update the management script. Visit GitHub for instructions."
@@ -312,7 +312,7 @@ echo -e $C_MGN'  /_/  /_/\__,_/_/ /_/\__,_/\__, /\___/   \____/_/\__,_/____/\__/
 echo -e $C_MGN'                           /____/                                            '$C_RST
 echo ""
 echo -e $C_MGN'  Manage local JIRA® Data Center cluster during Plugin development with Docker'$C_RST
-echo -e $C_MGN'  https://github.com/codeclou/docker-atlassian-jira-data-center/tree/master/7.6.0'$C_RST
+echo -e $C_MGN'  https://github.com/codeclou/docker-atlassian-jira-data-center/tree/master/7.7.0'$C_RST
 echo -e $C_MGN"  JIRA Software Version: ${JIRA_VERSION}"$C_RST
 echo -e $C_MGN"  PostgreSQL Version: ${POSTGRESQL_VERSION}"$C_RST
 echo -e $C_MGN'  ------'$C_RST
