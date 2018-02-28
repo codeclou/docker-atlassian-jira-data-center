@@ -213,7 +213,7 @@ then
   then
     rm -rf docker-atlassian-jira-data-center___management-scripts
   fi
-  git clone https://github.com/codeclou/docker-jira-confluence-data-center.git docker-atlassian-jira-data-center___management-scripts
+  git clone https://github.com/codeclou/docker-atlassian-jira-data-center.git docker-atlassian-jira-data-center___management-scripts
   cd docker-atlassian-jira-data-center___management-scripts
   git checkout master > /dev/null 2>&1
   current_branch=$(git rev-parse --abbrev-ref HEAD)

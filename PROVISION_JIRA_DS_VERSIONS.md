@@ -5,7 +5,7 @@
 
 ```
 cp provision-jira-ds-versions.sh /usr/local/bin/
-chmod +x /usr/local/bin/
+chmod +x /usr/local/bin/provision-jira-ds-versions.sh
 
 mkdir ~/.provision-jira-ds-versions-workdir/
 ```
