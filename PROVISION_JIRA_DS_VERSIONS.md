@@ -71,9 +71,7 @@ What you will need to do:
 
 Script Preview:
 
-:bangbang: FIXME !!!
-
-![](./docs/provision/provision-management-scripts.png)
+![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/provision-management-scripts.png)
 
 
 
