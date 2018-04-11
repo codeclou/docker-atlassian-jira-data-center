@@ -10,6 +10,7 @@ Please choose the JIRA Software version you want to run:
 
 |JIRA Software Version | Loadbalancer URL | PostgreSQL Version | Oracle Java Version |
 |-------------------|--------------------|-----------------|-----------------------|
+| **⇨ [7.9.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.9.0)** | http://jira-cluster-790-lb:60790/ | [9.4](https://hub.docker.com/_/postgres/) | [8u152](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.9.0/Dockerfile) |
 | **⇨ [7.8.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.8.0)** | http://jira-cluster-780-lb:60780/ | [9.4](https://hub.docker.com/_/postgres/) | [8u152](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.8.0/Dockerfile) |
 | **⇨ [7.7.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.7.0)** | http://jira-cluster-770-lb:60770/ | [9.4](https://hub.docker.com/_/postgres/) | [8u152](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.7.0/Dockerfile) |
 | **⇨ [7.6.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.6.0)** | http://jira-cluster-760-lb:60760/ | [9.4](https://hub.docker.com/_/postgres/) | [8u141](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.6.0/Dockerfile) |
