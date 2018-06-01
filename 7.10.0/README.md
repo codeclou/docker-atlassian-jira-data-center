@@ -37,7 +37,7 @@ It basically works in the following way:
 
 The script is meant to follow the convention over configuration paradigma, therefore there is not much to be configured, except one thing:
 
-  * It relies on the hostname `jira-cluster-7100-lb` pointing to the interface which binds 67100/tcp.
+  * It relies on the hostname `jira-cluster-7100-lb` pointing to the interface which binds 17100/tcp.
 
 
 -----
@@ -122,7 +122,7 @@ Important:
 
 **(2) Browse to JIRA® Software**
 
- * Open a browser to [http://jira-cluster-7100-lb:67100/](http://jira-cluster-7100-lb:67100/)
+ * Open a browser to [http://jira-cluster-7100-lb:17100/](http://jira-cluster-7100-lb:17100/)
  * It might take several minutes for the cluster to fully start up.
 
 &nbsp;
@@ -140,7 +140,7 @@ Should show something like:
 ```
 101c71ae0c12    jira-cluster-7100-node1     4446/tcp, 8080/tcp, 40001/tcp
 e2e9a6b1b757    jira-cluster-7100-db        5432/tcp
-72f92316309f    jira-cluster-7100-lb        0.0.0.0:67100->67100/tcp
+72f92316309f    jira-cluster-7100-lb        0.0.0.0:17100->17100/tcp
 ```
 
 You can check the logs of each container by calling e.g.:
@@ -156,9 +156,9 @@ docker logs jira-cluster-7100-node1
 
 Once the cluster is fully started up, you need to configure JIRA® Software in the browser.
 
-Go to **[http://jira-cluster-7100-lb:67100/](http://jira-cluster-7100-lb:67100/)** and make sure you enabled cookies (sticky session).
+Go to **[http://jira-cluster-7100-lb:17100/](http://jira-cluster-7100-lb:17100/)** and make sure you enabled cookies (sticky session).
 
-Use `http://jira-cluster-7100-lb:67100` as Base URL.
+Use `http://jira-cluster-7100-lb:17100` as Base URL.
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/01.png?v5" width="80%"/></p>
 
