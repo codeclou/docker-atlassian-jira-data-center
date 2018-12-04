@@ -160,29 +160,29 @@ Go to **[http://jira-cluster-7130-lb:17130/](http://jira-cluster-7130-lb:17130/)
 
 Use `http://jira-cluster-7130-lb:17130` as Base URL.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/01.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/01.png?v5" width="80%"/></p>
 
 You can either use an [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
 or at best get a JIRA® Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/02.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/02.png?v5" width="80%"/></p>
 
 Configure your user.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/03.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/03.png?v5" width="80%"/></p>
 
 Skip E-Mail Setup and click yourself through to the end of the installation.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/04.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/04.png?v5" width="80%"/></p>
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/05.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/05.png?v5" width="80%"/></p>
 
 
 
 Use the [JIRA® Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
-to check the Health of each cluster node. `System`  → `Atlassian Support Tools` → `Health Checks tab`
+to check the Health of each cluster node. `System`  → `Troubleshooting and support Tools` → `Instance Health` tab
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/10.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/10.png?v5" width="80%"/></p>
 
 
 
@@ -205,7 +205,7 @@ This will **add two additional JIRA® Nodes** and reconfigure the loadbalancer a
 
 Wait again several minutes and now check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/7.3.3/img/post-config/11.png?v5" width="80%"/></p>
+<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/11.png?v5" width="80%"/></p>
 
 If not all nodes you have started are active, try restarting all nodes not showing up.
 
