@@ -8,7 +8,7 @@ It starts a PostgreSQL Database, several JIRA® cluster nodes and Apache2 HTTPD 
 
 Please choose the JIRA Software version you want to run:
 
-|JIRA Software Version | Loadbalancer URL | PostgreSQL Version | Oracle Java Version |
+|JIRA Software Version | Loadbalancer URL | PostgreSQL Version | Java Version |
 |-------------------|--------------------|-----------------|-----------------------|
 | **⇨ [7.13.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.13.0)** | http://jira-cluster-7120-lb:17130/ | [9.4](https://hub.docker.com/_/postgres/) | [OpenJDK 8u181](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.13.0/Dockerfile) |
 | **⇨ [7.12.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.12.0)** | http://jira-cluster-7120-lb:17120/ | [9.4](https://hub.docker.com/_/postgres/) | [Oracle JDK 8u152](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.12.0/Dockerfile) |
