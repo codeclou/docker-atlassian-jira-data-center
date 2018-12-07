@@ -8,7 +8,7 @@ It starts a PostgreSQL Database, several JIRA® cluster nodes and Apache2 HTTPD 
 
 Please choose the JIRA Software version you want to run:
 
-|JIRA Software Version | Loadbalancer URL | PostgreSQL Version | Java Version |
+|JIRA Software Version | Loadbalancer URL | PostgreSQL Version | Oracle Java Version |
 |-------------------|--------------------|-----------------|-----------------------|
 | **⇨ [7.13.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.13.0)** | http://jira-cluster-7120-lb:17130/ | [9.4](https://hub.docker.com/_/postgres/) | [OpenJDK 8u181](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.13.0/Dockerfile) |
 | **⇨ [7.12.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.12.0)** | http://jira-cluster-7120-lb:17120/ | [9.4](https://hub.docker.com/_/postgres/) | [Oracle JDK 8u152](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.12.0/Dockerfile) |
@@ -34,8 +34,8 @@ Please choose the JIRA Software version you want to run:
  * **Atlassian JIRA® Sofware**
    * Atlassian®, JIRA®, JIRA® Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
    * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com).
- * **Oracle Java JDK 8**
-   * Oracle and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
+ * **Oracle Java JDK**
+   * Oracle, OpenJDK and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
    * Please check yourself for corresponding Licenses and Terms of Use at [www.oracle.com](https://www.oracle.com/).
  * **Docker**
    * Docker and the Docker logo are trademarks or registered [trademarks of Docker](https://www.docker.com/trademark-guidelines), Inc. in the United States and/or other countries. Docker, Inc. and other parties may also have trademark rights in other terms used herein.
