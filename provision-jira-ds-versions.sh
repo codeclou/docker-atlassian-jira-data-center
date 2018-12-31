@@ -22,8 +22,12 @@ LAST_VERSION=$2
 NEW_VERSION=$3
 
 # internal vars
-script_version="2018-02-28 16:20"
-NEW_VERSION_NO_DOTS=${NEW_VERSION//[.]/}
+script_version="2018-12-31 12:52"
+
+# new feature: to be able to use versions like "8.0.0-m0030-beta" and the dotfree version still being "800" 
+#              we changed the NEW_VERSION_NO_DOTS regex on 2018-12-31
+NEW_VERSION_NO_DOTS=$(echo $NEW_VERSION | sed -e 's/^\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\).*$/\1\2\3/g')
+#-
 LAST_VERSION_NO_DOTS=${LAST_VERSION//[.]/}
 
 ####################################################################################
