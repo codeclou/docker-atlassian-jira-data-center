@@ -1,8 +1,13 @@
 # Internal Development Documentation
 
-## Dockerhub Build Settings
- 
-![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/jira-node-tag-dockerhub.png?v2)
+## Jenkins
+
+We build with our own Jenkins and push to docker hub.
+
+Jenkins Pipeline Job Config:
+
+ * https://github.com/codeclou/docker-common-build
+
 
 ## Management Script
 
