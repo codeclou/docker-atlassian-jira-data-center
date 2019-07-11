@@ -15,7 +15,7 @@ set -e
 #
 ####################################################################################
 # keep in sync with 'manage-jira-cluster-8.3.0-m0003-version.txt'
-MANAGEMENT_SCRIPT_VERSION=4
+MANAGEMENT_SCRIPT_VERSION=5
 
 ####################################################################################
 #
@@ -26,7 +26,7 @@ MANAGEMENT_SCRIPT_VERSION=4
 JIRA_VERSION="8.3.0-m0003"
 JIRA_VERSION_DOT_FREE="830"
 JIRA_LB_PUBLIC_PORT=1830
-POSTGRESQL_VERSION="9.4"
+POSTGRESQL_VERSION="9.6"
 
 
 ####################################################################################
@@ -118,9 +118,19 @@ function start_instance_database {
         --name jira-cluster-${JIRA_VERSION_DOT_FREE}-db \
         --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
         --net-alias=jira-cluster-${JIRA_VERSION_DOT_FREE}-db \
-        -e POSTGRES_PASSWORD=jira \
-        -e POSTGRES_USER=jira \
+        -e POSTGRES_PASSWORD=root \
+        -e POSTGRES_USER=root \
         -d postgres:${POSTGRESQL_VERSION}
+    sleep 5
+    docker run --rm --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
+        -e PGPASSWORD=root \
+        postgres:${POSTGRESQL_VERSION} psql -h jira-cluster-${JIRA_VERSION_DOT_FREE}-db  -U root -c "CREATE DATABASE jira WITH ENCODING 'UNICODE' LC_COLLATE 'C' LC_CTYPE 'C' TEMPLATE template0;"
+    docker run --rm --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
+        -e PGPASSWORD=root \
+        postgres:${POSTGRESQL_VERSION} psql -h jira-cluster-${JIRA_VERSION_DOT_FREE}-db  -U root -c "CREATE USER jira WITH ENCRYPTED PASSWORD 'jira';"
+    docker run --rm --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
+        -e PGPASSWORD=root \
+        postgres:${POSTGRESQL_VERSION} psql -h jira-cluster-${JIRA_VERSION_DOT_FREE}-db  -U root -c "GRANT ALL PRIVILEGES ON DATABASE jira TO jira"
 }
 
 # Kill the database instance
