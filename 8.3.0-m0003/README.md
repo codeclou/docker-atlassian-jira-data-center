@@ -244,9 +244,9 @@ stateless worker nodes. JIRA® Data Center on the other hand relies on a state f
 
 &nbsp;
 
-**Why PostgreSQL 9.4?**
+**Why PostgreSQL 9.6?**
 
- * [JIRA Software 7.x supports max PostgreSQL 9.4](https://confluence.atlassian.com/adminjiraserver072/supported-platforms-828787550.html)
+ * [JIRA Software 8.x supports PostgreSQL 9.6](https://confluence.atlassian.com/adminjiraserver/supported-platforms-938846830.html)
 
 
 
