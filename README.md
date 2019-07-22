@@ -1,6 +1,6 @@
 # Docker Atlassian Jira Data Center
 
-Start an [Atlassian Jira Software Data Center](https://de.atlassian.com/enterprise/data-center) with Docker for local testing during plugin development.
+> Start an [Atlassian Jira Software Data Center](https://de.atlassian.com/enterprise/data-center) with Docker for local testing during plugin development.
 
 [![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/github-product-logo-docker-atlassian-jira.png)](https://github.com/codeclou/docker-atlassian-jira-data-center)
 
