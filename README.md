@@ -6,7 +6,7 @@
 
 It starts a PostgreSQL Database, several Jira cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume. This is not meant to be used in production! The cluster is designed to not be persistent, meaning, once you shut it down, all data is lost. See it as the Data-Center version of [`atlas-run-standalone`](https://developer.atlassian.com/docs/developer-tools/working-with-the-sdk/command-reference/atlas-run-standalone).
 
-Please choose the JIRA Software version you want to run:
+Please choose the Jira Software version you want to run:
 
 <!-- | **⇨ [8.3.0-m0003](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/8.3.0-m0003)** | http://jira-cluster-820-lb:1830/ | [9.4](https://hub.docker.com/_/postgres/) | [AdoptOpenJDK 11](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-8.3.0-m0003/Dockerfile) | -->
 
