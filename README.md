@@ -1,16 +1,16 @@
-# docker-atlassian-jira-data-center
+# Docker Atlassian Jira Data Center
+
+Start an [Atlassian Jira Software Data Center](https://de.atlassian.com/enterprise/data-center) with Docker for local testing during plugin development.
 
 [![](https://codeclou.github.io/docker-atlassian-jira-data-center/img/github-product-logo-docker-atlassian-jira.png)](https://github.com/codeclou/docker-atlassian-jira-data-center)
 
-
-Start an [Atlassian JIRA® Software Data Center](https://de.atlassian.com/enterprise/data-center) with Docker for local testing during plugin development.
-It starts a PostgreSQL Database, several JIRA® cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume. This is not meant to be used in production! The cluster is designed to not be persistent, meaning, once you shut it down, all data is lost. See it as the Data-Center version of [`atlas-run-standalone`](https://developer.atlassian.com/docs/developer-tools/working-with-the-sdk/command-reference/atlas-run-standalone).
+It starts a PostgreSQL Database, several Jira cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume. This is not meant to be used in production! The cluster is designed to not be persistent, meaning, once you shut it down, all data is lost. See it as the Data-Center version of [`atlas-run-standalone`](https://developer.atlassian.com/docs/developer-tools/working-with-the-sdk/command-reference/atlas-run-standalone).
 
 Please choose the JIRA Software version you want to run:
 
 <!-- | **⇨ [8.3.0-m0003](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/8.3.0-m0003)** | http://jira-cluster-820-lb:1830/ | [9.4](https://hub.docker.com/_/postgres/) | [AdoptOpenJDK 11](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-8.3.0-m0003/Dockerfile) | -->
 
-|JIRA Software Version | Loadbalancer URL | PostgreSQL Version | Oracle Java Version |
+|Jira Software Version | Loadbalancer URL | PostgreSQL Version | Oracle Java Version |
 |-------------------|--------------------|-----------------|-----------------------|
 | **⇨ [8.2.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/8.2.0)** | http://jira-cluster-820-lb:1820/ | [9.4](https://hub.docker.com/_/postgres/) | [AdoptOpenJDK 11](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-8.2.0/Dockerfile) |
 | **⇨ [8.1.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/8.1.0)** | http://jira-cluster-810-lb:1810/ | [9.4](https://hub.docker.com/_/postgres/) | [AdoptOpenJDK 8u202](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-8.1.0/Dockerfile) |
@@ -29,7 +29,7 @@ Please choose the JIRA Software version you want to run:
 | **⇨ [7.4.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/7.4.0)** | http://jira-cluster-740-lb:60740/ | [9.4](https://hub.docker.com/_/postgres/) | [Oracle JDK 8u131](https://github.com/codeclou/docker-atlassian-base-images/blob/jira-software-7.4.0/Dockerfile) |
 
 **Please Note:**
- * I do not provide support. If you have questions on how to run JIRA Software and/or JIRA Data Center, please ask in the
+ * We do not provide support. If you have questions on how to run Jira Software and/or Jira Data Center, please ask in the
 [Atlassian Community](https://community.atlassian.com/).
 
 -----
@@ -38,8 +38,8 @@ Please choose the JIRA Software version you want to run:
 
 ### Trademarks and Third Party Licenses
 
- * **Atlassian JIRA® Sofware**
-   * Atlassian®, JIRA®, JIRA® Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
+ * **Atlassian Jira Sofware**
+   * Atlassian, Jira, Jira Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
    * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com).
  * **Oracle Java JDK**
    * Oracle, OpenJDK and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
