@@ -112,12 +112,13 @@ function kill_instance_loadbalancer {
 #
 #
 function start_instance_database {
+    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Downloading${C_RST} - Init SQL Script to /tmp/jiracluster-${JIRA_VERSION}-db-init/*.sql."
+    mkdir /tmp/jiracluster-${JIRA_VERSION}-db-init | true
+    curl -s -o /tmp/jiracluster-${JIRA_VERSION}-db-init/jira-8-postgresql.sql https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/jiranode-8.3.0/initdb.d/jira-8-postgresql.sql
     echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-${JIRA_VERSION_DOT_FREE}-db."
-    mkdir /tmp/jiracluster-8.3.0-db-init | true
-    curl -o /tmp/jiracluster-8.3.0-db-init/jira-8-postgresql.sql https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/jiranode-8.3.0/initdb.d/jira-8-postgresql.sql
     docker run \
         --rm \
-        -v /tmp/jiracluster-8.3.0-db-init/:/docker-entrypoint-initdb.d/ \
+        -v /tmp/jiracluster-${JIRA_VERSION}-db-init/:/docker-entrypoint-initdb.d/ \
         --name jira-cluster-${JIRA_VERSION_DOT_FREE}-db \
         --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
         --net-alias=jira-cluster-${JIRA_VERSION_DOT_FREE}-db \
@@ -125,7 +126,7 @@ function start_instance_database {
         -e POSTGRES_USER=jira \
         -d postgres:${POSTGRESQL_VERSION}
     # give db time to startup
-    sleep 30s
+    sleep 15s
 }
 
 # Kill the database instance

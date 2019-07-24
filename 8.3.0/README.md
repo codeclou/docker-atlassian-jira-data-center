@@ -6,8 +6,8 @@
 
 ## Version 8.3.0
 
-Start an [Atlassian JIRA® Software Data Center](https://de.atlassian.com/enterprise/data-center) version 8.3.0 with Docker for local testing during plugin development.
-It starts a PostgreSQL Database, several JIRA® Software cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume.
+Start an [Atlassian Jira Software Data Center](https://de.atlassian.com/enterprise/data-center) version 8.3.0 with Docker for local testing during plugin development.
+It starts a PostgreSQL Database, several Jira Software cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume.
 
 &nbsp;
 
@@ -72,7 +72,7 @@ If you like to work with your cluster from your local network, use the servers p
 
 **(2) Enable Network Forwarding (Multicast)**
 
-JIRA® Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable IP Forwarding.
+Jira Data Center uses [EHCache Multicast networking features](http://www.ehcache.org/documentation/2.8/replication/rmi-replicated-caching.html). We need to enable IP Forwarding.
 
 On macOS® you do this with:
 
@@ -108,19 +108,20 @@ chmod +x /usr/local/bin/manage-jira-cluster-8.3.0.sh
 
 ### Usage
 
-**(1) Start a JIRA® Data Center 8.3.0 Cluster**
+**(1) Start a Jira Data Center 8.3.0 Cluster**
 
 ```bash
 manage-jira-cluster-8.3.0.sh --action create --scale 1
 ```
 
 Important:
- * We start with one loadbalancer, one JIRA® node and one PostgreSQL Database.
- * After we post configured the first JIRA® node we will add more nodes.
+ * We start with one loadbalancer, one Jira node and one PostgreSQL Database.
+ * Since Jira 8.3 we ship it with a pre-configured database, jira-home and jira-shared-home.
+ * After we post configured the first Jira node we will add more nodes.
 
 &nbsp;
 
-**(2) Browse to JIRA® Software**
+**(2) Browse to Jira Software**
 
  * Open a browser to [http://jira-cluster-830-lb:1830/](http://jira-cluster-830-lb:1830/)
  * It might take several minutes for the cluster to fully start up.
@@ -154,32 +155,25 @@ docker logs jira-cluster-830-node1
 
 **(4) Start Post Configuration**
 
-Once the cluster is fully started up, you need to configure JIRA® Software in the browser.
+Once the cluster is fully started up, you need to configure Jira Software in the browser.
 
 Go to **[http://jira-cluster-830-lb:1830/](http://jira-cluster-830-lb:1830/)** and make sure you enabled cookies (sticky session).
 
 Use `http://jira-cluster-830-lb:1830` as Base URL.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/01.png?v5" width="80%"/></p>
+ * Login as `admin` with password `admin`
 
-You can either use an [Atlassian Data Center Timebomb Licenses](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
-or at best get a JIRA® Software Data Center 30 Days Trial License from [my.atlassian.com](https://my.atlassian.com/product).
+Now fix the baseUrl:
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/02.png?v5" width="80%"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/12599965/61815008-978da980-ae49-11e9-8fc9-ca77f35989c2.png" width="80%"/></p>
 
-Configure your user.
+The Cluster comes with a pre installed [3 hour Data Center Timebomb License](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
+which you should replace with your own license.
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/03.png?v5" width="80%"/></p>
-
-Skip E-Mail Setup and click yourself through to the end of the installation.
-
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/04.png?v5" width="80%"/></p>
-
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/05.png?v5" width="80%"/></p>
+&nbsp;
 
 
-
-Use the [JIRA® Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
+Use the [Jira Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
 to check the Health of each cluster node. `System`  → `Troubleshooting and support Tools` → `Instance Health` tab
 
 <p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/10.png?v5" width="80%"/></p>
@@ -189,19 +183,17 @@ to check the Health of each cluster node. `System`  → `Troubleshooting and sup
 
 
 
-
-
 &nbsp;
 
-**(5) Scale Up Cluster - Add JIRA® Nodes**
+**(5) Scale Up Cluster - Add Jira Nodes**
 
-Now that our first JIRA® Node is fully working we add additional nodes to our existing cluster.
+Now that our first Jira Node is fully working we add additional nodes to our existing cluster.
 
 ```bash
 manage-jira-cluster-8.3.0.sh --action update --scale 3
 ```
 
-This will **add two additional JIRA® Nodes** and reconfigure the loadbalancer automatically.
+This will **add two additional Jira Nodes** and reconfigure the loadbalancer automatically.
 
 Wait again several minutes and now check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
 
@@ -240,7 +232,7 @@ This will kill and remove all instances.
 **Why not use Docker Swarm Mode?**
 
  * Because we need a sticky session loadbalancer, and the whole idea of swarm mode is to have identical
-stateless worker nodes. JIRA® Data Center on the other hand relies on a state for each node.
+stateless worker nodes. Jira Data Center on the other hand relies on a state for each node.
 
 &nbsp;
 
@@ -297,8 +289,8 @@ Not tested and not compatible under the following Operating Systems:
 
 ### Trademarks and Third Party Licenses
 
- * **Atlassian JIRA® Sofware**
-   * Atlassian®, JIRA®, JIRA® Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
+ * **Atlassian Jira Sofware**
+   * Atlassian®, Jira, Jira Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
    * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com).
  * **Oracle Java JDK 8**
    * Oracle and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
