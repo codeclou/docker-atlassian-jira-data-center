@@ -124,6 +124,8 @@ function start_instance_database {
         -e POSTGRES_PASSWORD=jira \
         -e POSTGRES_USER=jira \
         -d postgres:${POSTGRESQL_VERSION}
+    # give db time to startup
+    sleep 30s
 }
 
 # Kill the database instance
