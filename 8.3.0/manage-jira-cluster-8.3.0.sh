@@ -15,7 +15,7 @@ set -e
 #
 ####################################################################################
 # keep in sync with 'manage-jira-cluster-8.3.0-version.txt'
-MANAGEMENT_SCRIPT_VERSION=4
+MANAGEMENT_SCRIPT_VERSION=5
 
 ####################################################################################
 #
