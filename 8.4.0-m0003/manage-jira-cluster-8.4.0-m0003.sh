@@ -112,13 +112,13 @@ function kill_instance_loadbalancer {
 #
 #
 function start_instance_database {
-    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Downloading${C_RST} - Init SQL Script to /tmp/jiracluster-${JIRA_VERSION}-db-init/*.sql."
-    mkdir /tmp/jiracluster-${JIRA_VERSION}-db-init | true
-    curl -s -o /tmp/jiracluster-${JIRA_VERSION}-db-init/jira-8-postgresql.sql https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/jiranode-8.4.0-m0003/initdb.d/jira-8-postgresql.sql
+# NOTE: Since https://jira.atlassian.com/browse/JRASERVER-69740 is fixed we can go back to usual approach >= without prebuild db and home
+#    echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Downloading${C_RST} - Init SQL Script to /tmp/jiracluster-${JIRA_VERSION}-db-init/*.sql."
+#    mkdir /tmp/jiracluster-${JIRA_VERSION}-db-init | true
+#    curl -s -o /tmp/jiracluster-${JIRA_VERSION}-db-init/jira-8-postgresql.sql https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-data-center/jiranode-8.4.0-m0003/initdb.d/jira-8-postgresql.sql
     echo -e $C_CYN">> docker run .........:${C_RST}${C_GRN} Starting${C_RST}  - Starting instance jira-cluster-${JIRA_VERSION_DOT_FREE}-db."
     docker run \
         --rm \
-        -v /tmp/jiracluster-${JIRA_VERSION}-db-init/:/docker-entrypoint-initdb.d/ \
         --name jira-cluster-${JIRA_VERSION_DOT_FREE}-db \
         --net=jira-cluster-${JIRA_VERSION_DOT_FREE} \
         --net-alias=jira-cluster-${JIRA_VERSION_DOT_FREE}-db \
