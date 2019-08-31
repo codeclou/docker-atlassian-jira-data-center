@@ -205,7 +205,7 @@ This will **add two additional Jira Nodes** and reconfigure the loadbalancer aut
 
 Wait again several minutes and now check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/11.png?v5" width="80%"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/12599965/64061830-f3351a80-cbdf-11e9-8094-657243dc5364.png" width="80%"/></p>
 
 If not all nodes you have started are active, try restarting all nodes not showing up.
 
