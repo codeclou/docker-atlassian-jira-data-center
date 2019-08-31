@@ -159,11 +159,19 @@ Once the cluster is fully started up, you need to configure Jira Software in the
 
 Go to **[http://jira-cluster-840-lb:1840/](http://jira-cluster-840-lb:1840/)** and make sure you enabled cookies (sticky session).
 
-Use `http://jira-cluster-840-lb:1840` as Base URL.
+Wait for Jira to start up. Simply reload this page after a few minutes.
 
- * Login as `admin` with password `admin`
+<p align="center"><img width="80%" alt="jira-startup-01" src="https://user-images.githubusercontent.com/12599965/64061646-25de1380-cbde-11e9-85e3-d8994d10b0b5.png"></p>
 
-Now fix the baseUrl:
+Since we use a prebuild database and Jira home, some minor things trigger this page. Simply click "Ignore all warnings and continue".
+
+<p align="center"><img width="80%" alt="jira-startup-02" src="https://user-images.githubusercontent.com/12599965/64061647-25de1380-cbde-11e9-85e8-8c2b62ef1a4a.png"></p>
+
+Login as `admin` with password `admin`
+
+<p align="center"><img width="80%" alt="jira-startup-03" src="https://user-images.githubusercontent.com/12599965/64061648-25de1380-cbde-11e9-8a95-e8b725809757.png"></p>
+
+Now fix the baseUrl. Clicking there should automatically set `http://jira-cluster-840-lb:1840` as baseUrl.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/12599965/61815008-978da980-ae49-11e9-8fc9-ca77f35989c2.png" width="80%"/></p>
 
