@@ -116,7 +116,8 @@ manage-jira-cluster-8.4.0-m0003.sh --action create --scale 1
 
 Important:
  * We start with one loadbalancer, one Jira node and one PostgreSQL Database.
- * Since Jira 8.3 we ship it with a pre-configured database, jira-home and jira-shared-home.
+ * ~Since Jira 8.3 we ship it with a pre-configured database, jira-home and jira-shared-home.~
+    * Since Jira 8.4 due to fixing of [JRASERVER-69740](https://jira.atlassian.com/browse/JRASERVER-69740) we again ship without pre-configured database.
  * After we post configured the first Jira node we will add more nodes.
 
 &nbsp;
