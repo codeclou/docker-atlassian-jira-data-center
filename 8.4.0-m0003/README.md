@@ -163,20 +163,23 @@ Wait for Jira to start up. Simply reload this page after a few minutes.
 
 <p align="center"><img width="80%" alt="jira-startup-01" src="https://user-images.githubusercontent.com/12599965/64061646-25de1380-cbde-11e9-85e3-d8994d10b0b5.png"></p>
 
-Since we use a prebuild database and Jira home, some minor things trigger this page. Simply click "Ignore all warnings and continue".
 
-<p align="center"><img width="80%" alt="jira-startup-02" src="https://user-images.githubusercontent.com/12599965/64061647-25de1380-cbde-11e9-85e8-8c2b62ef1a4a.png"></p>
+Set the baseUrl to `http://jira-cluster-840-lb:1840` and continue.
 
-Login as `admin` with password `admin`
+<p align="center"><img width="80%" src="https://user-images.githubusercontent.com/12599965/64064654-99931700-cc04-11e9-8632-6431a72caa5f.png"/></p>
 
-<p align="center"><img width="80%" alt="jira-startup-03" src="https://user-images.githubusercontent.com/12599965/64061648-25de1380-cbde-11e9-8a95-e8b725809757.png"></p>
+Use a Data Center license. Either an Evaluation License or a [Timebomb License](https://developer.atlassian.com/platform/marketplace/timebomb-licenses-for-testing-server-apps/).
 
-Now fix the baseUrl. Clicking there should automatically set `http://jira-cluster-840-lb:1840` as baseUrl.
+<p align="center"><img width="80%" src="https://user-images.githubusercontent.com/12599965/64064667-cba47900-cc04-11e9-8f2b-c7d7fbe7cddb.png"/></p>
 
-<p align="center"><img src="https://user-images.githubusercontent.com/12599965/61815008-978da980-ae49-11e9-8fc9-ca77f35989c2.png" width="80%"/></p>
 
-The Cluster comes with a pre installed [3 hour Data Center Timebomb License](https://developer.atlassian.com/market/add-on-licensing-for-developers/timebomb-licenses-for-testing)
-which you should replace with your own license.
+Setup your admin account. Usually username `admin` and password `admin`.
+
+<p align="center"><img width="80%" src="https://user-images.githubusercontent.com/12599965/64064718-6b620700-cc05-11e9-8133-48152d89f284.png"/></p>
+
+Finish setup.
+
+<p align="center"><img width="80%" src="https://user-images.githubusercontent.com/12599965/64064726-9e0bff80-cc05-11e9-838a-e13abd800e0c.png"/></p>
 
 &nbsp;
 
