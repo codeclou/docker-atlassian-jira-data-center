@@ -187,7 +187,7 @@ Finish setup.
 Use the [Jira Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
 to check the Health of each cluster node. `System`  → `Troubleshooting and support Tools` → `Instance Health` tab
 
-<p align="center"><img src="https://codeclou.github.io/docker-atlassian-jira-data-center/SEVEN_THIRTEEN_ZERO/img/post-config/10.png?v5" width="80%"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/12599965/64064796-98fb8000-cc06-11e9-85c3-3e28217e4c79.png" width="80%"/></p>
 
 
 
@@ -208,7 +208,7 @@ This will **add two additional Jira Nodes** and reconfigure the loadbalancer aut
 
 Wait again several minutes and now check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
 
-<p align="center"><img src="https://user-images.githubusercontent.com/12599965/64061830-f3351a80-cbdf-11e9-8094-657243dc5364.png" width="80%"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/12599965/64064774-6487c400-cc06-11e9-8b29-c005f8a7ac0d.png" width="80%"/></p>
 
 If not all nodes you have started are active, try restarting all nodes not showing up.
 
