@@ -201,7 +201,7 @@ docker-compose -f docker-compose-three-nodes.yml up -d
 docker-compose -f docker-compose-three-nodes.yml restart jira-cluster-840-lb
 ```
 
-Or even scae up to four nodes.
+Or even scale up to four nodes.
 
 ```
 curl -so docker-compose-four-nodes.yml \
