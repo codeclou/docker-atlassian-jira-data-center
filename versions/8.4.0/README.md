@@ -74,7 +74,7 @@ and restart docker.
 **(1) Start a Jira Data Center 8.4.0 Cluster**
 
 ```bash
-rm -rf mkdir -p /opt/jira-cluster/8.4.0 | true
+rm -rf /opt/jira-cluster/8.4.0 | true
 mkdir -p /opt/jira-cluster/8.4.0
 mkdir -p /opt/jira-cluster/8.4.0/jira-home-shared
 mkdir -p /opt/jira-cluster/8.4.0/jira-home-node1
