@@ -79,17 +79,19 @@ mkdir -p /opt/jira-cluster/8.4.0
 mkdir -p /opt/jira-cluster/8.4.0/jira-home-shared
 mkdir -p /opt/jira-cluster/8.4.0/jira-home-node1
 mkdir -p /opt/jira-cluster/8.4.0/jira-home-node2
+# If on linux fix permissions for volume mounts
+# sudo chown 2001:2001 /opt/jira-cluster/8.4.0/jira-*
 ```
 
-Now download the `docker-compose.yml` file which defines the nodes. We use the official [Atlassian Docker Jira Software images](https://hub.docker.com/r/atlassian/jira-software).
+Now download the `docker-compose-two-nodes.yml` file which defines the nodes. We use the official [Atlassian Docker Jira Software images](https://hub.docker.com/r/atlassian/jira-software).
 
 ```bash
 cd /opt/jira-cluster/8.4.0
-curl -so docker-compose.yml \
+curl -so docker-compose-two-nodes.yml \
 "https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-\
-data-center/master/versions/8.4.0/docker-compose.yml"
+data-center/master/versions/8.4.0/docker-compose-two-nodes.yml"
 
-docker-compose -f docker-compose.yml up --detach 
+docker-compose -f docker-compose-two-nodes.yml up --detach 
 ```
 
 This will start two Jira Cluster nodes, a loadbalancer and a PostgreSQL database.
@@ -124,7 +126,7 @@ CONTAINER ID        IMAGE                           COMMAND                  POR
 You can check the logs of all containers by calling e.g.:
 
 ```bash
-docker-compose -f docker-compose.yml logs
+docker-compose -f docker-compose-two-nodes.yml logs
 ```
 
 
@@ -178,39 +180,37 @@ Now you should see both Cluster Nodes as active under `System` → `System Info`
 
 **(5) Scale Up Cluster - Add Jira Nodes**
 
-
-TBD
-
-<!--
-Now that our first Jira Node is fully working we add additional nodes to our existing cluster.
+Two add more nodes do:
 
 ```bash
 cd /opt/jira-cluster/8.4.0
-docker-compose -f docker-compse.yml down
-
 mkdir -p /opt/jira-cluster/8.4.0/jira-home-node3
 mkdir -p /opt/jira-cluster/8.4.0/jira-home-node4
+# If on linux fix permissions for volume mounts
+# sudo chown 2001:2001 /opt/jira-cluster/8.4.0/jira-*
 ```
 
-This will **add two additional Jira Nodes** and reconfigure the loadbalancer automatically.
+Now scale the cluster up to three nodes.
 
-Wait again several minutes and now check if all nodes are active and alive under `System`  → `System Info` and search for `Cluster Nodes`
+```
+curl -so docker-compose-three-nodes.yml \
+"https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-\
+data-center/master/versions/8.4.0/docker-compose-three-nodes.yml"
 
-<p align="center"><img src="https://user-images.githubusercontent.com/12599965/64064774-6487c400-cc06-11e9-8b29-c005f8a7ac0d.png" width="80%"/></p>
-
-If not all nodes you have started are active, try restarting all nodes not showing up.
-
-For example if Instance 3 does not show up, you can restart it like so:
-
-```bash
-manage-jira-cluster-8.4.0.sh --action restart-node --id 3
+docker-compose -f docker-compose-three-nodes.yml up -d
+docker-compose -f docker-compose-three-nodes.yml restart jira-cluster-840-lb
 ```
 
-&nbsp;
+Or even scae up to four nodes.
 
-Now your cluster should be up and running.
--->
+```
+curl -so docker-compose-four-nodes.yml \
+"https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-\
+data-center/master/versions/8.4.0/docker-compose-four-nodes.yml"
 
+docker-compose -f docker-compose-four-nodes.yml up -d
+docker-compose -f docker-compose-three-nodes.yml restart jira-cluster-840-lb
+```
 
 &nbsp;
 
@@ -218,7 +218,7 @@ Now your cluster should be up and running.
 
 ```bash
 cd /opt/jira-cluster/8.4.0
-docker-compose -f docker-compse.yml down
+docker-compose -f docker-compose-two-nodes.yml down
 ```
 
 This will kill and remove all instances.
