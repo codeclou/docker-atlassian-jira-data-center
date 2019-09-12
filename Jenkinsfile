@@ -10,7 +10,7 @@ pipelineHelper.deployTemplate {
         dir('source') {
             sh 'git reset --hard $GWBT_COMMIT_AFTER'
 
-            def gitCheck = sh (script: 'git show ' + $GWBT_COMMIT_AFTER + ' | grep -e \'/loadbalancer/\' | wc -l', returnStdout: true).trim()
+            def gitCheck = sh (script: 'git show ' + env.GWBT_COMMIT_AFTER + ' | grep -e \'/loadbalancer/\' | wc -l', returnStdout: true).trim()
             if (gitCheck != "0") {
                 hasLoadbalancerChanged = true
             }
