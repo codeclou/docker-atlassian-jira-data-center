@@ -62,7 +62,7 @@ sudo chown $NORMALUSER /opt/jira-cluster/
 
 **(4) On macOS add /opt/jira-cluster/ to Docker Settings**
 
-Und Docker Settings add `/opt/jira-cluster/` to *File Sharing* folders 
+Under Docker Settings add `/opt/jira-cluster/` to *File Sharing* folders 
 and restart docker.
 
 -----
@@ -272,8 +272,8 @@ Not tested and not compatible under the following Operating Systems:
  * **Atlassian Jira Sofware**
    * Atlassian®, Jira, Jira Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
    * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com).
- * **Oracle Java JDK 8**
-   * Oracle and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
+ * **Oracle Java**
+   * Oracle, OpenJDK and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
    * Please check yourself for corresponding Licenses and Terms of Use at [www.oracle.com](https://www.oracle.com/).
  * **Docker**
    * Docker and the Docker logo are trademarks or registered [trademarks of Docker](https://www.docker.com/trademark-guidelines), Inc. in the United States and/or other countries. Docker, Inc. and other parties may also have trademark rights in other terms used herein.
