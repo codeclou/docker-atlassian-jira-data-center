@@ -212,6 +212,12 @@ docker-compose -f docker-compose-four-nodes.yml up -d
 docker-compose -f docker-compose-three-nodes.yml restart jira-cluster-840-lb
 ```
 
+To check call this multiple times, and it should output the different node ids after some time
+
+```
+curl -I -s http://jira-cluster-840-lb:1840 | grep X-ANODEID
+```
+
 &nbsp;
 
 **(6) Shutting down the cluster**
