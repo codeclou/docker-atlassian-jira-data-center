@@ -12,8 +12,7 @@ services:
         aliases:
           - jira-cluster-840-db
   jira-cluster-840-lb:
-    #image: codeclou/docker-atlassian-jira-data-center:loadbalancer-8.4.0-m0003
-    image: loadbalancer:v2
+    image: codeclou/docker-atlassian-jira-data-center:loadbalancer-9837a52
     container_name: jira-cluster-840-lb
     links:
       - jira-cluster-840-node1
