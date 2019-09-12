@@ -16,6 +16,9 @@ services:
     container_name: jira-cluster-840-lb
     links:
       - jira-cluster-840-node1
+      - jira-cluster-840-node2
+      - jira-cluster-840-node3
+      - jira-cluster-840-node4
     ports:
       - 1840:1840
     environment:
