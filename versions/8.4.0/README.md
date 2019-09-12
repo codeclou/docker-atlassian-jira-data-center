@@ -180,7 +180,7 @@ Now you should see both Cluster Nodes as active under `System` → `System Info`
 
 **(5) Scale Up Cluster - Add Jira Nodes**
 
-Two add more nodes do:
+To add more nodes do:
 
 ```bash
 cd /opt/jira-cluster/8.4.0
