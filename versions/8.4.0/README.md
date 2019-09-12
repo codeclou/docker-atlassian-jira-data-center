@@ -89,7 +89,7 @@ curl -so docker-compose.yml \
 "https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-\
 data-center/master/versions/8.4.0/docker-compose.yml"
 
-docker-compose -f docker-compose.yml up
+docker-compose -f docker-compose.yml up --detach 
 ```
 
 This will start two Jira Cluster nodes, a loadbalancer and a PostgreSQL database.
@@ -121,10 +121,10 @@ CONTAINER ID        IMAGE                           COMMAND                  POR
 572fcaf9f669        postgres:9.6                    "docker-entrypoint.s…"   5432/tcp                 jira-cluster-840-db
 ```
 
-You can check the logs of each container by calling e.g.:
+You can check the logs of all containers by calling e.g.:
 
 ```bash
-docker logs jira-cluster-840-node1
+docker-compose -f docker-compose.yml logs
 ```
 
 
