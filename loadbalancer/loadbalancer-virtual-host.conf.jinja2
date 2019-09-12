@@ -1,0 +1,30 @@
+{% set amountNodes = NODES | int %}
+{% set loadBalancerPort = LB_PORT | int %}
+{% set nameSchema = NODES_NAME_SCHEMA | replace("___NUM___","")  %}
+
+Listen 0.0.0.0:{{loadBalancerPort}}
+<VirtualHost 0.0.0.0:{{loadBalancerPort}}>
+    ServerName jiracluster
+
+    # START - ErrorDocuments
+    DocumentRoot /work-private/document-root/
+    ProxyPass /errors/error502.html !
+    ProxyPass /errors/error503.html !
+    ErrorDocument 502 /errors/error502.html
+    ErrorDocument 503 /errors/error503.html
+    <Directory /work-private/document-root/>
+        Require all granted
+    </Directory>
+    # END - ErrorDocuments
+
+    Header add Set-Cookie  "ROUTEID=.%{BALANCER_WORKER_ROUTE}e; path=/"  env=BALANCER_ROUTE_CHANGED
+    <Proxy balancer://jira-cluster>
+        {% for n in range(1, (amountNodes+1)) %}
+            BalancerMember http://{{ nameSchema }}{{ n }}:8080 route={{ n }}
+        {% endfor %}
+    </Proxy>
+    ProxyPass / balancer://jira-cluster/  stickysession=ROUTEID
+    ProxyPreserveHost on
+    ProxyRequests off
+    ProxyTimeout 9600
+</VirtualHost>
