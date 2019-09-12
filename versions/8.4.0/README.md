@@ -166,8 +166,11 @@ to check the Health of each cluster node. `System`  → `Troubleshooting and sup
 
 <p align="center"><img src="https://user-images.githubusercontent.com/12599965/64064796-98fb8000-cc06-11e9-85c3-3e28217e4c79.png" width="80%"/></p>
 
+&nbsp; 
 
+Now you should see both Cluster Nodes as active under `System` → `System Info` → `Cluster Nodes`
 
+<p align="center"><img src="https://user-images.githubusercontent.com/12599965/64790850-0f896d80-d577-11e9-9f5f-d62b456dde63.png" width="80%"/></p>
 
 
 
