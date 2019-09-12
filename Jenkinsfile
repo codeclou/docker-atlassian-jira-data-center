@@ -23,9 +23,9 @@ pipelineHelper.deployTemplate {
             dir('loadbalancer') {
                 def shortCommitId = env.GWBT_COMMIT_AFTER.substring(0, 7)
                 echo "shortCommit: " + shortCommitId
-                //sh 'docker login -u codeclou -p ${SECRET_DOCKERHUB_CODECLOU_PASSWORD}'
-                //sh 'docker build . -t codeclou/' + env.GWBT_REPO_NAME + ':loadbalancer-' + shortCommitId
-                //sh 'docker push codeclou/' + env.GWBT_REPO_NAME + ':loadbalancer-' + shortCommitId
+                sh 'docker login -u codeclou -p ${SECRET_DOCKERHUB_CODECLOU_PASSWORD}'
+                sh 'docker build . -t codeclou/' + env.GWBT_REPO_NAME + ':loadbalancer-' + shortCommitId
+                sh 'docker push codeclou/' + env.GWBT_REPO_NAME + ':loadbalancer-' + shortCommitId
             }
         } else {
             echo "LOADBALANCER HAS NOT CHANGED - DO NOTHING"
