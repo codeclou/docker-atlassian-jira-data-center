@@ -83,7 +83,7 @@ mkdir -p /opt/jira-cluster/8.4.0/jira-home-node2
 # sudo chown 2001:2001 /opt/jira-cluster/8.4.0/jira-*
 ```
 
-Now download the `docker-compose-two-nodes.yml` file which defines the nodes. We use the official [Atlassian Docker Jira Software images](https://hub.docker.com/r/atlassian/jira-software).
+Now download the `docker-compose-one-node.yml` file which defines the nodes. We use the official [Atlassian Docker Jira Software images](https://hub.docker.com/r/atlassian/jira-software).
 
 ```bash
 cd /opt/jira-cluster/8.4.0
