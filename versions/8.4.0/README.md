@@ -89,7 +89,7 @@ Now download the `docker-compose-one-node.yml` file which defines the nodes. We 
 cd /opt/jira-cluster/8.4.0
 curl -so docker-compose-one-node.yml \
 "https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-\
-data-center/master/versions/8.4.0/docker-compose-one-nodes.yml"
+data-center/master/versions/8.4.0/docker-compose-one-node.yml"
 
 docker-compose -f docker-compose-one-node.yml up --detach 
 ```
