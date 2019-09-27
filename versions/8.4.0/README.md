@@ -92,6 +92,9 @@ curl -so docker-compose-one-node.yml \
 data-center/master/versions/8.4.0/docker-compose-one-node.yml"
 
 docker-compose -f docker-compose-one-node.yml up --detach 
+
+# if some longer HTTP 503, try restarting Loadbalancer
+docker-compose -f docker-compose-one-node.yml restart jira-cluster-840-lb
 ```
 
 This will start one Jira Cluster node, a loadbalancer and a PostgreSQL database.
