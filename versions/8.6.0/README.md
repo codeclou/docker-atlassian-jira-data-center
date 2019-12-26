@@ -188,9 +188,9 @@ docker-compose -f docker-compose-two-nodes.yml up -d
 docker-compose -f docker-compose-two-nodes.yml restart jira-cluster-860-lb
 ```
 
-Now you should see both Cluster Nodes as active under `System` → `System Info` → `Cluster Nodes`
+Now you should see both Cluster Nodes as active under `System` → `Clustering`
 
-<p align="center"><img src="https://user-images.githubusercontent.com/12599965/64790850-0f896d80-d577-11e9-9f5f-d62b456dde63.png" width="80%"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/12599965/71469542-caa5e180-27c9-11ea-9198-e7c1b1a72eaa.png" width="80%"/></p>
 
 
 
