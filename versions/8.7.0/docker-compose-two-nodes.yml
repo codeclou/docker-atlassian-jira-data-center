@@ -61,10 +61,10 @@ services:
       - JIRA_SHARED_HOME=/opt/jira-home-shared
     volumes:
       - type: bind
-        source: /opt/jira-cluster/8.6.0/jira-home-node1
+        source: /opt/jira-cluster/8.7.0/jira-home-node1
         target: /opt/jira-home
       - type: bind
-        source: /opt/jira-cluster/8.6.0/jira-home-shared
+        source: /opt/jira-cluster/8.7.0/jira-home-shared
         target: /opt/jira-home-shared
     depends_on:
       - jira-cluster-870-db
@@ -106,10 +106,10 @@ services:
       - JIRA_SHARED_HOME=/opt/jira-home-shared
     volumes:
       - type: bind
-        source: /opt/jira-cluster/8.6.0/jira-home-node2
+        source: /opt/jira-cluster/8.7.0/jira-home-node2
         target: /opt/jira-home
       - type: bind
-        source: /opt/jira-cluster/8.6.0/jira-home-shared
+        source: /opt/jira-cluster/8.7.0/jira-home-shared
         target: /opt/jira-home-shared
     depends_on:
       - jira-cluster-870-db
