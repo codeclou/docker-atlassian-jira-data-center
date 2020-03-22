@@ -183,7 +183,7 @@ echo -e $C_GRN"   new version ${NEW_VERSION} does not yet exist. CONTINUE${C_RST
 fi
 echo ""
 
-clone_dir versions/${LAST_VERSION} versons/${NEW_VERSION}
+clone_dir versions/${LAST_VERSION} versions/${NEW_VERSION}
 
 cd versions/${NEW_VERSION}
 replace_in_file ${LAST_VERSION}           ${NEW_VERSION}           docker-compose-four-nodes.yml
