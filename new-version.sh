@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# USAGE "bash new-version.sh $"
+# USAGE "bash new-version.sh  8.6.0  8.8.0"
 
 ####################################################################################
 # MIT License
