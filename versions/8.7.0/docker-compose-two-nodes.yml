@@ -1,4 +1,4 @@
-version: '3.2'
+version: "3.2"
 services:
   jira-cluster-870-db:
     image: postgres:11.6
@@ -51,7 +51,7 @@ services:
       - EHCACHE_LISTENER_HOSTNAME=jira-cluster-870-node1
       - EHCACHE_LISTENER_PORT=40001
       - EHCACHE_OBJECT_PORT=40011
-      - EHCACHE_PEER_DISCOVERY=default      
+      - EHCACHE_PEER_DISCOVERY=default
       #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
       #- EHCACHE_MULTICAST_PORT=4446
       #- EHCACHE_MULTICAST_TIMETOLIVE=32
@@ -94,9 +94,11 @@ services:
       - CLUSTERED=true
       - JIRA_NODE_ID=jira-cluster-870-node2
       - EHCACHE_LISTENER_HOSTNAME=jira-cluster-870-node2
-      - EHCACHE_LISTENER_PORT=40001
-      - EHCACHE_OBJECT_PORT=40011
-      - EHCACHE_PEER_DISCOVERY=default      
+      # FIX: LISTENER PORT MUST BE DIFFERENT FOR EVERY NODE! https://developer.atlassian.com/server/jira/platform/configuring-a-jira-cluster/
+      - EHCACHE_LISTENER_PORT=40002
+      - EHCACHE_OBJECT_PORT=40012
+      # FIX END -----
+      - EHCACHE_PEER_DISCOVERY=default
       #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
       #- EHCACHE_MULTICAST_PORT=4446
       #- EHCACHE_MULTICAST_TIMETOLIVE=32
