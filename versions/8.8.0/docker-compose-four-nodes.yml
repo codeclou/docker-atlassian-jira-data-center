@@ -96,8 +96,10 @@ services:
       - CLUSTERED=true
       - JIRA_NODE_ID=jira-cluster-880-node2
       - EHCACHE_LISTENER_HOSTNAME=jira-cluster-880-node2
-      - EHCACHE_LISTENER_PORT=40001
-      - EHCACHE_OBJECT_PORT=40011
+      # FIX: LISTENER PORT MUST BE DIFFERENT FOR EVERY NODE! https://developer.atlassian.com/server/jira/platform/configuring-a-jira-cluster/
+      - EHCACHE_LISTENER_PORT=40002
+      - EHCACHE_OBJECT_PORT=40012
+      # FIX END -----
       - EHCACHE_PEER_DISCOVERY=default
       #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
       #- EHCACHE_MULTICAST_PORT=4446
@@ -141,8 +143,10 @@ services:
       - CLUSTERED=true
       - JIRA_NODE_ID=jira-cluster-880-node3
       - EHCACHE_LISTENER_HOSTNAME=jira-cluster-880-node3
-      - EHCACHE_LISTENER_PORT=40001
-      - EHCACHE_OBJECT_PORT=40011
+      # FIX: LISTENER PORT MUST BE DIFFERENT FOR EVERY NODE! https://developer.atlassian.com/server/jira/platform/configuring-a-jira-cluster/
+      - EHCACHE_LISTENER_PORT=40003
+      - EHCACHE_OBJECT_PORT=40013
+      # FIX END -----
       - EHCACHE_PEER_DISCOVERY=default
       #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
       #- EHCACHE_MULTICAST_PORT=4446
