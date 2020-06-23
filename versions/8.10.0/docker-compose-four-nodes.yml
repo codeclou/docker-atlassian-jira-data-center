@@ -1,0 +1,221 @@
+version: "3.2"
+services:
+  jira-cluster-8100-db:
+    image: postgres:11.6
+    container_name: jira-cluster-8100-db
+    environment:
+      - POSTGRES_PASSWORD=jira
+      - POSTGRES_USER=jira
+      - POSTGRES_DB=jira
+    networks:
+      jira-software-cluster-network-8100:
+        aliases:
+          - jira-cluster-8100-db
+  jira-cluster-8100-lb:
+    image: codeclou/docker-atlassian-jira-data-center:loadbalancer-9837a52
+    container_name: jira-cluster-8100-lb
+    links:
+      - jira-cluster-8100-node1
+      - jira-cluster-8100-node2
+      - jira-cluster-8100-node3
+      - jira-cluster-8100-node4
+    ports:
+      - 18100:18100
+    environment:
+      - LB_PORT=18100
+      - NODES=4
+      - NODES_NAME_SCHEMA=jira-cluster-8100-node___NUM___
+    networks:
+      jira-software-cluster-network-8100:
+        aliases:
+          - jira-cluster-8100-lb
+  jira-cluster-8100-node1:
+    image: atlassian/jira-software:8.10.0-jdk11
+    container_name: jira-cluster-8100-node1
+    links:
+      - jira-cluster-8100-db
+    environment:
+      # Memory / Heap Size
+      - JVM_MINIMUM_MEMORY=512M
+      - JVM_MAXIMUM_MEMORY=2048M
+      # Reverse Proxy Settings
+      - ATL_PROXY_NAME=jira-cluster-8100-lb
+      - ATL_PROXY_PORT=18100
+      # Database
+      - ATL_JDBC_URL=jdbc:postgresql://jira-cluster-8100-db:5432/jira
+      - ATL_JDBC_USER=jira
+      - ATL_JDBC_PASSWORD=jira
+      - ATL_DB_DRIVER=org.postgresql.Driver
+      - ATL_DB_TYPE=postgres72
+      # Data Center configuration
+      - CLUSTERED=true
+      - JIRA_NODE_ID=jira-cluster-8100-node1
+      - EHCACHE_LISTENER_HOSTNAME=jira-cluster-8100-node1
+      - EHCACHE_LISTENER_PORT=40001
+      - EHCACHE_OBJECT_PORT=40011
+      - EHCACHE_PEER_DISCOVERY=default
+      #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
+      #- EHCACHE_MULTICAST_PORT=4446
+      #- EHCACHE_MULTICAST_TIMETOLIVE=32
+      #- EHCACHE_MULTICAST_HOSTNAME=jira-cluster-8100-node1
+      # Home Directories
+      - JIRA_HOME=/opt/jira-home
+      - JIRA_SHARED_HOME=/opt/jira-home-shared
+    volumes:
+      - type: bind
+        source: /opt/jira-cluster/8.10.0/jira-home-node1
+        target: /opt/jira-home
+      - type: bind
+        source: /opt/jira-cluster/8.10.0/jira-home-shared
+        target: /opt/jira-home-shared
+    depends_on:
+      - jira-cluster-8100-db
+    networks:
+      jira-software-cluster-network-8100:
+        aliases:
+          - jira-cluster-8100-node1
+  jira-cluster-8100-node2:
+    image: atlassian/jira-software:8.10.0-jdk11
+    container_name: jira-cluster-8100-node2
+    links:
+      - jira-cluster-8100-db
+    environment:
+      # Memory / Heap Size
+      - JVM_MINIMUM_MEMORY=512M
+      - JVM_MAXIMUM_MEMORY=2048M
+      # Reverse Proxy Settings
+      - ATL_PROXY_NAME=jira-cluster-8100-lb
+      - ATL_PROXY_PORT=18100
+      # Database
+      - ATL_JDBC_URL=jdbc:postgresql://jira-cluster-8100-db:5432/jira
+      - ATL_JDBC_USER=jira
+      - ATL_JDBC_PASSWORD=jira
+      - ATL_DB_DRIVER=org.postgresql.Driver
+      - ATL_DB_TYPE=postgres72
+      # Data Center configuration
+      - CLUSTERED=true
+      - JIRA_NODE_ID=jira-cluster-8100-node2
+      - EHCACHE_LISTENER_HOSTNAME=jira-cluster-8100-node2
+      # FIX: LISTENER PORT MUST BE DIFFERENT FOR EVERY NODE! https://developer.atlassian.com/server/jira/platform/configuring-a-jira-cluster/
+      - EHCACHE_LISTENER_PORT=40002
+      - EHCACHE_OBJECT_PORT=40012
+      # FIX END -----
+      - EHCACHE_PEER_DISCOVERY=default
+      #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
+      #- EHCACHE_MULTICAST_PORT=4446
+      #- EHCACHE_MULTICAST_TIMETOLIVE=32
+      #- EHCACHE_MULTICAST_HOSTNAME=jira-cluster-8100-node2
+      # Home Directories
+      - JIRA_HOME=/opt/jira-home
+      - JIRA_SHARED_HOME=/opt/jira-home-shared
+    volumes:
+      - type: bind
+        source: /opt/jira-cluster/8.10.0/jira-home-node2
+        target: /opt/jira-home
+      - type: bind
+        source: /opt/jira-cluster/8.10.0/jira-home-shared
+        target: /opt/jira-home-shared
+    depends_on:
+      - jira-cluster-8100-db
+    networks:
+      jira-software-cluster-network-8100:
+        aliases:
+          - jira-cluster-8100-node2
+  jira-cluster-8100-node3:
+    image: atlassian/jira-software:8.10.0-jdk11
+    container_name: jira-cluster-8100-node3
+    links:
+      - jira-cluster-8100-db
+    environment:
+      # Memory / Heap Size
+      - JVM_MINIMUM_MEMORY=512M
+      - JVM_MAXIMUM_MEMORY=2048M
+      # Reverse Proxy Settings
+      - ATL_PROXY_NAME=jira-cluster-8100-lb
+      - ATL_PROXY_PORT=18100
+      # Database
+      - ATL_JDBC_URL=jdbc:postgresql://jira-cluster-8100-db:5432/jira
+      - ATL_JDBC_USER=jira
+      - ATL_JDBC_PASSWORD=jira
+      - ATL_DB_DRIVER=org.postgresql.Driver
+      - ATL_DB_TYPE=postgres72
+      # Data Center configuration
+      - CLUSTERED=true
+      - JIRA_NODE_ID=jira-cluster-8100-node3
+      - EHCACHE_LISTENER_HOSTNAME=jira-cluster-8100-node3
+      # FIX: LISTENER PORT MUST BE DIFFERENT FOR EVERY NODE! https://developer.atlassian.com/server/jira/platform/configuring-a-jira-cluster/
+      - EHCACHE_LISTENER_PORT=40003
+      - EHCACHE_OBJECT_PORT=40013
+      # FIX END -----
+      - EHCACHE_PEER_DISCOVERY=default
+      #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
+      #- EHCACHE_MULTICAST_PORT=4446
+      #- EHCACHE_MULTICAST_TIMETOLIVE=32
+      #- EHCACHE_MULTICAST_HOSTNAME=jira-cluster-8100-node3
+      # Home Directories
+      - JIRA_HOME=/opt/jira-home
+      - JIRA_SHARED_HOME=/opt/jira-home-shared
+    volumes:
+      - type: bind
+        source: /opt/jira-cluster/8.10.0/jira-home-node3
+        target: /opt/jira-home
+      - type: bind
+        source: /opt/jira-cluster/8.10.0/jira-home-shared
+        target: /opt/jira-home-shared
+    depends_on:
+      - jira-cluster-8100-db
+    networks:
+      jira-software-cluster-network-8100:
+        aliases:
+          - jira-cluster-8100-node3
+  jira-cluster-8100-node4:
+    image: atlassian/jira-software:8.10.0-jdk11
+    container_name: jira-cluster-8100-node4
+    links:
+      - jira-cluster-8100-db
+    environment:
+      # Memory / Heap Size
+      - JVM_MINIMUM_MEMORY=512M
+      - JVM_MAXIMUM_MEMORY=2048M
+      # Reverse Proxy Settings
+      - ATL_PROXY_NAME=jira-cluster-8100-lb
+      - ATL_PROXY_PORT=18100
+      # Database
+      - ATL_JDBC_URL=jdbc:postgresql://jira-cluster-8100-db:5432/jira
+      - ATL_JDBC_USER=jira
+      - ATL_JDBC_PASSWORD=jira
+      - ATL_DB_DRIVER=org.postgresql.Driver
+      - ATL_DB_TYPE=postgres72
+      # Data Center configuration
+      - CLUSTERED=true
+      - JIRA_NODE_ID=jira-cluster-8100-node4
+      - EHCACHE_LISTENER_HOSTNAME=jira-cluster-8100-node4
+      # FIX: LISTENER PORT MUST BE DIFFERENT FOR EVERY NODE! https://developer.atlassian.com/server/jira/platform/configuring-a-jira-cluster/
+      - EHCACHE_LISTENER_PORT=40004
+      - EHCACHE_OBJECT_PORT=40014
+      # FIX END -----
+      - EHCACHE_PEER_DISCOVERY=default
+      #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
+      #- EHCACHE_MULTICAST_PORT=4446
+      #- EHCACHE_MULTICAST_TIMETOLIVE=32
+      #- EHCACHE_MULTICAST_HOSTNAME=jira-cluster-8100-node4
+      # Home Directories
+      - JIRA_HOME=/opt/jira-home
+      - JIRA_SHARED_HOME=/opt/jira-home-shared
+    volumes:
+      - type: bind
+        source: /opt/jira-cluster/8.10.0/jira-home-node4
+        target: /opt/jira-home
+      - type: bind
+        source: /opt/jira-cluster/8.10.0/jira-home-shared
+        target: /opt/jira-home-shared
+    depends_on:
+      - jira-cluster-8100-db
+    networks:
+      jira-software-cluster-network-8100:
+        aliases:
+          - jira-cluster-8100-node4
+
+networks:
+  jira-software-cluster-network-8100:
+    driver: bridge
