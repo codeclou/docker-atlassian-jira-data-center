@@ -8,21 +8,21 @@
 
 It starts a PostgreSQL Database, two Jira Software cluster nodes and Apache2 HTTPD as sticky session loadbalancer. The shared jira-home is handled via a shared Docker volume mounts.
 
------
+---
 
 &nbsp;
 
 ### Prerequisites
 
- * All Docker containers run internally as non-root with fixed UID 10777 and GID 10777.
-   * The Atlassian Docker container use UID and GID 2001.
- * You need Linux or macOS.
- * Basic unix-tools like `wc`, `awk`, `curl`, `tr`, `head` and `bash` must be installed.
- * Bash 3 or 4 must be installed.
- * Latest Docker version must be installed.
- * docker-compose must be installed.
+- All Docker containers run internally as non-root with fixed UID 10777 and GID 10777.
+  - The Atlassian Docker container use UID and GID 2001.
+- You need Linux or macOS.
+- Basic unix-tools like `wc`, `awk`, `curl`, `tr`, `head` and `bash` must be installed.
+- Bash 3 or 4 must be installed.
+- Latest Docker version must be installed.
+- docker-compose must be installed.
 
------
+---
 
 &nbsp;
 
@@ -36,6 +36,7 @@ Add the alias on your Docker-Host machine.
 sudo su
 echo "127.0.0.1  jira-cluster-840-lb" >> /etc/hosts
 ```
+
 If you like to work with your cluster from your local network, use the servers public IP instead.
 
 &nbsp;
@@ -62,10 +63,10 @@ sudo chown $NORMALUSER /opt/jira-cluster/
 
 **(4) On macOS add /opt/jira-cluster/ to Docker Settings**
 
-Under Docker Settings add `/opt/jira-cluster/` to *File Sharing* folders 
+Under Docker Settings add `/opt/jira-cluster/` to _File Sharing_ folders
 and restart docker.
 
------
+---
 
 &nbsp;
 
@@ -91,7 +92,7 @@ curl -so docker-compose-one-node.yml \
 "https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-\
 data-center/master/versions/8.4.0/docker-compose-one-node.yml"
 
-docker-compose -f docker-compose-one-node.yml up --detach 
+docker-compose -f docker-compose-one-node.yml up --detach
 
 # if some longer HTTP 503, try restarting Loadbalancer
 docker-compose -f docker-compose-one-node.yml restart jira-cluster-840-lb
@@ -103,8 +104,8 @@ This will start one Jira Cluster node, a loadbalancer and a PostgreSQL database.
 
 **(2) Browse to Jira Software**
 
- * Open a browser to [http://jira-cluster-840-lb:1840/](http://jira-cluster-840-lb:1840/)
- * It might take several minutes for the cluster to fully start up.
+- Open a browser to [http://jira-cluster-840-lb:1840/](http://jira-cluster-840-lb:1840/)
+- It might take several minutes for the cluster to fully start up.
 
 &nbsp;
 
@@ -131,7 +132,6 @@ You can check the logs of all containers by calling e.g.:
 docker-compose -f docker-compose-one-node.yml logs
 ```
 
-
 &nbsp;
 
 **(4) Start Post Configuration**
@@ -144,7 +144,6 @@ Wait for Jira to start up. Simply reload this page after a few minutes.
 
 <p align="center"><img width="80%" alt="jira-startup-01" src="https://user-images.githubusercontent.com/12599965/64061646-25de1380-cbde-11e9-85e3-d8994d10b0b5.png"></p>
 
-
 Set the baseUrl to `http://jira-cluster-840-lb:1840` and continue.
 
 <p align="center"><img width="80%" src="https://user-images.githubusercontent.com/12599965/64064654-99931700-cc04-11e9-8632-6431a72caa5f.png"/></p>
@@ -152,7 +151,6 @@ Set the baseUrl to `http://jira-cluster-840-lb:1840` and continue.
 Use a Data Center license. Either an Evaluation License or a [Timebomb License](https://developer.atlassian.com/platform/marketplace/timebomb-licenses-for-testing-server-apps/).
 
 <p align="center"><img width="80%" src="https://user-images.githubusercontent.com/12599965/64064667-cba47900-cc04-11e9-8f2b-c7d7fbe7cddb.png"/></p>
-
 
 Setup your admin account. Usually username `admin` and password `admin`.
 
@@ -164,21 +162,24 @@ Finish setup.
 
 &nbsp;
 
-
 Use the [Jira Data Center Health Check Tools](https://confluence.atlassian.com/enterprise/jira-data-center-health-check-tools-644580752.html)
-to check the Health of each cluster node. `System`  → `Troubleshooting and support Tools` → `Instance Health` tab
+to check the Health of each cluster node. `System` → `Troubleshooting and support Tools` → `Instance Health` tab
 
 <p align="center"><img src="https://user-images.githubusercontent.com/12599965/64064796-98fb8000-cc06-11e9-85c3-3e28217e4c79.png" width="80%"/></p>
 
-&nbsp; 
-
-
+&nbsp;
 
 &nbsp;
 
 **(5) Scale Up Cluster - Add Jira Nodes**
 
-To add a second node do:
+At first copy the Jira home directory files from node1 to node2. (Not all folder might exist. `caches` and `plugins` should.)
+
+```
+cp -R /opt/jira-cluster/8.4.0/jira-home-node1/{data,plugins,logos,import,export,caches} /opt/jira-cluster/8.4.0/jira-home-node2
+```
+
+To startup the second node do:
 
 ```
 curl -so docker-compose-two-nodes.yml \
@@ -193,8 +194,6 @@ Now you should see both Cluster Nodes as active under `System` → `System Info`
 
 <p align="center"><img src="https://user-images.githubusercontent.com/12599965/64790850-0f896d80-d577-11e9-9f5f-d62b456dde63.png" width="80%"/></p>
 
-
-
 Now scale the cluster up to three nodes.
 
 ```bash
@@ -204,6 +203,14 @@ mkdir -p /opt/jira-cluster/8.4.0/jira-home-node4
 # If on linux fix permissions for volume mounts
 # sudo chown 2001:2001 /opt/jira-cluster/8.4.0/jira-*
 ```
+
+At first copy the Jira home directory files from node1 to node3. (Not all folder might exist. `caches` and `plugins` should.)
+
+```
+cp -R /opt/jira-cluster/8.4.0/jira-home-node1/{data,plugins,logos,import,export,caches} /opt/jira-cluster/8.4.0/jira-home-node3
+```
+
+To startup the third node do:
 
 ```
 curl -so docker-compose-three-nodes.yml \
@@ -221,6 +228,7 @@ curl -so docker-compose-four-nodes.yml \
 "https://raw.githubusercontent.com/codeclou/docker-atlassian-jira-\
 data-center/master/versions/8.4.0/docker-compose-four-nodes.yml"
 
+cp -R /opt/jira-cluster/8.4.0/jira-home-node1/{data,plugins,logos,import,export,caches} /opt/jira-cluster/8.4.0/jira-home-node4
 docker-compose -f docker-compose-four-nodes.yml up -d
 docker-compose -f docker-compose-three-nodes.yml restart jira-cluster-840-lb
 ```
@@ -242,7 +250,7 @@ docker-compose -f docker-compose-two-nodes.yml down
 
 This will kill and remove all instances.
 
------
+---
 
 &nbsp;
 
@@ -265,8 +273,7 @@ COMMIT
 
 &nbsp;
 
-
------
+---
 
 &nbsp;
 
@@ -274,41 +281,41 @@ COMMIT
 
 Tested under the following Operating Systems:
 
- * Ubuntu 16.04 64 Bit Server
-   * Docker version 17.03.0-ce, build 60ccb22
-   * GNU bash, version 4.3.46(1)-release (x86_64-pc-linux-gnu)
- * OS X El Capitan
-   * Docker version 17.03.0-ce, build 60ccb22
-   * GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin15)
+- Ubuntu 16.04 64 Bit Server
+  - Docker version 17.03.0-ce, build 60ccb22
+  - GNU bash, version 4.3.46(1)-release (x86_64-pc-linux-gnu)
+- OS X El Capitan
+  - Docker version 17.03.0-ce, build 60ccb22
+  - GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin15)
 
 Not tested and not compatible under the following Operating Systems:
 
-  * Microsoft Windows
+- Microsoft Windows
 
------
+---
 
 &nbsp;
 
 ### Trademarks and Third Party Licenses
 
- * **Atlassian Jira Sofware**
-   * Atlassian®, Jira, Jira Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
-   * Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com).
- * **Oracle Java**
-   * Oracle, OpenJDK and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
-   * Please check yourself for corresponding Licenses and Terms of Use at [www.oracle.com](https://www.oracle.com/).
- * **Docker**
-   * Docker and the Docker logo are trademarks or registered [trademarks of Docker](https://www.docker.com/trademark-guidelines), Inc. in the United States and/or other countries. Docker, Inc. and other parties may also have trademark rights in other terms used herein.
-   * Please check yourself for corresponding Licenses and Terms of Use at [www.docker.com](https://www.docker.com/).
- * **PostgreSQL**
-   * PostgreSQL is a [registered trademark of the PostgreSQL Community Association of Canada](https://wiki.postgresql.org/wiki/Trademark_Policy).
-   * Please check yourself for corresponding Licenses and Terms of Use at [www.postgresql.org](https://www.postgresql.org/).
- * **Ubuntu**
-   * Ubuntu and Canonical are registered [trademarks of Canonical Ltd.](https://www.ubuntu.com/legal/short-terms)
- * **Apple**
-   * macOS®, Mac and OS X are [trademarks of Apple Inc.](http://www.apple.com/legal/intellectual-property/trademark/appletmlist.html), registered in the U.S. and other countries.
+- **Atlassian Jira Sofware**
+  - Atlassian®, Jira, Jira Software are registered [trademarks of Atlassian Pty Ltd](https://de.atlassian.com/legal/trademark).
+  - Please check yourself for corresponding Licenses and Terms of Use at [atlassian.com](https://atlassian.com).
+- **Oracle Java**
+  - Oracle, OpenJDK and Java are registered [trademarks of Oracle](https://www.oracle.com/legal/trademarks.html) and/or its affiliates. Other names may be trademarks of their respective owners.
+  - Please check yourself for corresponding Licenses and Terms of Use at [www.oracle.com](https://www.oracle.com/).
+- **Docker**
+  - Docker and the Docker logo are trademarks or registered [trademarks of Docker](https://www.docker.com/trademark-guidelines), Inc. in the United States and/or other countries. Docker, Inc. and other parties may also have trademark rights in other terms used herein.
+  - Please check yourself for corresponding Licenses and Terms of Use at [www.docker.com](https://www.docker.com/).
+- **PostgreSQL**
+  - PostgreSQL is a [registered trademark of the PostgreSQL Community Association of Canada](https://wiki.postgresql.org/wiki/Trademark_Policy).
+  - Please check yourself for corresponding Licenses and Terms of Use at [www.postgresql.org](https://www.postgresql.org/).
+- **Ubuntu**
+  - Ubuntu and Canonical are registered [trademarks of Canonical Ltd.](https://www.ubuntu.com/legal/short-terms)
+- **Apple**
+  - macOS®, Mac and OS X are [trademarks of Apple Inc.](http://www.apple.com/legal/intellectual-property/trademark/appletmlist.html), registered in the U.S. and other countries.
 
------
+---
 
 &nbsp;
 
