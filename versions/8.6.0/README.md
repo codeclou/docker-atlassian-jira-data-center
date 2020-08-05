@@ -231,7 +231,7 @@ data-center/master/versions/8.6.0/docker-compose-four-nodes.yml"
 
 cp -R /opt/jira-cluster/8.6.0/jira-home-node1/{data,plugins,logos,import,export,caches} /opt/jira-cluster/8.6.0/jira-home-node4
 docker-compose -f docker-compose-four-nodes.yml up -d
-docker-compose -f docker-compose-three-nodes.yml restart jira-cluster-860-lb
+docker-compose -f docker-compose-four-nodes.yml restart jira-cluster-860-lb
 ```
 
 To check call this multiple times, and it should output the different node ids after some time
