@@ -10,6 +10,7 @@ Please choose the Jira Software version you want to run:
 
 | Jira Software Version                                                                                   | Loadbalancer URL                 |
 | ------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **⇨ [8.11.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.11.0)** | http://jira-cluster-8110-lb:18110/ |
 | **⇨ [8.10.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.10.0)** | http://jira-cluster-8100-lb:18100/ |
 | **⇨ [8.9.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.9.0)** | http://jira-cluster-890-lb:1890/ |
 | **⇨ [8.8.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.8.0)** | http://jira-cluster-880-lb:1880/ |
