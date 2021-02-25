@@ -1,0 +1,78 @@
+version: '3.2'
+services:
+  jira-cluster-8134-db:
+    image: postgres:11.6
+    container_name: jira-cluster-8134-db
+    environment:
+      - POSTGRES_PASSWORD=jira
+      - POSTGRES_USER=jira
+      - POSTGRES_DB=jira
+    networks:
+      jira-software-cluster-network-8134:
+        aliases:
+          - jira-cluster-8134-db
+  jira-cluster-8134-lb:
+    image: codeclou/docker-atlassian-jira-data-center:loadbalancer-9837a52
+    container_name: jira-cluster-8134-lb
+    links:
+      - jira-cluster-8134-node1
+    ports:
+      - 18134:18134
+    environment:
+      - LB_PORT=18134
+      - NODES=1
+      - NODES_NAME_SCHEMA=jira-cluster-8134-node___NUM___
+    networks:
+      jira-software-cluster-network-8134:
+        aliases:
+          - jira-cluster-8134-lb
+  jira-cluster-8134-node1:
+    image: atlassian/jira-software:8.13.4-jdk11
+    container_name: jira-cluster-8134-node1
+    links:
+      - jira-cluster-8134-db
+    environment:
+      # Memory / Heap Size
+      - JVM_MINIMUM_MEMORY=512M
+      - JVM_MAXIMUM_MEMORY=2048M
+      # Reverse Proxy Settings
+      - ATL_PROXY_NAME=jira-cluster-8134-lb
+      - ATL_PROXY_PORT=18134
+      # Database
+      - ATL_JDBC_URL=jdbc:postgresql://jira-cluster-8134-db:5432/jira
+      - ATL_JDBC_USER=jira
+      - ATL_JDBC_PASSWORD=jira
+      - ATL_DB_DRIVER=org.postgresql.Driver
+      - ATL_DB_TYPE=postgres72
+      # Data Center configuration
+      - CLUSTERED=true
+      - JIRA_NODE_ID=jira-cluster-8134-node1
+      - EHCACHE_LISTENER_HOSTNAME=jira-cluster-8134-node1
+      - EHCACHE_LISTENER_PORT=40001
+      - EHCACHE_OBJECT_PORT=40011
+      - EHCACHE_PEER_DISCOVERY=default      
+      #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
+      #- EHCACHE_MULTICAST_PORT=4446
+      #- EHCACHE_MULTICAST_TIMETOLIVE=32
+      #- EHCACHE_MULTICAST_HOSTNAME=jira-cluster-8134-node1
+      # Home Directories
+      - JIRA_HOME=/opt/jira-home
+      - JIRA_SHARED_HOME=/opt/jira-home-shared
+    volumes:
+      - type: bind
+        source: /opt/jira-cluster/8.13.4/jira-home-node1
+        target: /opt/jira-home
+      - type: bind
+        source: /opt/jira-cluster/8.13.4/jira-home-shared
+        target: /opt/jira-home-shared
+    depends_on:
+      - jira-cluster-8134-db
+    networks:
+      jira-software-cluster-network-8134:
+        aliases:
+          - jira-cluster-8134-node1
+
+
+networks:
+  jira-software-cluster-network-8134:
+    driver: bridge
