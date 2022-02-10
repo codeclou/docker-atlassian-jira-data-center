@@ -58,3 +58,10 @@ Please choose the Jira Software version you want to run:
 ### License
 
 [MIT](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/LICENSE) © [Bernhard Grünewaldt](https://github.com/clouless)
+
+&nbsp;
+
+### Awesome Contributors
+
+ - [Magamir](https://github.com/Magamir)
+ - [Pyroseza](https://github.com/Pyroseza)
