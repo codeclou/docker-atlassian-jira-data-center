@@ -120,10 +120,10 @@ docker ps
 Should show something like:
 
 ```
-CONTAINER ID        IMAGE                           COMMAND                  PORTS                    NAMES
-15ed1263c551        loadbalancer:v2                 "/work-private/docke…"   0.0.0.0:18205->18205/tcp   jira-cluster-8205-lb
-2994d0d680ad        atlassian/jira-software:8.20.5   "/tini -- /entrypoin…"   8080/tcp                 jira-cluster-8205-node1
-572fcaf9f669        postgres:9.6                    "docker-entrypoint.s…"   5432/tcp                 jira-cluster-8205-db
+CONTAINER ID   IMAGE                                                             COMMAND                  CREATED          STATUS          PORTS                      NAMES
+4fb9ba30c689   codeclou/docker-atlassian-jira-data-center:loadbalancer-9837a52   "/work-private/docke…"   19 minutes ago   Up 18 minutes   0.0.0.0:18205->18205/tcp   jira-cluster-8205-lb
+6694a19445ae   atlassian/jira-software:8.20.5-jdk11                              "/usr/bin/tini -- /e…"   23 minutes ago   Up 23 minutes   8080/tcp                   jira-cluster-8205-node1
+c4253b09bce1   postgres:12.9                                                     "docker-entrypoint.s…"   23 minutes ago   Up 23 minutes   5432/tcp                   jira-cluster-8205-db
 ```
 
 You can check the logs of all containers by calling e.g.:
@@ -286,6 +286,9 @@ Tested under the following Operating Systems:
 - OS X El Capitan
   - Docker version 17.03.0-ce, build 60ccb22
   - GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin15)
+- OS X Big Sur (11.6.3)
+  - Docker version 20.10.10, build b485636
+  - GNU bash, version 5.1.8(1)-release (x86_64-apple-darwin20.3.0)
 
 Not tested and not compatible under the following Operating Systems:
 
