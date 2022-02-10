@@ -175,7 +175,5 @@ services:
 networks:
   jira-software-cluster-network-8205:
     driver: bridge
-
-
 volumes:
   db_data: null

@@ -14,6 +14,7 @@ services:
       jira-software-cluster-network-8205:
         aliases:
           - jira-cluster-8205-db
+    restart: unless-stopped
   jira-cluster-8205-lb:
     image: codeclou/docker-atlassian-jira-data-center:loadbalancer-9837a52
     container_name: jira-cluster-8205-lb

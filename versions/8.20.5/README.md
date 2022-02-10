@@ -122,9 +122,7 @@ Should show something like:
 ```
 CONTAINER ID   IMAGE                                                             COMMAND                  CREATED          STATUS          PORTS                      NAMES
 4fb9ba30c689   codeclou/docker-atlassian-jira-data-center:loadbalancer-9837a52   "/work-private/docke…"   19 minutes ago   Up 18 minutes   0.0.0.0:18205->18205/tcp   jira-cluster-8205-lb
-6d9155d43ac1   atlassian/jira-software:8.20.5-jdk11                              "/usr/bin/tini -- /e…"   19 minutes ago   Up 19 minutes   8080/tcp                   jira-cluster-8205-node3
 6694a19445ae   atlassian/jira-software:8.20.5-jdk11                              "/usr/bin/tini -- /e…"   23 minutes ago   Up 23 minutes   8080/tcp                   jira-cluster-8205-node1
-f85de088bf7a   atlassian/jira-software:8.20.5-jdk11                              "/usr/bin/tini -- /e…"   23 minutes ago   Up 23 minutes   8080/tcp                   jira-cluster-8205-node2
 c4253b09bce1   postgres:12.9                                                     "docker-entrypoint.s…"   23 minutes ago   Up 23 minutes   5432/tcp                   jira-cluster-8205-db
 ```
 
