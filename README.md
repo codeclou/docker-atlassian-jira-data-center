@@ -10,6 +10,7 @@ Please choose the Jira Software version you want to run:
 
 | Jira Software Version                                                                                   |
 | ------------------------------------------------------------------------------------------------------- |
+| **⇨ [8.20.5](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.20.5)** |
 | **⇨ [8.13.4](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.13.4)** |
 | **⇨ [8.11.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.11.0)** |
 | **⇨ [8.10.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.10.0)** |
