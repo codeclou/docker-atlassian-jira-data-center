@@ -1,0 +1,83 @@
+version: '3.2'
+services:
+  jira-cluster-8205-db:
+    image: postgres:12.9
+    container_name: jira-cluster-8205-db
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=jira
+      - POSTGRES_USER=jira
+      - POSTGRES_DB=jira
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      jira-software-cluster-network-8205:
+        aliases:
+          - jira-cluster-8205-db
+  jira-cluster-8205-lb:
+    image: codeclou/docker-atlassian-jira-data-center:loadbalancer-9837a52
+    container_name: jira-cluster-8205-lb
+    links:
+      - jira-cluster-8205-node1
+    ports:
+      - 18205:18205
+    environment:
+      - LB_PORT=18205
+      - NODES=1
+      - NODES_NAME_SCHEMA=jira-cluster-8205-node___NUM___
+    networks:
+      jira-software-cluster-network-8205:
+        aliases:
+          - jira-cluster-8205-lb
+  jira-cluster-8205-node1:
+    image: atlassian/jira-software:8.20.5-jdk11
+    container_name: jira-cluster-8205-node1
+    links:
+      - jira-cluster-8205-db
+    environment:
+      # Memory / Heap Size
+      - JVM_MINIMUM_MEMORY=512M
+      - JVM_MAXIMUM_MEMORY=2048M
+      # Reverse Proxy Settings
+      - ATL_PROXY_NAME=jira-cluster-8205-lb
+      - ATL_PROXY_PORT=18205
+      # Database
+      - ATL_JDBC_URL=jdbc:postgresql://jira-cluster-8205-db:5432/jira
+      - ATL_JDBC_USER=jira
+      - ATL_JDBC_PASSWORD=jira
+      - ATL_DB_DRIVER=org.postgresql.Driver
+      - ATL_DB_TYPE=postgres72
+      # Data Center configuration
+      - CLUSTERED=true
+      - JIRA_NODE_ID=jira-cluster-8205-node1
+      - EHCACHE_LISTENER_HOSTNAME=jira-cluster-8205-node1
+      - EHCACHE_LISTENER_PORT=40001
+      - EHCACHE_OBJECT_PORT=40011
+      - EHCACHE_PEER_DISCOVERY=default
+      #- EHCACHE_MULTICAST_ADDRESS=230.0.0.1
+      #- EHCACHE_MULTICAST_PORT=4446
+      #- EHCACHE_MULTICAST_TIMETOLIVE=32
+      #- EHCACHE_MULTICAST_HOSTNAME=jira-cluster-8205-node1
+      # Home Directories
+      - JIRA_HOME=/opt/jira-home
+      - JIRA_SHARED_HOME=/opt/jira-home-shared
+    volumes:
+      - type: bind
+        source: /opt/jira-cluster/8.20.5/jira-home-node1
+        target: /opt/jira-home
+      - type: bind
+        source: /opt/jira-cluster/8.20.5/jira-home-shared
+        target: /opt/jira-home-shared
+    depends_on:
+      - jira-cluster-8205-db
+    networks:
+      jira-software-cluster-network-8205:
+        aliases:
+          - jira-cluster-8205-node1
+
+
+networks:
+  jira-software-cluster-network-8205:
+    driver: bridge
+volumes:
+  db_data: null
