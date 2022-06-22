@@ -244,7 +244,7 @@ curl -I -s http://jira-cluster-900-lb:1900 | grep X-ANODEID
 
 ```bash
 cd /opt/jira-cluster/9.0.0
-docker-compose -f docker-compose-two-nodes.yml down
+docker-compose -f docker-compose-two-nodes.yml down -v
 ```
 
 This will kill and remove all instances.
