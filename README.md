@@ -8,18 +8,19 @@ It starts a PostgreSQL Database, several Jira cluster nodes and Apache2 HTTPD as
 
 Please choose the Jira Software version you want to run:
 
-| Jira Software Version                                                                                   |
-| ------------------------------------------------------------------------------------------------------- |
+| Jira Software Version                                                                                     |
+| --------------------------------------------------------------------------------------------------------- |
+| **⇨ [9.0.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/9.0.0)**   |
 | **⇨ [8.20.5](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.20.5)** |
 | **⇨ [8.13.4](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.13.4)** |
 | **⇨ [8.11.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.11.0)** |
 | **⇨ [8.10.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.10.0)** |
-| **⇨ [8.9.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.9.0)** |
-| **⇨ [8.8.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.8.0)** |
-| **⇨ [8.7.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.7.0)** |
-| **⇨ [8.6.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.6.0)** |
-| **⇨ [8.5.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.5.0)** |
-| **⇨ [8.4.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.4.0)** |
+| **⇨ [8.9.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.9.0)**   |
+| **⇨ [8.8.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.8.0)**   |
+| **⇨ [8.7.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.7.0)**   |
+| **⇨ [8.6.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.6.0)**   |
+| **⇨ [8.5.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.5.0)**   |
+| **⇨ [8.4.0](https://github.com/codeclou/docker-atlassian-jira-data-center/blob/master/versions/8.4.0)**   |
 
 **Please Note:**
 
@@ -63,5 +64,5 @@ Please choose the Jira Software version you want to run:
 
 ### Awesome Contributors
 
- - [Magamir](https://github.com/Magamir)
- - [Pyroseza](https://github.com/Pyroseza)
+- [Magamir](https://github.com/Magamir)
+- [Pyroseza](https://github.com/Pyroseza)
