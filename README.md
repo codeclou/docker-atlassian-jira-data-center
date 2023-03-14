@@ -1,3 +1,5 @@
+:mega: **End of Lifetime Notice:** We no longer provide updates to this repository. We have changed our internal way of testing Atlassian Data Center Apps, and do not have the resources to manage changes needed to this repository. The Repository will be made readonly, you can still fork it and adapt it to your needs.
+
 # Docker Atlassian Jira Data Center
 
 > Start an [Atlassian Jira Software Data Center](https://de.atlassian.com/enterprise/data-center) with Docker for local testing during plugin development.
